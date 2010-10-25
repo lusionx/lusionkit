@@ -1,0 +1,41 @@
+﻿.data
+{
+    margin: 20px 0px;
+    font-size: 13px;
+}
+.data table
+{
+    margin: 10px 0px;
+}
+.data thead tr
+{
+    background-color: #41519a;
+    color: #ffffff;
+    font-size: 13px;
+}
+.data thead td, .data thead th
+{
+    padding: 3px 0px 3px 5px;
+}
+.data tbody td, .data tbody th
+{
+    padding: 1px 0px 1px 5px;
+}
+.data tbody tr.alrow
+{
+    background-color: #B2C3E1;
+}
+.data tbody tr.hover
+{
+    background-color: #99ACDD;
+    color: #ffffff;
+}
+.data caption
+{
+    text-align: center;
+    color: #ffffff;
+    background-color: #6B7EBF;
+    border: solid #41519A 1px;
+    font-weight: bold;
+    padding: 2px 0px;
+}

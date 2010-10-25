@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+    <MachineID>
+        <item value="1">1</item>
+        <item value="2">2</item>
+    </MachineID>
+    <Type>
+        <item value="1">1</item>
+        <item value="2">2</item>
+        <item value="3">3</item>
+        <item value="4">4</item>
+        <item value="5">5</item>
+        <item value="6">6</item>
+        <item value="7">7</item>
+        <item value="8">8</item>
+        <item value="9">9</item>
+        <item value="A">10</item>
+        <item value="B">11</item>
+        <item value="C">12</item>
+        <item value="D">13</item>
+        <item value="E">14</item>
+        <item value="F">15</item>
+    </Type>
+    <Month>
+        <item value="A">01月</item>
+        <item value="B">02月</item>
+        <item value="C">03月</item>
+        <item value="D">04月</item>
+        <item value="E">05月</item>
+        <item value="F">06月</item>
+        <item value="G">07月</item>
+        <item value="H">08月</item>
+        <item value="I">09月</item>
+        <item value="J">10月</item>
+        <item value="K">11月</item>
+        <item value="L">12月</item>
+    </Month>
+    <Shift>
+        <item value="D">D</item>
+        <item value="N">N</item>
+    </Shift>
+    <Year>
+        <item value="2009" seletct="0"></item>
+        <item value="2010" seletct="1"></item>
+        <item value="2011" seletct="0"></item>
+        <item value="2012" seletct="0"></item>
+        <item value="2013" seletct="0"></item>
+    </Year>
+</root>
