@@ -1,0 +1,37 @@
+﻿dl.func
+{
+    width: 95%;
+    background: #99acdd;
+    margin: 10px 5px;
+    float: none;
+}
+dl.func dt
+{
+    color: #41519a;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 0px 3px 35px;
+    background: url(images/menuicon.JPG) no-repeat 13px 6px;
+}
+dl.func dd
+{
+    padding: 2px;
+}
+dl.func div
+{
+    background: #ffffff;
+    padding: 10px 0px 15px;
+}
+dl.func ul
+{
+    margin-left: 11px;
+    width: 90%;
+    color: #000000;
+    font-family: verdana;
+}
+dl.func li
+{
+    font-size: 13px;
+    padding: 2px 0px 2px 14px;
+    background: url(Images/bullet.jpg) no-repeat 0px 4px;
+}

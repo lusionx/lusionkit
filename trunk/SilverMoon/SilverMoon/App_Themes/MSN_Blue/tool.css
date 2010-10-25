@@ -1,0 +1,69 @@
+﻿.nn
+{
+    display: none;
+}
+.clr
+{
+    clear: both;
+    width: 100%;
+    height: 0px;
+}
+.fr
+{
+    float: right;
+}
+.fl
+{
+    float: left;
+}
+ul.inline
+{
+    text-align: center;
+}
+ul.inline li
+{
+    display: inline;
+    float: left;
+}
+.w100
+{
+    width: 100%;
+}
+.tl
+{
+    text-align: left;
+}
+.btn, .query input[type=submit]
+{
+    color: #ffffff;
+    background-color: #6B7EBF;
+    border: Solid #41519A 1px;
+    font-weight: bold;
+    padding: 2px 10px 2px 10px;
+    margin-right: 10px;
+}
+.txt, .query input[type=text], .sblock input[type=text]
+{
+    color: #000000;
+    background-color: #ffffff;
+    border: solid #41519A 1px;
+    font-weight: normal;
+    padding: 2px 10px 2px 4px;
+}
+.slct, .query select, .sblock select
+{
+    color: #000000;
+    background-color: #ffffff;
+    border: solid #41519A 1px;
+    font-weight: normal;
+    padding: 0px;
+}
+.pager
+{
+    text-align: right;
+}
+.ltsp
+{
+    letter-spacing: 4px;
+}
+
