@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="SLWeb.main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Scripts>
+            <asp:ScriptReference Path="~/js/jquery-1.2.6.min.js" />
+            <asp:ScriptReference Path="~/js/jEasyValidate.js" />
+            <asp:ScriptReference Path="~/js/extenjquery.js" />
+        </Scripts>
+    </asp:ScriptManager>
+
+    <script type="text/javascript">
+        $(function() {
+           //update();
+        })
+        function update() {
+            var oo = {};
+            oo.userid = $('#id').val();
+            var pars = Sys.Serialization.JavaScriptSerializer.serialize(oo);
+            $.postJSON(pars, "/WS/UserInf.asmx/UpdateUser", null);
+            setTimeout(update, 5000);
+        }        
+    </script>
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
