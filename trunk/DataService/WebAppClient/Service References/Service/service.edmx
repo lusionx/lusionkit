@@ -1,0 +1,135 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="Wcf01" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:m2="http://schemas.microsoft.com/ado/2008/11/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+      <EntityType Name="Person">
+        <Key>
+          <PropertyRef Name="Name" />
+        </Key>
+        <Property Name="Name" Type="Edm.String" Nullable="false" />
+        <Property Name="Hospital" Type="Edm.String" Nullable="true" />
+      </EntityType>
+      <EntityType Name="com_dept">
+        <Key>
+          <PropertyRef Name="dept_id" />
+        </Key>
+        <Property Name="dept_id" Type="Edm.String" Nullable="false" />
+        <Property Name="dept_name" Type="Edm.String" Nullable="true" />
+        <Property Name="Passwd" Type="Edm.String" Nullable="true" />
+        <Property Name="unit_id" Type="Edm.String" Nullable="true" />
+        <Property Name="parent_id" Type="Edm.String" Nullable="true" />
+        <Property Name="kj_dept_id" Type="Edm.String" Nullable="true" />
+        <Property Name="list_order" Type="Edm.Int32" Nullable="false" />
+        <Property Name="add_time" Type="Edm.DateTime" Nullable="false" />
+      </EntityType>
+      <EntityType Name="com_person">
+        <Key>
+          <PropertyRef Name="com_person_id" />
+        </Key>
+        <Property Name="com_person_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="person_no" Type="Edm.String" Nullable="true" />
+        <Property Name="Other_no" Type="Edm.String" Nullable="true" />
+        <Property Name="person_name" Type="Edm.String" Nullable="true" />
+        <Property Name="sex" Type="Edm.String" Nullable="true" />
+        <Property Name="cert_id" Type="Edm.String" Nullable="true" />
+        <Property Name="birthday" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="nation" Type="Edm.Guid" Nullable="true" />
+        <Property Name="party" Type="Edm.Guid" Nullable="true" />
+        <Property Name="university" Type="Edm.String" Nullable="true" />
+        <Property Name="telephone" Type="Edm.String" Nullable="true" />
+        <Property Name="mobile" Type="Edm.String" Nullable="true" />
+        <Property Name="email" Type="Edm.String" Nullable="true" />
+        <Property Name="spec" Type="Edm.Guid" Nullable="true" />
+        <Property Name="job_date" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="education" Type="Edm.Guid" Nullable="true" />
+        <Property Name="degree" Type="Edm.Guid" Nullable="true" />
+        <Property Name="prof_cert_id" Type="Edm.String" Nullable="true" />
+        <Property Name="hospital_duty" Type="Edm.Guid" Nullable="true" />
+        <Property Name="photo" Type="Edm.String" Nullable="true" />
+        <Property Name="person_type" Type="Edm.Guid" Nullable="true" />
+        <Property Name="remark" Type="Edm.String" Nullable="true" />
+        <Property Name="passwd" Type="Edm.String" Nullable="true" />
+        <Property Name="Dept_id" Type="Edm.String" Nullable="true" />
+        <Property Name="Update_other_no" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Transfer_state" Type="Edm.Int32" Nullable="false" />
+        <Property Name="add_time" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="BatchGuid" Type="Edm.Guid" Nullable="true" />
+        <Property Name="is_create_card" Type="Edm.Boolean" Nullable="true" />
+        <Property Name="is_charges" Type="Edm.Boolean" Nullable="true" />
+        <Property Name="internals" Type="Edm.String" Nullable="true" />
+        <Property Name="update_time" Type="Edm.DateTime" Nullable="false" />
+      </EntityType>
+      <EntityType Name="com_unit">
+        <Key>
+          <PropertyRef Name="unit_id" />
+        </Key>
+        <Property Name="unit_id" Type="Edm.String" Nullable="false" />
+        <Property Name="unit_name" Type="Edm.String" Nullable="true" />
+        <Property Name="gov_passwd" Type="Edm.String" Nullable="true" />
+        <Property Name="short_name" Type="Edm.String" Nullable="true" />
+        <Property Name="address" Type="Edm.String" Nullable="true" />
+        <Property Name="contact" Type="Edm.String" Nullable="true" />
+        <Property Name="telephone" Type="Edm.String" Nullable="true" />
+        <Property Name="postcode" Type="Edm.String" Nullable="true" />
+        <Property Name="parent_unit" Type="Edm.String" Nullable="true" />
+        <Property Name="hospital_level" Type="Edm.Guid" Nullable="true" />
+        <Property Name="cme_score_check_mode" Type="Edm.Byte" Nullable="false" />
+        <Property Name="cme_standard_kind_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Proj_control_top_unit" Type="Edm.String" Nullable="true" />
+        <Property Name="attendance_grantscore_top_unit" Type="Edm.String" Nullable="true" />
+        <Property Name="cme_score_avail_state" Type="Edm.Byte" Nullable="false" />
+        <Property Name="cme_score_check_state" Type="Edm.Byte" Nullable="false" />
+        <Property Name="tmp_oper_people_id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="photo_address" Type="Edm.String" Nullable="true" />
+        <Property Name="privilege" Type="Edm.Int32" Nullable="false" />
+        <Property Name="list_order" Type="Edm.Int32" Nullable="false" />
+        <Property Name="open_dept" Type="Edm.Int32" Nullable="false" />
+        <Property Name="add_time" Type="Edm.DateTime" Nullable="false" />
+      </EntityType>
+      <EntityType Name="cme_person">
+        <Key>
+          <PropertyRef Name="cme_person_id" />
+        </Key>
+        <Property Name="cme_person_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="com_person_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="cme_year" Type="Edm.String" Nullable="true" />
+        <Property Name="title_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="person_state_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="unit" Type="Edm.String" Nullable="true" />
+        <Property Name="hospital_level" Type="Edm.Guid" Nullable="true" />
+        <Property Name="remark" Type="Edm.String" Nullable="true" />
+        <Property Name="add_time" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="key_id" Type="Edm.Int32" Nullable="false" />
+      </EntityType>
+      <EntityType Name="cme_year">
+        <Key>
+          <PropertyRef Name="cme_year_id" />
+        </Key>
+        <Property Name="cme_year_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="cme_standard_kind_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="cme_year1" Type="Edm.String" Nullable="true" />
+        <Property Name="start_date" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="end_date" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="add_time" Type="Edm.DateTime" Nullable="false" />
+      </EntityType>
+      <EntityType Name="cme_unit_level">
+        <Key>
+          <PropertyRef Name="unit_level_id" />
+        </Key>
+        <Property Name="unit_level_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="unit_level_name" Type="Edm.String" Nullable="true" />
+        <Property Name="cme_standard_kind_id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="list_order" Type="Edm.Int32" Nullable="false" />
+        <Property Name="add_time" Type="Edm.DateTime" Nullable="false" />
+      </EntityType>
+      <EntityContainer Name="KjptDB" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Persons" EntityType="Wcf01.Person" />
+        <EntitySet Name="com_depts" EntityType="Wcf01.com_dept" />
+        <EntitySet Name="com_persons" EntityType="Wcf01.com_person" />
+        <EntitySet Name="com_units" EntityType="Wcf01.com_unit" />
+        <EntitySet Name="cme_persons" EntityType="Wcf01.cme_person" />
+        <EntitySet Name="cme_years" EntityType="Wcf01.cme_year" />
+        <EntitySet Name="cme_unit_levels" EntityType="Wcf01.cme_unit_level" />
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

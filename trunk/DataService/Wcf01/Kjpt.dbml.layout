@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Kjpt">
+  <DataContextMoniker Name="/KjptDataContext" />
+  <nestedChildShapes>
+    <classShape Id="638c161d-61e9-4f8b-ac33-4d6f8511ed56" isExpanded="false" absoluteBounds="3.5, 1.375, 2, 0.45">
+      <DataClassMoniker Name="/KjptDataContext/com_dept" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ac1debef-90e9-4c22-9085-f8da0acb771c" absoluteBounds="3.515, 1.835, 1.9700000000000002, 1.5628255208333335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f3c13400-fb4f-40db-aeb9-2f5f8332c99b" isExpanded="false" absoluteBounds="3, 2.125, 2, 0.45">
+      <DataClassMoniker Name="/KjptDataContext/com_person" />
+      <nestedChildShapes>
+        <elementListCompartment Id="896aa9ae-462f-401e-b013-ce672d7471cb" absoluteBounds="3.015, 2.585, 1.9700000000000002, 5.609700520833333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2e84e854-f3ed-4164-bff7-d2a029607d9b" isExpanded="false" absoluteBounds="4.875, 3, 2, 0.45">
+      <DataClassMoniker Name="/KjptDataContext/com_unit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="65a47af4-ce2e-4303-b122-562c31f32f0b" absoluteBounds="4.8900000000000006, 3.46, 1.9700000000000002, 3.923502604166667" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e1a38d6c-3829-4969-8b02-459fd3017a32" isExpanded="false" absoluteBounds="1.75, 1, 2, 0.45">
+      <DataClassMoniker Name="/KjptDataContext/cme_person" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0c83a093-958b-40d1-b8a2-cd105098cf84" absoluteBounds="1.7650000000000001, 1.46, 1.9700000000000002, 1.9000651041666665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="911d9398-3308-44f7-acb5-91f40113d487" isExpanded="false" absoluteBounds="2, 3.75, 2, 0.45">
+      <DataClassMoniker Name="/KjptDataContext/cme_year" />
+      <nestedChildShapes>
+        <elementListCompartment Id="85c9f834-146c-451f-bef1-d6e613f7583b" absoluteBounds="2.015, 4.21, 1.9700000000000002, 1.2255859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bb538363-1008-47e1-98e0-ae27be225cd6" isExpanded="false" absoluteBounds="0.75, 2.75, 2, 0.45">
+      <DataClassMoniker Name="/KjptDataContext/cme_unit_level" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9ac17dea-7628-4678-a616-19a6bcb9eb90" absoluteBounds="0.76500000000000012, 3.21, 1.9700000000000002, 1.0569661458333333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
