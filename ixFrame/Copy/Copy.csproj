@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9961AF2D-364F-4CC0-B162-B1801A12F602}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Copy</RootNamespace>
+    <AssemblyName>Copy</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Caching\AssemblyCache.cs" />
+    <Compile Include="Caching\CacheBinInfo.cs" />
+    <Compile Include="Caching\CachingService.cs" />
+    <Compile Include="Caching\Components\AspCachingOnRemove.cs" />
+    <Compile Include="Caching\Components\AspCachingService.cs" />
+    <Compile Include="Caching\DatabaseCacheConfig\CacheConfigCollection.cs" />
+    <Compile Include="Caching\DatabaseCacheConfig\CacheConfigInfo.cs" />
+    <Compile Include="Caching\DatabaseCacheConfig\CacheConfigs.cs" />
+    <Compile Include="Caching\DatabaseCacheConfig\CacheDependencyType.cs" />
+    <Compile Include="Caching\DataProvider.cs" />
+    <Compile Include="Caching\DataProviderLazeCacheHelper.cs" />
+    <Compile Include="Caching\ICachingService.cs" />
+    <Compile Include="Caching\ITreeNode.cs" />
+    <Compile Include="Caching\LJBinTree.cs" />
+    <Compile Include="Caching\OnDataCacheRemoved.cs" />
+    <Compile Include="Caching\RequestCacheService.cs" />
+    <Compile Include="Caching\StaticCacheService.cs" />
+    <Compile Include="Caching\WeakReferencesCacheService.cs" />
+    <Compile Include="Caching\WeakReferencesService.cs" />
+    <Compile Include="Components\Common.cs" />
+    <Compile Include="Components\ExceptionService.cs" />
+    <Compile Include="Components\Logger.cs" />
+    <Compile Include="Components\ManagedThreadPool.cs" />
+    <Compile Include="Components\PortalPageConfigObject.cs" />
+    <Compile Include="Components\Randoms.cs" />
+    <Compile Include="Components\ScrambleStyle.cs" />
+    <Compile Include="Constants\Classes.cs" />
+    <Compile Include="Constants\Enums.cs" />
+    <Compile Include="Helper\AllowedHtmlTagType.cs" />
+    <Compile Include="Helper\BrowserHelper.cs" />
+    <Compile Include="Helper\Character.cs" />
+    <Compile Include="Helper\ClientHelper.cs" />
+    <Compile Include="Helper\CryptographyHelper.cs" />
+    <Compile Include="Helper\DateUtil.cs" />
+    <Compile Include="Helper\FieldLoader.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\FileUploadHelper.cs" />
+    <Compile Include="Helper\HtmlHelper.cs" />
+    <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="Helper\IpHelper.cs" />
+    <Compile Include="Helper\JavaScriptHelper.cs" />
+    <Compile Include="Helper\JScript.cs" />
+    <Compile Include="Helper\RandomNumbers.cs" />
+    <Compile Include="Helper\RequestHelper.cs" />
+    <Compile Include="Helper\SafeConvert.cs" />
+    <Compile Include="Helper\SerializeHelper.cs" />
+    <Compile Include="Helper\SqlHelper.cs" />
+    <Compile Include="Helper\StreamHelper.cs" />
+    <Compile Include="Helper\StringHelper.cs" />
+    <Compile Include="Helper\StringUtil.cs" />
+    <Compile Include="Helper\UploadImage.cs" />
+    <Compile Include="Helper\UserCookies.cs" />
+    <Compile Include="Helper\ValidateImage.cs" />
+    <Compile Include="Helper\ValidateUtil.cs" />
+    <Compile Include="Helper\Watermark.cs" />
+    <Compile Include="Helper\XmlHelper.cs" />
+    <Compile Include="Pack\ECMAScriptPacker.cs" />
+    <Compile Include="Pack\JsMin.cs" />
+    <Compile Include="Pack\Packer.cs" />
+    <Compile Include="Pack\ParseMaster.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\UploadFile\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="URLRewriter\Config\RewriterConfiguration.cs" />
+    <Compile Include="URLRewriter\Config\RewriterRule.cs" />
+    <Compile Include="URLRewriter\Config\RewriterRuleCollection.cs" />
+    <Compile Include="URLRewriter\RewriterFacilities.cs" />
+    <Compile Include="ValidationCode\DataProtection.cs" />
+    <Compile Include="ValidationCode\VCode.cs" />
+    <Compile Include="ValidationCode\VerifyCode.cs" />
+    <Compile Include="Zip\Checksums\Adler32.cs" />
+    <Compile Include="Zip\Checksums\CRC32.cs" />
+    <Compile Include="Zip\Checksums\IChecksum.cs" />
+    <Compile Include="Zip\Checksums\StrangeCRC.cs" />
+    <Compile Include="Zip\Core\FileSystemScanner.cs" />
+    <Compile Include="Zip\Core\INameTransform.cs" />
+    <Compile Include="Zip\Core\IScanFilter.cs" />
+    <Compile Include="Zip\Core\IScanner.cs" />
+    <Compile Include="Zip\Core\NameFilter.cs" />
+    <Compile Include="Zip\Core\PathFilter.cs" />
+    <Compile Include="Zip\Core\StreamUtils.cs" />
+    <Compile Include="Zip\Encryption\PkzipClassic.cs" />
+    <Compile Include="Zip\GZip\GZIPConstants.cs" />
+    <Compile Include="Zip\GZip\GZipException.cs" />
+    <Compile Include="Zip\GZip\GzipInputStream.cs" />
+    <Compile Include="Zip\GZip\GzipOutputStream.cs" />
+    <Compile Include="Zip\HttpCompress\CompressingFilter.cs" />
+    <Compile Include="Zip\HttpCompress\DeflateFilter.cs" />
+    <Compile Include="Zip\HttpCompress\Enums.cs" />
+    <Compile Include="Zip\HttpCompress\GZipFilter.cs" />
+    <Compile Include="Zip\HttpCompress\HttpOutputFilter.cs" />
+    <Compile Include="Zip\SharpZipBaseException.cs" />
+    <Compile Include="Zip\Zip\Compression\Deflater.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="Zip\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="Zip\Zip\Compression\Inflater.cs" />
+    <Compile Include="Zip\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="Zip\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="Zip\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="Zip\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="Zip\Zip\FastZip.cs" />
+    <Compile Include="Zip\Zip\IEntryFactory.cs" />
+    <Compile Include="Zip\Zip\ZipConstants.cs" />
+    <Compile Include="Zip\Zip\ZipEntry.cs" />
+    <Compile Include="Zip\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Zip\Zip\ZipException.cs" />
+    <Compile Include="Zip\Zip\ZipExtraData.cs" />
+    <Compile Include="Zip\Zip\ZipFile.cs" />
+    <Compile Include="Zip\Zip\ZipHelperStream.cs" />
+    <Compile Include="Zip\Zip\ZipInputStream.cs" />
+    <Compile Include="Zip\Zip\ZipNameTransform.cs" />
+    <Compile Include="Zip\Zip\ZipOutputStream.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\UploadFile\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UploadFile\UploadFile.disco" />
+    <None Include="Service References\UploadFile\UploadFile.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UploadFile\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UploadFile\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UploadFile\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
