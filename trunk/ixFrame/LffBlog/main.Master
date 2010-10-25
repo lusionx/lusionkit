@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="LffBlog.main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Scripts>
+            <asp:ScriptReference Path="~/js/jquery.1.2.6.min.js" />
+            <asp:ScriptReference Path="~/js/jquery.blockUI.js" />
+            <asp:ScriptReference Path="~/js/jquery.extend.js" />
+            <asp:ScriptReference Path="~/js/jquery.validate.js" />
+            <asp:ScriptReference Path="~/js/jquery.ajaxEdit.js" />
+        </Scripts>
+    </asp:ScriptManager>
+    <div id="context">
+        <asp:ContentPlaceHolder ID="cph_context" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
