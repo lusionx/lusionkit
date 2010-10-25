@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{33E09F9F-0DD3-4244-A84B-818B8FEBF076}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alxf.ProduceCard.BLL</RootNamespace>
+    <AssemblyName>Alxf.ProduceCard.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Card_ApplyModel.cs" />
+    <Compile Include="Card_ApplyModelPartial.cs" />
+    <Compile Include="Card_ApplyModelResponsibility.cs" />
+    <Compile Include="Card_ApplyStateModel.cs" />
+    <Compile Include="Card_ApplyStateModelPartail.cs" />
+    <Compile Include="Card_ApplyStateModelResponsibility.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="IStateAction.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serial.cs" />
+    <Compile Include="UserDaibiao.cs" />
+    <Compile Include="UserDatar.cs" />
+    <Compile Include="UserKuGuan.cs" />
+    <Compile Include="UserZhiJian.cs" />
+    <Compile Include="UserZhuLi.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alxf.Frame.DataBase\Alxf.Frame.DataBase.csproj">
+      <Project>{CDA98A13-7806-4541-A58F-864176421AEC}</Project>
+      <Name>Alxf.Frame.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alxf.Frame.ModelBase\Alxf.Frame.ModelBase.csproj">
+      <Project>{5884EE45-464D-4B20-88A9-361C766CF94D}</Project>
+      <Name>Alxf.Frame.ModelBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alxf.ProduceCard.DAL\Alxf.ProduceCard.DAL.csproj">
+      <Project>{0C59F814-9CCE-43EB-AB0D-5ABD7F826FB5}</Project>
+      <Name>Alxf.ProduceCard.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
