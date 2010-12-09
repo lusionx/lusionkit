@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>Learn
+        </title>
+    </head>
+    <body>
+        <div>
+            <?=$out?>
+        </div>
+    </body>
+</html>
