@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAlx.UI", "MyAlx.UI\MyAlx.UI.csproj", "{87476D69-A1B2-4EB3-8D1A-C4B1B4660A42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAlx.Core", "MyAlx.Core\MyAlx.Core.csproj", "{5B894439-49F3-4016-A198-849444F246C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAlx.Tools", "MyAlx.Tools\MyAlx.Tools.csproj", "{7782E53C-5DA0-4225-9984-D804A2FC35BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87476D69-A1B2-4EB3-8D1A-C4B1B4660A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87476D69-A1B2-4EB3-8D1A-C4B1B4660A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87476D69-A1B2-4EB3-8D1A-C4B1B4660A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87476D69-A1B2-4EB3-8D1A-C4B1B4660A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B894439-49F3-4016-A198-849444F246C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B894439-49F3-4016-A198-849444F246C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B894439-49F3-4016-A198-849444F246C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B894439-49F3-4016-A198-849444F246C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7782E53C-5DA0-4225-9984-D804A2FC35BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7782E53C-5DA0-4225-9984-D804A2FC35BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7782E53C-5DA0-4225-9984-D804A2FC35BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7782E53C-5DA0-4225-9984-D804A2FC35BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
