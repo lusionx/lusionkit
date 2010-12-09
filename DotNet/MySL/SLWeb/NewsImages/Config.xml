@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item>
+        <path>aaaa.jpg</path>
+        <href>http://www.baidu.com/</href>
+        <title>aaaa</title>
+        <width></width>
+        <height></height>
+    </item>
+    <item>
+        <path>bbbb.jpg</path>
+        <href>http://www.qq.com/</href>
+        <title>bbbb</title>
+        <width></width>
+        <height></height>
+    </item>
+    <item>
+        <path>cccc.jpg</path>
+        <href>http://www.163.com/</href>
+        <title>cccc</title>
+        <width></width>
+        <height></height>
+    </item>
+</items>
+

@@ -1,0 +1,961 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5FA2FB99-4F82-4ADF-994A-9DB028711760}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WssSVLib</RootNamespace>
+    <AssemblyName>WssSVLib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>false</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Serialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Alerts\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Authentication\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Copy\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Dws\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Forms\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Imaging\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Lists\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Meetings\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\People\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Permissions\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SharepointEmailWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SiteData\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Sites\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\StsAdapter\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\UserGroup\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Versions\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Views\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\WebPartPagesWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Webs\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\StsAdapter\DspSts.wsdl" />
+    <None Include="Service References\Alerts\alerts.disco" />
+    <None Include="Service References\Alerts\configuration91.svcinfo" />
+    <None Include="Service References\Alerts\configuration.svcinfo" />
+    <None Include="Service References\Alerts\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Copy\Copy.disco" />
+    <None Include="Service References\Copy\configuration91.svcinfo" />
+    <None Include="Service References\Copy\configuration.svcinfo" />
+    <None Include="Service References\Copy\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Dws\DWS.disco" />
+    <None Include="Service References\Dws\configuration91.svcinfo" />
+    <None Include="Service References\Dws\configuration.svcinfo" />
+    <None Include="Service References\Dws\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Forms\Forms.disco" />
+    <None Include="Service References\Forms\configuration91.svcinfo" />
+    <None Include="Service References\Forms\configuration.svcinfo" />
+    <None Include="Service References\Forms\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Imaging\Imaging.disco" />
+    <None Include="Service References\Imaging\configuration91.svcinfo" />
+    <None Include="Service References\Imaging\configuration.svcinfo" />
+    <None Include="Service References\Imaging\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Lists\Lists.disco" />
+    <None Include="Service References\Lists\configuration91.svcinfo" />
+    <None Include="Service References\Lists\configuration.svcinfo" />
+    <None Include="Service References\Lists\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Meetings\Meetings.disco" />
+    <None Include="Service References\Meetings\configuration91.svcinfo" />
+    <None Include="Service References\Meetings\configuration.svcinfo" />
+    <None Include="Service References\Meetings\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\People\People.disco" />
+    <None Include="Service References\People\configuration91.svcinfo" />
+    <None Include="Service References\People\configuration.svcinfo" />
+    <None Include="Service References\People\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Permissions\Permissions.disco" />
+    <None Include="Service References\Permissions\configuration91.svcinfo" />
+    <None Include="Service References\Permissions\configuration.svcinfo" />
+    <None Include="Service References\Permissions\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SharepointEmailWS\sharepointemailws.disco" />
+    <None Include="Service References\SharepointEmailWS\configuration91.svcinfo" />
+    <None Include="Service References\SharepointEmailWS\configuration.svcinfo" />
+    <None Include="Service References\SharepointEmailWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SiteData\SiteData.disco" />
+    <None Include="Service References\SiteData\configuration91.svcinfo" />
+    <None Include="Service References\SiteData\configuration.svcinfo" />
+    <None Include="Service References\SiteData\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Sites\Sites.disco" />
+    <None Include="Service References\Sites\configuration91.svcinfo" />
+    <None Include="Service References\Sites\configuration.svcinfo" />
+    <None Include="Service References\Sites\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\UserGroup\UserGroup.disco" />
+    <None Include="Service References\UserGroup\configuration91.svcinfo" />
+    <None Include="Service References\UserGroup\configuration.svcinfo" />
+    <None Include="Service References\UserGroup\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Versions\versions.disco" />
+    <None Include="Service References\Versions\configuration91.svcinfo" />
+    <None Include="Service References\Versions\configuration.svcinfo" />
+    <None Include="Service References\Versions\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Views\Views.disco" />
+    <None Include="Service References\Views\configuration91.svcinfo" />
+    <None Include="Service References\Views\configuration.svcinfo" />
+    <None Include="Service References\Views\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\webpartpages.disco" />
+    <None Include="Service References\WebPartPagesWebService\configuration91.svcinfo" />
+    <None Include="Service References\WebPartPagesWebService\configuration.svcinfo" />
+    <None Include="Service References\WebPartPagesWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Webs\Webs.disco" />
+    <None Include="Service References\Webs\configuration91.svcinfo" />
+    <None Include="Service References\Webs\configuration.svcinfo" />
+    <None Include="Service References\Webs\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Authentication\Authentication.disco" />
+    <None Include="Service References\Authentication\configuration91.svcinfo" />
+    <None Include="Service References\Authentication\configuration.svcinfo" />
+    <None Include="Service References\Authentication\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Alerts\" />
+    <WCFMetadataStorage Include="Service References\Authentication\" />
+    <WCFMetadataStorage Include="Service References\Copy\" />
+    <WCFMetadataStorage Include="Service References\Dws\" />
+    <WCFMetadataStorage Include="Service References\Forms\" />
+    <WCFMetadataStorage Include="Service References\Imaging\" />
+    <WCFMetadataStorage Include="Service References\Lists\" />
+    <WCFMetadataStorage Include="Service References\Meetings\" />
+    <WCFMetadataStorage Include="Service References\People\" />
+    <WCFMetadataStorage Include="Service References\Permissions\" />
+    <WCFMetadataStorage Include="Service References\SharepointEmailWS\" />
+    <WCFMetadataStorage Include="Service References\SiteData\" />
+    <WCFMetadataStorage Include="Service References\Sites\" />
+    <WCFMetadataStorage Include="Service References\StsAdapter\" />
+    <WCFMetadataStorage Include="Service References\UserGroup\" />
+    <WCFMetadataStorage Include="Service References\Versions\" />
+    <WCFMetadataStorage Include="Service References\Views\" />
+    <WCFMetadataStorage Include="Service References\WebPartPagesWebService\" />
+    <WCFMetadataStorage Include="Service References\Webs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\StsAdapter\DspSts.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\StsAdapter\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\StsAdapter\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Alerts\alerts.wsdl" />
+    <None Include="Service References\Alerts\WssSVLib.Alerts.AlertInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Alerts\WssSVLib.Alerts.DeleteAlertsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Authentication\Authentication.wsdl" />
+    <None Include="Service References\Authentication\WssSVLib.Authentication.AuthenticationMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Authentication\WssSVLib.Authentication.LoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Copy\Copy.wsdl" />
+    <None Include="Service References\Copy\WssSVLib.Copy.CopyIntoItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Copy\WssSVLib.Copy.CopyResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Copy\WssSVLib.Copy.GetItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\DWS.wsdl" />
+    <None Include="Service References\Dws\WssSVLib.Dws.CanCreateDwsUrlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.CreateDwsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.CreateFolderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.DeleteDwsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.DeleteFolderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.FindDwsDocResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.GetDwsDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.GetDwsMetaDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.RemoveDwsUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.RenameDwsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Dws\WssSVLib.Dws.UpdateDwsDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Forms\Forms.wsdl" />
+    <None Include="Service References\Forms\WssSVLib.Forms.GetFormCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Forms\WssSVLib.Forms.GetFormResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\Imaging.wsdl" />
+    <None Include="Service References\Imaging\WssSVLib.Imaging.CheckSubwebAndListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.CreateNewFolderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.DeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.DownloadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.EditResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.GetItemsByIdsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.GetItemsXMLDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.GetListItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.ListPictureLibraryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.RenameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Imaging\WssSVLib.Imaging.UploadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\Lists.wsdl" />
+    <None Include="Service References\Lists\WssSVLib.Lists.AddAttachmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.AddDiscussionBoardItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.AddListFromFeatureResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.AddListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.ApplyContentTypeToListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.CheckInFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.CheckOutFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.CreateContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.DeleteAttachmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.DeleteContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.DeleteContentTypeXmlDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.DeleteListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetAttachmentCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListAndViewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListContentTypesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListItemChangesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListItemChangesSinceTokenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.GetVersionCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.UndoCheckOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.UpdateContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.UpdateContentTypesXmlDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.UpdateContentTypeXmlDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.UpdateListItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Lists\WssSVLib.Lists.UpdateListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\Meetings.wsdl" />
+    <None Include="Service References\Meetings\WssSVLib.Meetings.AddMeetingFromICalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.AddMeetingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.CreateWorkspaceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.GetMeetingsInformationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.GetMeetingWorkspacesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.RemoveMeetingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.RestoreMeetingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.SetAttendeeResponseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.SetWorkspaceTitleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.UpdateMeetingFromICalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Meetings\WssSVLib.Meetings.UpdateMeetingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\People\People.wsdl" />
+    <None Include="Service References\People\WssSVLib.People.ResolvePrincipalsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\People\WssSVLib.People.SearchPrincipalsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Permissions\Permissions.wsdl" />
+    <None Include="Service References\Permissions\WssSVLib.Permissions.AddPermissionCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Permissions\WssSVLib.Permissions.AddPermissionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Permissions\WssSVLib.Permissions.GetPermissionCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Permissions\WssSVLib.Permissions.RemovePermissionCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Permissions\WssSVLib.Permissions.RemovePermissionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Permissions\WssSVLib.Permissions.UpdatePermissionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\sharepointemailws.wsdl" />
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.ChangeContactsMembershipInDistributionGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.ChangeUsersMembershipInDistributionGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.CreateContactResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.CreateDistributionGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.DeleteContactResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.DeleteDistributionGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.GetJobStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.ModifyContactResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.ModifyDistributionGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SharepointEmailWS\WssSVLib.SharepointEmailWS.RenameDistributionGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\SiteData.wsdl" />
+    <None Include="Service References\SiteData\WssSVLib.SiteData.EnumerateFolderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetAttachmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetChangesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetContentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetListCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetListItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetSiteAndWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetSiteUrlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetURLSegmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SiteData\WssSVLib.SiteData.GetWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Sites\Sites.wsdl" />
+    <None Include="Service References\Sites\WssSVLib.Sites.Template.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\StsAdapter\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\StsAdapter\WssSVLib.StsAdapter.queryRequest2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\UserGroup.wsdl" />
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddGroupToRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddRoleDefResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddUserCollectionToGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddUserCollectionToRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddUserToGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.AddUserToRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetAllUserCollectionFromWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetGroupCollectionFromRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetGroupCollectionFromSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetGroupCollectionFromUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetGroupCollectionFromWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetGroupCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetGroupInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetRoleCollectionFromGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetRoleCollectionFromUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetRoleCollectionFromWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetRoleCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetRoleInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetRolesAndPermissionsForCurrentUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetRolesAndPermissionsForSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetUserCollectionFromGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetUserCollectionFromRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetUserCollectionFromSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetUserCollectionFromWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetUserCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetUserInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.GetUserLoginFromEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveGroupFromRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveUserCollectionFromGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveUserCollectionFromRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveUserCollectionFromSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveUserFromGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveUserFromRoleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveUserFromSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.RemoveUserFromWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.UpdateGroupInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.UpdateRoleDefInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.UpdateRoleInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserGroup\WssSVLib.UserGroup.UpdateUserInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Versions\versions.wsdl" />
+    <None Include="Service References\Versions\WssSVLib.Versions.DeleteAllVersionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Versions\WssSVLib.Versions.DeleteVersionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Versions\WssSVLib.Versions.GetVersionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Versions\WssSVLib.Versions.RestoreVersionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\Views.wsdl" />
+    <None Include="Service References\Views\WssSVLib.Views.AddViewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\WssSVLib.Views.DeleteViewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\WssSVLib.Views.GetViewCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\WssSVLib.Views.GetViewHtmlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\WssSVLib.Views.GetViewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\WssSVLib.Views.UpdateViewHtml2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\WssSVLib.Views.UpdateViewHtmlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Views\WssSVLib.Views.UpdateViewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\webpartpages.wsdl" />
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.AddWebPartResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.AddWebPartToZoneResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.AssociateWorkflowMarkupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.ConvertWebPartFormatResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.DeleteWebPartResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.ExecuteProxyUpdatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.FetchLegalWorkflowActionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetAssemblyMetaDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetBindingResourceDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetCustomControlListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetDataFromDataSourceControlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetFormCapabilityFromDataSourceControlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetSafeAssemblyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPart2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPartCrossPageCompatibilityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPartPageConnectionInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPartPageDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPartPageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPartProperties2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPartPropertiesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetWebPartResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.GetXmlDataFromDataSourceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.RemoveWorkflowAssociationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.RenderWebPartForEditResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.SaveWebPart2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.SaveWebPartResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WebPartPagesWebService\WssSVLib.WebPartPagesWebService.ValidateWorkflowMarkupAndCreateSupportObjectsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\Webs.wsdl" />
+    <None Include="Service References\Webs\WssSVLib.Webs.CreateContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.CustomizeCssResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.DeleteContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetActivatedFeaturesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetAllSubWebCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetColumnsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetContentTypesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetCustomizedPageStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetListTemplatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetWebCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.GetWebResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.RemoveContentTypeXmlDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.RevertCssResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.RevertFileContentStreamResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.UpdateColumnsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.UpdateContentTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.UpdateContentTypeXmlDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Webs\WssSVLib.Webs.WebUrlFromPageUrlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
