@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://computer/_vti_bin/sharepointemailws.asmx?wsdl" docRef="http://computer/_vti_bin/sharepointemailws.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://computer/_vti_bin/sharepointemailws.asmx" xmlns:q1="http://microsoft.com/webservices/SharePoint/SharepointEmailWS/" binding="q1:SharepointEmailWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://computer/_vti_bin/sharepointemailws.asmx" xmlns:q2="http://microsoft.com/webservices/SharePoint/SharepointEmailWS/" binding="q2:SharepointEmailWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-</discovery>
