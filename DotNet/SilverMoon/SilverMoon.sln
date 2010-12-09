@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8780BA66-1F11-4138-9F8D-C6CF4506CA5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverMoon", "SilverMoon\SilverMoon.csproj", "{7E45A176-BFB9-4542-99E1-EC1EF59D9B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi", "..\GoogleApi\GoogleApi.csproj", "{70EB9BFF-FA18-43BF-BC3D-6D4E4879E59D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool", "..\Tool\Tool.csproj", "{8AB5F3F9-E816-44F3-B324-93E4A9A5E0BE}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SilverMoon.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E45A176-BFB9-4542-99E1-EC1EF59D9B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E45A176-BFB9-4542-99E1-EC1EF59D9B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E45A176-BFB9-4542-99E1-EC1EF59D9B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E45A176-BFB9-4542-99E1-EC1EF59D9B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70EB9BFF-FA18-43BF-BC3D-6D4E4879E59D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70EB9BFF-FA18-43BF-BC3D-6D4E4879E59D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70EB9BFF-FA18-43BF-BC3D-6D4E4879E59D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70EB9BFF-FA18-43BF-BC3D-6D4E4879E59D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AB5F3F9-E816-44F3-B324-93E4A9A5E0BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB5F3F9-E816-44F3-B324-93E4A9A5E0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB5F3F9-E816-44F3-B324-93E4A9A5E0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB5F3F9-E816-44F3-B324-93E4A9A5E0BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

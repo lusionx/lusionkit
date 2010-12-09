@@ -1,0 +1,35 @@
+﻿.orange
+{
+    background-color: #FFCC66 !important;
+}
+
+/*分布图的颜色定义,良品*/
+.st0, .green
+{
+    background-color: #66FF33;
+}
+/*DC*/
+.st10
+{
+    background-color: #FF0000;
+}
+/*FI浇口*/
+.st20
+{
+    background-color: #008080;
+}
+/*FI外观*/
+.st30
+{
+    background-color: #800080;
+}
+/*检查系*/
+.st40
+{
+    background-color: #808000;
+}
+/*TFTE*/
+.st50
+{
+    background-color: #800000;
+}
