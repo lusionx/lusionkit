@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+    <AddForm>
+        <head>
+            <![CDATA[
+<table>
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <td>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </thead>
+    <tbody>]]>
+        </head>
+        <item>
+            <![CDATA[
+        <tr>
+            <th>
+                {0}
+            </th>
+            <td>
+               <alxf:{1} runat="server" ID="af_{0}" {2}></alxf:{1}>
+            </td>
+            <td>
+            </td>
+        </tr>]]>
+        </item>
+        <foot><![CDATA[
+    </tbody>
+</table>]]>        
+        </foot>        
+    </AddForm>
+</Template>
