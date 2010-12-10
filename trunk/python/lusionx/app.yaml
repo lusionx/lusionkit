@@ -13,6 +13,11 @@ handlers:
 - url: /learn.*
   script: learn.py
 
+- url: /test.*
+  script: test.py
+
+- url: /msg.*
+  script: msg.py
+
 - url: /.*
   script: not_found.py
-
