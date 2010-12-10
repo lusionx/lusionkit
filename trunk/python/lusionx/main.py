@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
