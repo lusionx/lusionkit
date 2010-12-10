@@ -11,7 +11,7 @@ class home(webapp.RequestHandler):
         vals = {
             'url': 'url',
             'url_linktext': 'url_linktext'}
-        str = kit.renderview(vals,'home')
+        str = kit.render_view(vals,'home')
         #path = os.path.join(os.path.dirname(__file__), 'view/home.html')
         self.response.out.write(str)
 

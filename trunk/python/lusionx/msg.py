@@ -19,7 +19,7 @@ class list(webapp.RequestHandler):
         vals = {
             'title': '列表',
             'entities': q}
-        htm = kit.renderview(vals,'list','msg')
+        htm = kit.render_view(vals,'list','msg')
         #one = q.fetch(1)[0]
         self.response.out.write(htm)
 
@@ -33,7 +33,7 @@ class new(webapp.RequestHandler):
             'title':'new msg',
             'entity':one,
             'act':'/msg/new'}
-        htm = kit.renderview(vals,'form','msg')
+        htm = kit.render_view(vals,'form','msg')
         self.response.out.write(htm)
 
     def post(self):
@@ -53,7 +53,7 @@ class edit(webapp.RequestHandler):
             'title':'edit one',
             'entity':one,
             'act':'/msg/edit/'+str(id)}
-        htm = kit.renderview(vals,'form','msg')
+        htm = kit.render_view(vals,'form','msg')
         self.response.out.write(htm)
 
     def post(self,id=0):
@@ -64,10 +64,10 @@ class edit(webapp.RequestHandler):
         self.redirect('/msg/list')
 
 acts.append((r'/msg/edit/(\d+)',edit))
-
+acts.append((r'/msg.*',list))
 
 def main():
-    application = webapp.WSGIApplication(acts, debug=True)
+    application = webapp.WSGIApplication(acts, debug=kit.webapp_debug)
     util.run_wsgi_app(application)
 
 

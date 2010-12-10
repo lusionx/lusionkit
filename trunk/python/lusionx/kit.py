@@ -4,9 +4,12 @@ from google.appengine.ext.webapp import template
 from xml.dom.minidom import parseString
 
 _templateExt = '.html'
+
 _templateFold = 'view'
+
 _sharedFold = 'shared'
 
+webapp_debug = True
 
 def _getviewpath(name, folder):
     root = os.path.dirname(__file__)
@@ -17,7 +20,7 @@ def _getviewpath(name, folder):
     else:
         return "I can't find view"
 
-def renderview(dict, name, folder=''):
+def render_view(dict, name, folder=''):
     path = _getviewpath(name,folder)
     return template.render(path, dict,True)
 
@@ -31,3 +34,5 @@ def getbody(htmlstr):
     for node in nodes:
         str+=node.toxml()
     return str
+
+
