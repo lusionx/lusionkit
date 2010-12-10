@@ -3,22 +3,21 @@
 {% block title %} {{title}} {% endblock %}
 
 {% block body %}
-<form method="post" action="/msg/edit/0">
+<form method="post" action="{{act}}">
 <p>
     <label for="name">
         name</label>
-    <input type="text" name="name" />
+    <input type="text" name="name" value="{{entity.name}}" />
 </p>
 <p>
     <label for="age">
         age</label>
-    <input type="text" name="age" />
+    <input type="number" name="age" value="{{entity.age}}" />
 </p>
 <p>
     <label for="msg">
         msg</label>
-    <textarea name="msg">    
-    </textarea>
+    <textarea name="msg">{{entity.msg}}</textarea>
 </p>
 <p>
     <input type="submit" />
