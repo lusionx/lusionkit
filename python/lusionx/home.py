@@ -3,22 +3,21 @@
 import os
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
-from google.appengine.ext.webapp import template
+import kit
 
 
 class home(webapp.RequestHandler):
     def get(self):
-        template_values = {             
+        vals = {
             'url': 'url',
-            'url_linktext': 'url_linktext',
-            }
-        path = os.path.join(os.path.dirname(__file__), 'view/home.html')
-        self.response.out.write(template.render(path, template_values))
+            'url_linktext': 'url_linktext'}
+        str = kit.renderview(vals,'home')
+        #path = os.path.join(os.path.dirname(__file__), 'view/home.html')
+        self.response.out.write(str)
 
 
 def main():
-    application = webapp.WSGIApplication([('/', home)],
-                                         debug=True)
+    application = webapp.WSGIApplication([('/', home)], debug=True)
     util.run_wsgi_app(application)
 
 

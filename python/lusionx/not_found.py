@@ -10,8 +10,7 @@ class one(webapp.RequestHandler):
 
 
 def main():
-    application = webapp.WSGIApplication([('/', one)],
-                                         debug=True)
+    application = webapp.WSGIApplication([('/.*', one)], debug=True)
     util.run_wsgi_app(application)
 
 

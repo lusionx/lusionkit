@@ -1,15 +1,17 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
+acts = []
 
-class MainHandler(webapp.RequestHandler):
+class main(webapp.RequestHandler):
     def get(self):
         self.response.out.write('首页')
 
+acts.append(('/',MainHandler))
+
 
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
-                                         debug=True)
+    application = webapp.WSGIApplication(acts, debug=True)
     util.run_wsgi_app(application)
 
 
