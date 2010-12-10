@@ -2,7 +2,6 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
-
 class hello(webapp.RequestHandler):
     def get(self):
         self.response.out.write('Hello gea learn')
@@ -24,8 +23,7 @@ def main():
         (r'/learn/hello', hello),
         (r'/learn/test', test),
         (r'/learn/par/(.*)/(.*)', par),
-        (r'/learn/.*', default)
-        ], debug=True)
+        (r'/learn.*', default)], debug=True)
     util.run_wsgi_app(application)
 
 if __name__ == '__main__':
