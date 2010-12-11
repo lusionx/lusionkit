@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import kit
 from google.appengine.ext import webapp
