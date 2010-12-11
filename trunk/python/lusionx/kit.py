@@ -3,13 +3,12 @@ import os
 from google.appengine.ext.webapp import template
 from xml.dom.minidom import parseString
 
-_templateExt = '.html'
-
-_templateFold = 'view'
-
-_sharedFold = 'shared'
 
 webapp_debug = True
+
+_templateExt = '.html'
+_templateFold = 'view'
+_sharedFold = 'shared'
 
 def _getviewpath(name, folder):
     root = os.path.dirname(__file__)
@@ -36,3 +35,10 @@ def getbody(htmlstr):
     return str
 
 
+_acts = []
+
+def add_act(url,act_class):
+    _acts.append((url,act_class))
+
+def get_wsgi_app(webapp):
+    return webapp.WSGIApplication(_acts, webapp_debug)
