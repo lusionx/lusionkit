@@ -1,8 +1,12 @@
+webapp框架下
 在 app.yaml 配置控制器 aa.py
 
 aa.py中每个类对应一个 action,action中有 只有 get和 post方法, 
 配合from google.appengine.ext.webapp import template
 中str = template.render(path, template_values)来得到html文本
+
+django框架下
+??
 
 
 
