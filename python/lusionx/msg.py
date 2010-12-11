@@ -6,8 +6,6 @@ from google.appengine.ext.webapp import template
 import kit
 from models import Person
 
-acts = []
-
 def getform(entity,request):
     entity.name = request.get('name')
     entity.age = int(request.get('age'))
@@ -23,7 +21,7 @@ class list(webapp.RequestHandler):
         #one = q.fetch(1)[0]
         self.response.out.write(htm)
 
-acts.append((r'/msg/list',list))
+kit.add_act(r'/msg/list',list)
 
 
 class new(webapp.RequestHandler):
@@ -42,7 +40,7 @@ class new(webapp.RequestHandler):
         entity.put()
         self.redirect('/msg/list')
 
-acts.append((r'/msg/new',new))
+kit.add_act(r'/msg/new',new)
 
 
 class edit(webapp.RequestHandler):
@@ -63,13 +61,14 @@ class edit(webapp.RequestHandler):
         one.put()
         self.redirect('/msg/list')
 
-acts.append((r'/msg/edit/(\d+)',edit))
-acts.append((r'/msg.*',list))
+kit.add_act(r'/msg/edit/(\d+)',edit)
+
+
+kit.add_act(r'/msg.*',list)
 
 def main():
-    application = webapp.WSGIApplication(acts, debug=kit.webapp_debug)
+    application = kit.get_wsgi_app(webapp)
     util.run_wsgi_app(application)
-
 
 if __name__ == '__main__':
     main()

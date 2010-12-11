@@ -1,6 +1,5 @@
 
 
-import os
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import kit
@@ -15,10 +14,11 @@ class home(webapp.RequestHandler):
         #path = os.path.join(os.path.dirname(__file__), 'view/home.html')
         self.response.out.write(str)
 
+kit.add_act(r'/', home)
 
 def main():
-    application = webapp.WSGIApplication([('/', home)], debug=True)
-    util.run_wsgi_app(application)
+    app = kit.get_wsgi_app(webapp)
+    util.run_wsgi_app(app)
 
 
 if __name__ == '__main__':
