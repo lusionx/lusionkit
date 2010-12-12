@@ -8,7 +8,7 @@ from xml.dom.minidom import parseString
 webapp_debug = True
 
 _templateExt = '.html'
-_templateFold = 'view'
+_templateFold = 'views'
 _sharedFold = 'shared'
 
 def _getviewpath(name, folder):

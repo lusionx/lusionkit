@@ -1,0 +1,36 @@
+{% extends "../shared/master.html" %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block body %}
+<form method="post" action="{{act}}">
+<p>
+    <label for="ip">
+        ip</label>
+    <input type="text" name="ip" value="{{entity.ip}}" />
+</p>
+<p>
+    <label for="port">
+        port</label>
+    <input type="number" min="80" max="9000" step="10" name="port" value="{{entity.port}}" />
+</p>
+<p>
+    <label for="enable">
+        enable</label>
+    <input type="number" min="0" max="1" step="1" name="enable" value="{{entity.enable}}" />
+</p>
+<p>
+    <label for="area">
+        area</label>
+    <input type="text" name="area" value="{{entity.area}}" />
+</p>
+<p>
+    <label for="source">
+        source</label>
+    <input type="url" name="source" value="{{entity.area}}" />
+</p>
+<p>
+    <input type="submit" />
+</p>
+</form>
+{% endblock %}

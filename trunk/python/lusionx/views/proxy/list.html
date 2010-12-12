@@ -1,0 +1,45 @@
+{% extends "../shared/master.html" %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block body %}
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>ip</th>
+                <th>prot</th>
+                <th>enbale</th>
+                <th>area</th>
+                <th>source</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+            <th colspan=5>
+                <a href="/proxy/new">new</a></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for a in entities %}
+            <tr>
+                <td>{{a.key.id}}</td>
+                <td>{{a.ip}}</td>
+                <td>{{a.prot}}</td>
+                <td>{{a.enbale}}</td>
+                <td>{{a.area}}</td>
+                <td>
+                    <a href="{{a.source}}">来源</a>
+                </td>
+                <td>
+                    <a href="/proxy/edit/{{a.key.id}}">edit{{a.ID}}</a>
+                    <a href="/proxy/fetch/{{a.key.id}}">fetch{{a.ID}}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

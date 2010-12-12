@@ -24,4 +24,4 @@ class Proxy(db.Model):
     #此ip所属地区
     area = db.StringProperty(default = '')
     #此代理从哪个网页得来的
-    source = db.LinkProperty()
+    source = db.LinkProperty(default = 'http://xhsh.tk/')
