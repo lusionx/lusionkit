@@ -14,8 +14,8 @@ handlers:
 - url: /static
   static_dir: static
 
-- url: /test.*
-  script: test.py
+- url: /proxy.*
+  script: proxy.py
 
 - url: /msg.*
   script: msg.py
