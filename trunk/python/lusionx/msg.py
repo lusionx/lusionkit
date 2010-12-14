@@ -62,7 +62,7 @@ class edit(webapp.RequestHandler):
         self.redirect('/msg/list')
 kit.add_act(r'/msg/edit/(\d+)',edit)
 
-kit.add_act(r'/msg.*',list)
+kit.add_act(r'/msg/.*',list)
 
 def main():
     application = kit.get_wsgi_app(webapp)
