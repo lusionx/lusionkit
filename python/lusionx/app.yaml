@@ -17,7 +17,10 @@ handlers:
 - url: /proxy.*
   script: proxy.py
 
-- url: /msg.*
+- url: /msg
+  script: msg.py
+
+- url: /msg/\w*
   script: msg.py
 
 - url: /.*
