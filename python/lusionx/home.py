@@ -14,12 +14,11 @@ class home(webapp.RequestHandler):
         #path = os.path.join(os.path.dirname(__file__), 'view/home.html')
         self.response.out.write(str)
 
-kit.add_act(r'/', home)
+kit.add_act(r'/home', home)
 
 def main():
     app = kit.get_wsgi_app(webapp)
     util.run_wsgi_app(app)
-
-
+    
 if __name__ == '__main__':
     main()
