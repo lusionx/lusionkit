@@ -3,9 +3,13 @@ version: 1
 runtime: python
 api_version: 1
 
+#notice:the *.py must can handler the url 
 handlers:
+#- url: /home\.html
+#  script: home.py
+
 - url: /
-  script: home.py
+  script: index.py  
 
 - url: /favicon.ico
   static_files: static/favicon.ico
@@ -14,14 +18,11 @@ handlers:
 - url: /static
   static_dir: static
 
-- url: /proxy.*
+- url: /proxy/.*|/proxy
   script: proxy.py
 
-- url: /msg
+- url: /msg/.*|/msg
   script: msg.py
-
-- url: /msg/\w*
-  script: msg.py
-
+  
 - url: /.*
   script: not_found.py

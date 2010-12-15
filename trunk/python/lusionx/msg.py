@@ -2,7 +2,6 @@
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
-from google.appengine.ext.webapp import template
 import kit
 from models import Person
 
@@ -62,7 +61,9 @@ class edit(webapp.RequestHandler):
         self.redirect('/msg/list')
 kit.add_act(r'/msg/edit/(\d+)',edit)
 
-kit.add_act(r'/msg/.*',list)
+#对应不完整的act(少[/])添加默认的处理,
+#不考虑 乱写情况
+kit.add_act(r'/msg[/]?',list)
 
 def main():
     application = kit.get_wsgi_app(webapp)
