@@ -6,9 +6,10 @@
 # Time: 20:41:15 
 
 """what?"""
-
+import models
 def get():
-    return '我从default主题来'
+    a = '<a href="/admin" >管理</a>'
+    return '我从default主题来' + a
 
 def main():
     return get()
