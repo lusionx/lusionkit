@@ -1,5 +1,5 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
-
 
 from google.appengine.ext.webapp import template
 import os, settings

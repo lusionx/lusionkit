@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     惺惺惜惺惺
@@ -7,4 +7,8 @@
 {% block menu %}
     <li><a href="/admin">Dashboard</a></li>
     <li><a href="/admin/post/lst">Post</a></li>
+{% endblock %}
+
+{% block main %}
+    {{var}}
 {% endblock %}
