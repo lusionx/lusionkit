@@ -47,7 +47,7 @@ class Post_Tag(db.Model):
 class Category(db.Model):
     """各种 分类(link,post)"""
     name = db.StringProperty(default='')
-    parent = db.SelfReferenceProperty()
+    father = db.SelfReferenceProperty()
     kindof = db.StringProperty(choices=['Link','Post'])
 
 class Link(db.Model):
@@ -59,23 +59,3 @@ class Link(db.Model):
     def html(self):
         ls = '<a href="%(href)s" title="%(title)s" >%(text)s</a>' % {'href':self.href, 'title':self.title, 'text':self.text }
         return ls
-
-
-
-#######################################################
-#学习用类
-class Person(db.Model):
-    name = db.StringProperty(default='')
-    age = db.IntegerProperty(default=1)
-    msg = db.TextProperty(default='')
-
-class Proxy(db.Model):
-    ip = db.StringProperty(default='')
-    port = db.IntegerProperty(default=80)
-    enable = db.BooleanProperty(default=True)
-    #上次验证时间
-    verify = db.DateTimeProperty(auto_now=True)
-    #此ip所属地区
-    area = db.StringProperty(default='')
-    #此代理从哪个网页得来的
-    source = db.LinkProperty(default='http://xhsh.tk/')

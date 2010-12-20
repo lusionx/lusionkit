@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block menu %}
+    {% for a in menus %}
+        <li><a href="{{a.href}}">{{a.text}}</a></li>
+    {% endfor %}
+{% endblock %}

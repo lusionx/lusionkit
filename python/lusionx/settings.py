@@ -2,16 +2,21 @@
 # -*- coding: utf-8 -*-
 # Filename: proxy.py
 
-_version = '0.10'
+"""
+全局系统配置
+"""
+
+version = '0.10'
 theme = 'default'
+debug = True
+templates = 'templates'
 
-import os
+import os, sys
 
-def get_home():
-    return __import__('theme.'+theme+'.home',fromlist=['theme.'+theme+'.home'])
+app_folder = os.path.dirname(__file__)
 
-def get_post():
-    return __import__('theme.'+theme+'.post',fromlist=['theme.'+theme+'.post'])
+theme_home = __import__('theme.'+theme+'.home',fromlist=['theme.'+theme+'.home'])
 
-def get_app_folder():
-    return os.path.dirname(__file__)
+theme_post = __import__('theme.'+theme+'.post',fromlist=['theme.'+theme+'.post'])
+
+theme_template = os.path.join(app_folder, 'theme', theme)

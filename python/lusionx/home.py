@@ -14,14 +14,14 @@ url_map = {}
 
 class act1(webapp.RequestHandler):
     def get(self):
-        html = settings.get_home()
+        html = settings.theme_home
         self.response.out.write(html.main())
     def post(self):
         pass
-url_map['/.*'] = act1
+url_map['/'] = act1
 
 def main():
-    application = webapp.WSGIApplication([(k,v) for (k, v) in url_map.items()], debug=True)
+    application = webapp.WSGIApplication([(k,v) for (k, v) in url_map.items()], debug=settings.debug)
     util.run_wsgi_app(application)
 
 if __name__ == '__main__':
