@@ -4,20 +4,14 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import kit, settings
+from admin import context
 
 url_map = {}
 
-context = {
-            'title':'Dashboard',
-            'menus':[
-                        {'href':'/admin','text':'Dashboard'},
-                        {'href':'/admin/post/lst','text':'Post'}
-                    ]
-        }
 
 class act(webapp.RequestHandler):
     def get(self):
-        html = kit.render(context,'admin','home.html')
+        html = kit.render(context.default,'admin','home.html')
         self.response.out.write(html)
     def post(self):
         pass

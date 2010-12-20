@@ -1,11 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# File: index.py
-# User: Administrator
-# Date: 2010-12-15
-# Time: 17:38:57 
 
-"""what?"""
+"""post"""
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import settings

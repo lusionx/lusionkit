@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Filename: proxy.py
+# Filename: settings.py
 
 """
 全局系统配置
