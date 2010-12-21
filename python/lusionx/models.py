@@ -19,19 +19,21 @@ from google.appengine.ext import db
 
 class Post(db.Model):
     """文章"""
-    title = db.StringProperty(default='')
-    content = db.TextProperty(default='')
+    title = db.StringProperty(verbose_name='标题', default='')
+    content = db.TextProperty(verbose_name='正文', default='')
     author = db.UserProperty(auto_current_user=True)
-    status = db.StringProperty(default='草稿', choices=['草稿','正式'])
+    status = db.StringProperty(verbose_name='状态', default=u'草稿')#, choices=[u'草稿',u'发布',u'作废'])
     published = db.DateTimeProperty(auto_now_add=True)
-    comment_abled = db.BooleanProperty(default=True)
+    comment_abled = db.BooleanProperty(verbose_name='允许评论', default=True)
     modified = db.DateTimeProperty(auto_now=True)
 
 class Comment(db.Model):
     """文章的评论"""
-    name = db.StringProperty(default='')
-    email = db.EmailProperty(default='')
-    content = db.StringProperty(default='')
+    name = db.StringProperty(verbose_name='称呼', default='')
+    email = db.EmailProperty(verbose_name='E-mail', default='')
+    content = db.StringProperty(verbose_name='内容',default='')
+    father = db.SelfReferenceProperty()
+    post_id = db.IntegerProperty(default=0)
     post = db.ReferenceProperty(Post)
 
 class Tag(db.Model):
@@ -59,3 +61,6 @@ class Link(db.Model):
     def html(self):
         ls = '<a href="%(href)s" title="%(title)s" >%(text)s</a>' % {'href':self.href, 'title':self.title, 'text':self.text }
         return ls
+
+def transForm():
+    pass

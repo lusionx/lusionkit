@@ -4,6 +4,10 @@
     {{title}}
 {% endblock %}
 
+{% block head%}
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+{% endblock %}
+
 {% block menu %}
     {% for a in menus %}
         <li><a href="{{a.href}}">{{a.text}}</a></li>
@@ -12,5 +16,20 @@
 
 {% block main %}
     <form action="" method="post">
+    {{form}}
+    <p><input type="submit" value="提交"></p>
     </form>
+    <script type="text/javascript">
+        (function () {
+            bar = [
+                    ['Scoure', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
+                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link']
+                  ]
+            parms = {
+                skin: 'kama',
+                language: 'en'
+            };
+            CKEDITOR.replace('id_content', parms);
+        })();
+    </script>
 {% endblock %}

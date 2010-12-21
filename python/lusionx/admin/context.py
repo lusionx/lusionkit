@@ -6,6 +6,6 @@ default = {
             'menus':[
                         {'href':'/admin','text':'Dashboard'},
                         {'href':'/admin/post/lst','text':'Post'},
-                        {'href':'/admin/post/edit/0','text':'AddPost'}
+                        {'href':'/admin/post/new','text':'AddPost'}
                     ]
         }
