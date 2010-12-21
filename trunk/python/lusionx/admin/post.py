@@ -96,7 +96,7 @@ class new(webapp.RequestHandler):
 
 url_map['/admin/post/new'] = new
 
-
+url_map['/admin/post/.*'] = kit.error
 
 def main():
     application = webapp.WSGIApplication([(k,v) for (k, v) in url_map.items()], debug=settings.debug)
