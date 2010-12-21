@@ -10,6 +10,8 @@ version = '0.10'
 theme = 'default'
 debug = True
 templates = 'templates'
+"""全局默认缓存时间(分钟)"""
+cache = 60
 
 import os, sys
 

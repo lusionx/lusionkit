@@ -4,7 +4,7 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from google.appengine.api import memcache
-import zipfile, os
+import zipfile, os, settings
 
 url_map = {}
 
@@ -31,7 +31,7 @@ def get_from_cache(path):
         return data
     else:
         data = get_from_zip(path)
-        memcache.set(path,data,60)
+        memcache.set(path,data,settings.cache*60)
         return data
 
 
