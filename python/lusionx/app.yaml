@@ -3,6 +3,9 @@ version: 1
 runtime: python
 api_version: 1
 
+builtins:
+- datastore_admin: on
+
 #1.notice:the *.py must can handler the url
 #2.every url must start with '/' and  can't end with '/'
 #3.every url must match completely
