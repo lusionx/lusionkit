@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/python
+import kit
+import urllib2, urllib, json
+from xml.dom.minidom import parseString
+from datetime import datetime
+
+
+
+
+def yesterday():
+    #url = 'http://bt.ktxp.com/yesterday.html'
+    url = 'http://bt.ktxp.com/rss-sort-1.xml'
+    html = urllib2.urlopen(url).read()
+    dom = parseString(html)
+    info = []
+    for item in dom.getElementsByTagName('item'):
+        title = item.getElementsByTagName('title')[0].firstChild.data
+        link = item.getElementsByTagName('link')[0].firstChild.data
+        torrent = item.getElementsByTagName('enclosure')[0].getAttribute('url')
+        pubDate = item.getElementsByTagName('pubDate')[0].firstChild.data
+        pubDate = datetime.strptime(pubDate[5:-6],'%d %b %Y %H:%M:%S')
+        btid = link[link.rfind('/')+1:-5]
+        info.append((title,link,torrent,pubDate.strftime('%Y-%m-%d %H:%M:%S'),btid))
+
+        #print title.encode('GBK')
+    return info
+
+
+
+
+def save(cubes):
+    for a in cubes:
+        obj = kit.exec_top_one('select * from btktpx where btid = ?',(a[-1],))
+        if obj == None:
+            kit.exec_non('insert into btktpx (title,link,torrent,pub_date,btid) values (?,?,?,?,?)',a)
+
+
+
+
+def get_completed(id):
+    url = 'http://bt.ktxp.com/ajax.php'
+    #act=torrent id=182720
+    #{"leechers":"9","seeders":"4","completed":"2"}
+    values = {'act':'torrent','id':id}
+    data = urllib.urlencode(values)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    obj = json.loads(response.read())
+    return obj[u'completed']
+
+def modify_completed():
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    sql = '''select btid from btktpx
+                where modify isnull or
+                    datetime(modify,'+1 hours') < datetime(?)'''
+    for a in kit.exec_rows(sql,(now,)):
+        btid = a[0]
+        cc = get_completed(btid)
+        kit.exec_non('''update btktpx
+        set completed = ?,
+            modify = ?
+        where btid = ?''',(cc,now,btid))
+
+
+def main():
+    load = lambda :save(yesterday())
+    load()
+    modify_completed()
+    a = u'我叫联系'
+    print a.encode('GBK')
+
+if __name__ == '__main__':
+    main()
