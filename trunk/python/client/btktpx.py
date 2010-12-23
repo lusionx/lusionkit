@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 import kit
-import urllib2, urllib, json
+import urllib2, urllib, json, sys
 from xml.dom.minidom import parseString
 from datetime import datetime
 
@@ -23,7 +23,7 @@ def yesterday():
         btid = link[link.rfind('/')+1:-5]
         info.append((title,link,torrent,pubDate.strftime('%Y-%m-%d %H:%M:%S'),btid))
 
-        #print title.encode('GBK')
+        print 'read::'+title.encode('GBK')
     return info
 
 
@@ -33,7 +33,11 @@ def save(cubes):
     for a in cubes:
         obj = kit.exec_top_one('select * from btktpx where btid = ?',(a[-1],))
         if obj == None:
-            kit.exec_non('insert into btktpx (title,link,torrent,pub_date,btid) values (?,?,?,?,?)',a)
+            kit.exec_non('''insert into btktpx 
+                (title,link,torrent,pub_date,btid) 
+                values 
+                (?,?,?,?,?)''',a)
+            print 'add::'+a[0].encode('GBK')
 
 
 
@@ -61,14 +65,27 @@ def modify_completed():
         set completed = ?,
             modify = ?
         where btid = ?''',(cc,now,btid))
+        print 'id=%s,completed=%s' % (btid,cc)
 
 
 def main():
     load = lambda :save(yesterday())
-    load()
-    modify_completed()
-    a = u'我叫联系'
-    print a.encode('GBK')
+    #load()    
+    args = []
+    if len(sys.argv) > 1:
+        args = sys.argv[1:]
+    if 'l' in args:
+        load()
+        a = u'读取操作完成'
+        print a.encode('GBK')
+    elif 'm' in args:
+        modify_completed()
+        a = u'更新操作完成'
+        print a.encode('GBK')
+    else:
+        a = u'没有操作'
+        print a.encode('GBK')
+    
 
 if __name__ == '__main__':
     main()
