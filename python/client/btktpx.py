@@ -8,12 +8,9 @@ from datetime import datetime
 
 
 
-def yesterday():
-    #url = 'http://bt.ktxp.com/yesterday.html'
-    url = 'http://bt.ktxp.com/rss-sort-1.xml'
+def loadrss(url):
     html = urllib2.urlopen(url).read()
     dom = parseString(html)
-    info = []
     for item in dom.getElementsByTagName('item'):
         title = item.getElementsByTagName('title')[0].firstChild.data
         link = item.getElementsByTagName('link')[0].firstChild.data
@@ -21,23 +18,21 @@ def yesterday():
         pubDate = item.getElementsByTagName('pubDate')[0].firstChild.data
         pubDate = datetime.strptime(pubDate[5:-6],'%d %b %Y %H:%M:%S')
         btid = link[link.rfind('/')+1:-5]
-        info.append((title,link,torrent,pubDate.strftime('%Y-%m-%d %H:%M:%S'),btid))
-
+        
+        save((title,link,torrent,pubDate.strftime('%Y-%m-%d %H:%M:%S'),btid))
         print 'read::'+title.encode('GBK')
-    return info
 
 
 
 
-def save(cubes):
-    for a in cubes:
-        obj = kit.exec_top_one('select * from btktpx where btid = ?',(a[-1],))
-        if obj == None:
-            kit.exec_non('''insert into btktpx 
-                (title,link,torrent,pub_date,btid) 
-                values 
-                (?,?,?,?,?)''',a)
-            print 'add::'+a[0].encode('GBK')
+def save(a): 
+    obj = kit.exec_top_one('select * from btktpx where btid = ?',(a[-1],))
+    if obj == None:
+        kit.exec_non('''insert into btktpx 
+            (title,link,torrent,pub_date,btid) 
+            values 
+            (?,?,?,?,?)''',a)
+        print '----add::'+a[0].encode('GBK')
 
 
 
@@ -55,9 +50,10 @@ def get_completed(id):
 
 def modify_completed():
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    #找到 8小时 以前更新的
     sql = '''select btid from btktpx
                 where modify isnull or
-                    datetime(modify,'+1 hours') < datetime(?)'''
+                    datetime(modify,'+8 hours') < datetime(?)'''
     for a in kit.exec_rows(sql,(now,)):
         btid = a[0]
         cc = get_completed(btid)
@@ -65,7 +61,7 @@ def modify_completed():
         set completed = ?,
             modify = ?
         where btid = ?''',(cc,now,btid))
-        print 'id=%s,completed=%s' % (btid,cc)
+        print 'id::%s,completed::%s' % (btid,cc)
 
 
 def main():
@@ -75,7 +71,11 @@ def main():
     if len(sys.argv) > 1:
         args = sys.argv[1:]
     if 'l' in args:
-        load()
+        url = 'http://bt.ktxp.com/rss-sort-1.xml'
+        if len(args) == 2:
+            url = args[1]
+        print 'load::'+url
+        loadrss(url)
         a = u'读取操作完成'
         print a.encode('GBK')
     elif 'm' in args:
