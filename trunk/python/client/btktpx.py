@@ -5,7 +5,11 @@ import urllib2, urllib, json, sys
 from xml.dom.minidom import parseString
 from datetime import datetime
 
-
+def out(line,tup):
+    try:
+        print line % tup
+    except UnicodeEncodeError:
+        print "Sorry!can't print!UnicodeEncodeError"
 
 
 def loadrss(url):
@@ -20,7 +24,7 @@ def loadrss(url):
         btid = link[link.rfind('/')+1:-5]
         
         save((title,link,torrent,pubDate.strftime('%Y-%m-%d %H:%M:%S'),btid))
-        print 'read::'+title.encode('GBK')
+        out('read::%s',title)
 
 
 
@@ -32,7 +36,7 @@ def save(a):
             (title,link,torrent,pub_date,btid) 
             values 
             (?,?,?,?,?)''',a)
-        print '----add::'+a[0].encode('GBK')
+        out('----add::%s',a[0])
 
 
 
@@ -45,23 +49,34 @@ def get_completed(id):
     data = urllib.urlencode(values)
     req = urllib2.Request(url, data)
     response = urllib2.urlopen(req)
-    obj = json.loads(response.read())
-    return obj[u'completed']
+    try:
+        obj = json.loads(response.read())
+        return obj[u'completed']
+    except ValueError:
+        out('%s Error', (id))
+        return -1
 
 def modify_completed():
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    #找到 8小时 以前更新的
+    #找到 4小时 以前更新的
     sql = '''select btid from btktpx
-                where modify isnull or
-                    datetime(modify,'+8 hours') < datetime(?)'''
+where modify isnull or ( datetime(pub_date,'+1 months') > datetime('now','localtime')  and
+datetime(modify,'+4 hours') < datetime(?))'''
     for a in kit.exec_rows(sql,(now,)):
         btid = a[0]
         cc = get_completed(btid)
+        if cc == -1:
+            kit.exec_non('''delete from btktpx where btid = ?''',(btid,))
+            print 'id::%s delete' % btid
+            continue
         kit.exec_non('''update btktpx
         set completed = ?,
             modify = ?
         where btid = ?''',(cc,now,btid))
-        print 'id::%s,completed::%s' % (btid,cc)
+        try:
+            print 'id::%s,completed::%s' % (btid,cc)
+        except Error:
+            print 'no print'
 
 
 def main():
