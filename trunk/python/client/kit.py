@@ -27,3 +27,18 @@ def exec_top_one(sql,par=()):
     cur.close()
     conn.close()
     return obj
+    
+def exec_scalar(sql,par=()):
+    conn = sqlite3.connect(_connstr)
+    cur = conn.cursor()
+    cur.execute(sql,par)
+    obj = cur.fetchone()
+    cur.close()
+    conn.close()
+    return obj[0]
+
+def trim(zstr):
+    ystr=zstr.lstrip()
+    ystr=ystr.rstrip()
+    ystr=ystr.strip()
+    return ystr
