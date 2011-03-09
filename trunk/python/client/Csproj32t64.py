@@ -8,6 +8,7 @@ files = [
         u'D:\91huayi\健康档案\Substructure\Substructure.csproj',
         u'D:\91huayi\健康档案\Web\Web.csproj',
         u'D:\91huayi\健康档案\RemoteTraining\RemoteTraining.csproj',
+        u'D:\91huayi\健康档案\ClassWebServesTest\ClassWebServesTest.csproj'
         ]
 i=0
 to = 32
