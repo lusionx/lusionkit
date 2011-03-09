@@ -7,6 +7,7 @@
 
 class Query():
     def __init__(self,iter1):
+    """an init iter"""
         self.kind = 'lst'
         self.data = list(iter1)
 
