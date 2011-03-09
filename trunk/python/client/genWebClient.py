@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
+"""生成 web服务访问代理
+"""
 import BeautifulSoup as bsp
 import httplib2
 import os
 
-service = 'http://www.w3schools.com/webservices/tempconvert.asmx'
+#endwith .asxm
+service = 'http://124.205.94.73:8001/ServiceTest.asmx'
 
 def methods():
     h = httplib2.Http('.cache')
@@ -28,28 +31,21 @@ def methodInfo(url):
     return name, action, pars
 
 def genClient(f,name,action,pars):
-
     f.write('def '+name+'('+','.join(pars)+'):\n')
-    f.write("    url = '"+action+"'\n")
+    f.write("    url = service+'"+name+"'\n")
     f.write("    body = {"+','.join([ "'"+a+"':"+a for a in pars])+"}\n")
     f.write("    headers = {'Content-type': 'application/x-www-form-urlencoded'}\n")
     f.write('    http = httplib2.Http()\n')
     f.write("    response, content = http.request(url, 'POST', headers=headers, body=urllib.urlencode(body))\n")
-    f.write("    return BeautifulSoup.BeautifulSoup(content)\n")
-    f.write('\n')
+    f.write("    return BeautifulSoup.BeautifulSoup(content)\n\n")
 
 
 def main():
     f = open('client.py','w')
-    f.write('# -*- coding: utf-8 -*-')
-    f.write('\n')
-    f.write('#!/usr/bin/python')
-    f.write('\n')
-    f.write('\n')
-    f.write('import BeautifulSoup\n')
-    f.write('import httplib2\n')
-    f.write('import urllib\n')
-    f.write('\n')
+    f.write('# -*- coding: utf-8 -*-\n')
+    f.write('#!/usr/bin/python\n\n')
+    f.write('import BeautifulSoup, httplib2, urllib\n\n')
+    f.write('service = "'+service+'/"\n\n')
     for a in methods():
         name, action, pars = methodInfo(a)
         genClient(f,name, action, pars)
