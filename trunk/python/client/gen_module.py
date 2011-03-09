@@ -8,6 +8,7 @@
 import os
 import BeautifulSoup as bsp
 
+
 filelist=[]
 
 def sanc_dir(dirpath, dirname):
@@ -28,18 +29,19 @@ def scan(dirpath):
             filelist.append(fullpath)
 
 
-def
+import dbtables as tbs
+import extPy
 
-
-def main():
-    dir =u'D:\91huayi\健康档案\Web'
+def inserUrl():
+    dir =os.path.todir(u'D:\91huayi\健康档案\Web')
     scan(dir)
-
     #生成了所有的页面地址
     filelist2 = map(lambda a: '~'+a[len(dir):].replace('\\','/'),filelist)
     for a in filelist2:
-        pass
-        
+        i = tbs.hr_url.insert()
+        i.execute(url = a)
+
+def inserMod():
     #读取数据库导出的所有的模块的xml
     f = open(u'D:/admin/Desktop/doc/sys_module.xml')
     soup = bsp.BeautifulSoup(f.read())
@@ -49,12 +51,15 @@ def main():
         module_name=a.module_name.string,
         url=a.url.string,
         sort_order=a.sort_order.string),soup.findAll('record'))
-
     for a in modules:
-        #print a
-        pass
-    #合并2个 列表
+        i = tbs.hr_mod.insert()
+        i.execute(a)
     f.close()
+    
+def main():
+    """合并2个表的数据"""
+    
+
 
 if __name__ == '__main__':
     main()
