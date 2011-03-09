@@ -23,7 +23,7 @@ def mysqldb():
     proxy = Table('proxy', MetaData(db), autoload=True)
     s = proxy.select()
     run(s)
-    
+
 def main():
     #sqlitedb()
     mysqldb()

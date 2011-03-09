@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 import kit
-import urllib2, urllib, json, sys
+import urllib2, urllib, sys
+import simplejson as json
 from xml.dom.minidom import parseString
 from datetime import datetime
 
@@ -100,7 +101,7 @@ def main():
     else:
         a = u'没有操作'
         print a.encode('GBK')
-    
+    print raw_input()
 
 if __name__ == '__main__':
     main()
