@@ -40,15 +40,23 @@ def genClient(f,name,action,pars):
     f.write("    return BeautifulSoup.BeautifulSoup(content)\n\n")
 
 
+from django.template import Template, Context
+from django.conf import settings
+import codecs
+
 def main():
-    f = open('client.py','w')
-    f.write('# -*- coding: utf-8 -*-\n')
-    f.write('#!/usr/bin/python\n\n')
-    f.write('import BeautifulSoup, httplib2, urllib\n\n')
-    f.write('service = "'+service+'/"\n\n')
+    f = codecs.open('client.py','w','utf-8')
+    settings.configure()
+    cc = dict(service=service,methods=[])
+    mds = cc['methods']
     for a in methods():
         name, action, pars = methodInfo(a)
-        genClient(f,name, action, pars)
+        mds.append(dict(name=name, action=action,
+            pars=', '.join(pars),
+            body=','.join([ a+'='+a for a in pars])))
+    t = Template(open('template/WebClient.py').read())
+    f.write(t.render(Context(cc)))
     f.close()
+
 if __name__ == '__main__':
     main()

@@ -24,10 +24,10 @@ def wallpaper_dir(path):
 
 import random
 
-def pick_wallpaper(wallpapers):
+def pick(wallpapers):
     return random.choice(wallpapers)
     
-def set_wallpaper(path):
+def set(path):
     im = Image.open(path)
     path = 'wallpaper.bmp'
     im.save(path)
@@ -38,8 +38,8 @@ def main(argv):
     if len(argv) > 1:
         wallpapers = wallpaper_dir(argv[1]);
         if len(wallpapers) > 0:
-            path = pick_wallpaper (wallpapers)
-            set_wallpaper(path)
+            path = pick(wallpapers)
+            set(path)
         else:
             print "No wallpapers were found."
     else:

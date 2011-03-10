@@ -56,10 +56,17 @@ def inserMod():
         i.execute(a)
     f.close()
     
+import django
+from django.template import Context,Template
+import codecs
 def main():
-    """合并2个表的数据"""
-    
-
+    """导出成html"""
+    django.conf.settings.configure()
+    t = Template(open('template/mod.html').read())
+    c = Context({"data":tbs.hr_mod.select().execute()})
+    f = codecs.open('mod.html','w','utf-8')
+    f.write(t.render(c))
+    f.close()
 
 if __name__ == '__main__':
     main()
