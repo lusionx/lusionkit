@@ -5,33 +5,61 @@
 
 import httplib2
 import BeautifulSoup
+import datetime
+import os
 
-def info():
-    url = 'http://apod.nasa.gov/apod/'
-    h = httplib2.Http('.cache')
+def info(url):
+    h = httplib2.Http()
+    print "load:" + url
     resp, content = h.request(url, "GET")
     soup = BeautifulSoup.BeautifulSoup(content)
     p = soup.body.center.p.nextSibling
-    imgurl = url + p.a['href']
+    dir = os.path.split(url)[0] + '/'
+    imgurl = dir + p.a['href']
     date = p.contents[0].strip('\n ')
-    print imgurl
+    print 'imgurl:'+imgurl
     resp, bytes = h.request(imgurl,'GET')
     return date, imgurl, bytes
 
 
-import datetime
-import os
-
-def main():
-    imgdate, imgurl, bytes = info()
+def save(url):
+    imgdate, imgurl, bytes = info(url)
     ext = os.path.splitext(imgurl)[1]
     dt = datetime.datetime.strptime(imgdate,'%Y %B %d').strftime('%Y-%m-%d')
     savepath = 'nasa/'+dt+ext
+    print 'save:'+savepath
     f = open(savepath,'wb')
     f.write(bytes)
     f.close()
 
+
+def loadAll():
+    #以往所有图片索引
+    url = 'http://apod.nasa.gov/apod/archivepix.html'
+    h = httplib2.Http('.cache')
+    resp, content = h.request(url, "GET")
+    soup = BeautifulSoup.BeautifulSoup(content)
+    dir = os.path.split(url)[0]+'/'
+    for a in soup.body.b.findAll('a'):
+        print dir + a['href']
+    
+def saveAll():
+    f = open('savenasa.txt','a')
+    for line in open('allnasa.txt'):
+        try:
+            save(line.strip('\n'))
+        except Exception:
+            print "error:"+line
+            f.write(line)
+        finally:
+            print 'next'
+    f.close()
+
 if __name__ == '__main__':
-    main()
+    #今天
+    u = ['http://apod.nasa.gov/apod/']
+    saveAll()
+    #save('http://apod.nasa.gov/apod/ap110309.html')
+    
 
 
