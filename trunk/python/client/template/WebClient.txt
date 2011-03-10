@@ -3,7 +3,7 @@
 
 import BeautifulSoup, httplib2, urllib
 
-service = '{{service}}'
+service = '{{service}}/'
 
 {% for md in methods %}
 def {{md.name}}({{md.pars}}):
