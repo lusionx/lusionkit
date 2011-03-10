@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid #000;
+        }
+        .del
+        {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div id="warper">
+    <p>公服所有模块列表,要删除就给tr加class del <br/>
+    角色:1超级;2中心;3机构管理员;4操作员</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>地址</th>
+                    <th>负责人</th>
+                    <th>
+                        角色
+                    </th>
+                    <th>
+                        说明
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody>
+                {% for a in data %}
+                <tr class="">
+                    <td>
+                        {{a.mod_cat_key}}
+                    </td>
+                    <td>
+                        {{a.module_name}}
+                    </td>
+                    <td>
+                        {{a.url}}
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        {{a.role}}
+                    </td>
+                    <td>
+                        {{a.remark}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
