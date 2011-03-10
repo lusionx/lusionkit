@@ -44,22 +44,22 @@ def loadAll():
         print dir + a['href']
     
 def saveAll():
-    f = open('savenasa.txt','a')
-    for line in open('allnasa.txt'):
+    f = open('doc/nasaErr.txt','a')
+    for line in open('doc/nasaAll.txt'):
         try:
             save(line.strip('\n'))
         except Exception:
             print "error:"+line
             f.write(line)
+            f.flush()
         finally:
             print 'next'
     f.close()
 
 if __name__ == '__main__':
     #今天
-    u = ['http://apod.nasa.gov/apod/']
+    #save('http://apod.nasa.gov/apod/ap110310.html')
     saveAll()
-    #save('http://apod.nasa.gov/apod/ap110309.html')
     
 
 

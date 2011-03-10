@@ -54,7 +54,7 @@ def main():
         mds.append(dict(name=name, action=action,
             pars=', '.join(pars),
             body=','.join([ a+'='+a for a in pars])))
-    t = Template(open('template/WebClient.py').read())
+    t = Template(open('template/WebClient.txt').read())
     f.write(t.render(Context(cc)))
     f.close()
 
