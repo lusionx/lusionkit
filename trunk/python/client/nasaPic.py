@@ -58,8 +58,8 @@ def saveAll():
 
 if __name__ == '__main__':
     #某天
-    #save('http://apod.nasa.gov/apod/ap110311.html')
-    saveAll()
+    save('http://apod.nasa.gov/apod/ap110314.html')
+    #saveAll()
     
 
 

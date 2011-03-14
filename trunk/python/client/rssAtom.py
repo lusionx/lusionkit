@@ -6,7 +6,7 @@
 import rssService as rss
 import urllib, httplib2
 import simplejson as json
-import extPy as ext
+from extPy import *
 
 def load(url):
     h = httplib2.Http('.cache')
@@ -15,10 +15,13 @@ def load(url):
     url += urllib.urlencode(data)
     resp, content = h.request(url, "GET")
     results = json.loads(content)
-    feed = ext.adDict(results)
+    feed = adDict(results)
     print feed.responseData.feed.entries[1].link.text()
 
 def main(arg):
-    load('http://www.cnblogs.com/rss')
+    load(arg)
 if __name__ == '__main__':
-    main('')
+    urls = []
+    urls.append('http://www.cnblogs.com/rss')
+    main(urls[0])
+
