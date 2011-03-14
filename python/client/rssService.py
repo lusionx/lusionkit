@@ -15,47 +15,70 @@ class Channel(object):
 class Item(object):
     pass
 
-def initDB(create=False):
-    """call this before tabels models operating"""
-    db = create_engine('sqlite:///info.sqlite3')
-    #db.echo = True
-    metadata = MetaData(db)
+class DB():
+    def __init__(self,create=False):
+        """call this before tabels models operating"""
+        db = create_engine('sqlite:///info.sqlite3')
+        #db.echo = True
+        metadata = MetaData(db)
 
-    channels = Table('rss_channel', metadata,
-        Column('id', Integer, primary_key=True),
-        Column('title', String, nullable=False, default=''),
-        Column('link', String, nullable=False, default=''),
-        Column('description', String, nullable=False, default=''),
-        Column('language', String, nullable=False, default=''),
-        Column('lastBuildDate', String, nullable=False, default=''),
-        Column('generator', String, nullable=False, default=''),
-    )
+        channels = Table('rss_channel', metadata,
+            Column('id', Integer, primary_key=True),
+            Column('title', String, nullable=False, default=''),
+            Column('link', String, nullable=False, default=''),
+            Column('description', String, nullable=False, default=''),
+            Column('language', String, nullable=False, default=''),
+            Column('lastBuildDate', String, nullable=False, default=''),
+            Column('generator', String, nullable=False, default=''),
+        )
 
-    items = Table('rss_item', metadata,
-        Column('id', Integer, primary_key=True),
-        Column('channel_id', Integer, ForeignKey('rss_channel.id'), nullable=False),
-        Column('link', String, nullable=False, default=''),
-        Column('title', String, nullable=False, default=''),
-        Column('description', String, nullable=False, default=''),
-        Column('author', String, nullable=False, default=''),
-        Column('comments', String, nullable=False, default=''),
-        Column('guid', String, nullable=False, default=''),
-        Column('pubDate', String, nullable=False, default=''),
-    )
-    if create:
-        items.create()
-        channels.create()
-    
-    clear_mappers()
+        items = Table('rss_item', metadata,
+            Column('id', Integer, primary_key=True),
+            Column('channel_id', Integer, ForeignKey('rss_channel.id'), nullable=False),
+            Column('link', String, nullable=False, default=''),
+            Column('title', String, nullable=False, default=''),
+            Column('description', String, nullable=False, default=''),
+            Column('author', String, nullable=False, default=''),
+            Column('comments', String, nullable=False, default=''),
+            Column('guid', String, nullable=False, default=''),
+            Column('pubDate', String, nullable=False, default=''),
+        )
+        if create:
+            items.create()
+            channels.create()
 
-    mapper(Channel, channels, properties={
-        'items': relationship(Item)
-    })
-    mapper(Item, items, properties={
-        'channel': relationship(Channel),
-    })
-    
-    return Session()
+        clear_mappers()
+
+        mapper(Channel, channels, properties={
+            'items': relationship(Item)
+        })
+        mapper(Item, items, properties={
+            'channel': relationship(Channel),
+        })
+        self.session=Session()
+        
+    def update(self,ch):
+        sess = self.session
+        ch_o = sess.query(Channel).filter(Channel.link == ch.link).first()
+        i = 0
+        if ch_o == None:#is a new fesdd
+            sess.add(ch)
+            i = len(ch.items)
+            sess.commit()
+        elif ch_o.lastBuildDate != ch.lastBuildDate:
+            # add new items
+            dblinks = sess.query(Item.link).filter(Item.channel_id == ch_o.id)
+            dblinks = [a[0] for a in dblinks]
+            addlinks = [ item for item in ch.items if item.link not in dblinks]
+            i=0
+            for a in addlinks:
+                i+=1
+                a.channel = ch_o
+                sess.add(a)
+            sess.commit()
+        else:
+            pass #do nothing
+        return i
 
 def loadRss(url):
     """load a rss url,return Channel instence"""
@@ -96,37 +119,16 @@ def genItems(itemsNode):
         items.append(item)
     return items
 
-def update(sess,ch):
-    ch_o = sess.query(Channel).filter(Channel.link == ch.link).first()
-    i = 0
-    if ch_o == None:
-        sess.add(ch)
-        i = len(ch.items)
-        sess.commit()
-    elif ch_o.lastBuildDate != ch.lastBuildDate:
-        # add new items
-        dblinks = sess.query(Item.link).filter(Item.channel_id == ch_o.id)
-        dblinks = [a[0] for a in dblinks]
-        addlinks = [ item for item in ch.items if item.link not in dblinks]
-        i=0
-        for a in addlinks:
-            i+=1
-            a.channel = ch_o
-            sess.add(a)
-        sess.commit()
-    else:
-        pass #do nothing
-    return i
-
 def main(url):
-    ss = initDB()
-    #url = 'http://bt.ktxp.com/rss-sort-1.xml'
+    db = DB()
     c = loadRss(url)
     chl = genChannel(c)
     if chl.link:
-        print 'Add %s items' % (update(ss,chl),)
+        print 'Add %s items' % (db.update(chl),)
 
 if __name__ == '__main__':
-    url = 'http://www.cnblogs.com/rss'
-    main(url)
+    url = []
+    url.append('http://www.cnblogs.com/rss')
+    url.append('http://bt.ktxp.com/rss-sort-1.xml')
+    main(url[0])
 
