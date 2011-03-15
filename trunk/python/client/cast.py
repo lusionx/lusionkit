@@ -20,9 +20,9 @@ def guid_raw(txt):
 
 
 def main(arg):
-    txt = 'E1F8BEDC831D2A4AAE4E2451A55A1AC4'
-    print txt
-    txt = raw_guid(txt)
+    txt = '7466F76A-6D55-4B05-85A7-EEE49CBF0B01'
+
+    #txt = raw_guid(txt)
     print txt
     txt = guid_raw(txt)
     print txt
