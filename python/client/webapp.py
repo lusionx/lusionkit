@@ -24,13 +24,7 @@ class model:
     
 class output:
     def GET(self):
-        ss = DB.curr()
-        mu = DB.User
-        u = mu()
-        man = ss.query(mu).filter(mu.name == 'John').first()
-        #ss.commit()
-        #return ','.join([a.address for a in lxs])
-        return man.name
+        return 'output'
         
 if __name__ == "__main__":
     print 'running web'

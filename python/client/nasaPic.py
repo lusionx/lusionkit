@@ -7,59 +7,106 @@ import httplib2
 import BeautifulSoup
 import datetime
 import os
-
-def info(url):
-    h = httplib2.Http()
-    print "load:" + url
-    resp, content = h.request(url, "GET")
-    soup = BeautifulSoup.BeautifulSoup(content)
-    p = soup.body.center.p.nextSibling
-    dir = os.path.split(url)[0] + '/'
-    imgurl = dir + p.a['href']
-    date = p.contents[0].strip('\n ')
-    print 'imgurl:'+imgurl
-    resp, bytes = h.request(imgurl,'GET')
-    return date, imgurl, bytes
+from sqlalchemy import create_engine
+from sqlalchemy.schema import Table, MetaData, Column, ForeignKey
+from sqlalchemy.orm import mapper, Session, clear_mappers, relationship
+from sqlalchemy.types import Integer, String
 
 
-def save(url):
-    imgdate, imgurl, bytes = info(url)
-    ext = os.path.splitext(imgurl)[1]
-    dt = datetime.datetime.strptime(imgdate,'%Y %B %d').strftime('%Y-%m-%d')
-    savepath = 'nasa/'+dt+ext
-    print 'save:'+savepath
-    f = open(savepath,'wb')
-    f.write(bytes)
-    f.close()
+class Apod(object):
+    pass
+
+class DB():
+    def __init__(self,create=False):
+        """call this before tabels models operating"""
+        db = create_engine('sqlite:///info.sqlite3')
+        #db.echo = True
+        metadata = MetaData(db)
+        apods = Table('nasa_apod', metadata,
+            Column('url', String, primary_key=True),
+            Column('date', String, nullable=False, default=''),
+            Column('remark', String, nullable=False, default=''),
+            Column('src', String, nullable=False, default=''),
+            Column('state', String, nullable=False, default=''),
+            Column('local', String, nullable=False, default=''),
+        )
+
+        if create:
+            apods.create()
+        clear_mappers()
+        mapper(Apod, apods)
+        self.session=Session()
+
+    def info(self,url,apod=None):
+        """
+        url like http://apod.nasa.gov/apod/ap101227.html
+        return a Apod instance
+        """
+        if apod is None:
+            apod = Apod()
+        apod.url = url
+        h = httplib2.Http()
+        print "load:" + url
+        resp, content = h.request(url, "GET")
+        soup = BeautifulSoup.BeautifulSoup(content)
+        p = soup.body.center.p.nextSibling
+        dir = os.path.split(url)[0] + '/'
+        apod.src = dir + p.a['href']
+        imgdate = p.contents[0].strip('\n ')
+        apod.date = datetime.datetime.strptime(imgdate,'%Y %B %d').strftime('%Y-%m-%d')
+        apod.remark = soup.body.findAll('b')[0].string.strip('\n ')
+        return apod
+        
+        
+    def download(self,imgurl):
+        """from url load the img,return the bytes"""
+        h = httplib2.Http()
+        resp, bytes = h.request(imgurl,"GET")
+        return bytes
+        
+        
+    def updateLocal(self):
+        for apod in self.session.query(Apod)\
+                        .filter(Apod.date != '').filter(Apod.local == '')\
+                        .order_by(Apod.url.desc()).slice(0,10):
+            ext = os.path.splitext(apod.src)[1]
+            apod.local = apod.date + '-'\
+                + apod.remark.replace(' ','').replace(':','').replace('?','')\
+                + ext
+            if os.path.exists('nasa/'+apod.local):
+                print "exists:" + apod.local
+            else:
+                f = open('nasa/'+apod.local, 'wb')
+                bytes = self.download(apod.src)
+                f.write(bytes)
+                f.close()
+            self.session.commit()
+        
+    def updateInfo(self):
+        """更新前几条,的基本信息,并不下载图片"""
+        for a in self.session.query(Apod)\
+                    .filter(Apod.date == '').filter(Apod.state == '')\
+                    .order_by(Apod.url.desc()).slice(0,1):
+            try:
+                self.info(a.url,a)
+            except:
+                a.state = 'Err'
+                continue
+        self.session.commit()
 
 
 def loadAll():
-    #以往所有图片索引
+    """以往所有图片页面索引"""
     url = 'http://apod.nasa.gov/apod/archivepix.html'
     h = httplib2.Http('.cache')
     resp, content = h.request(url, "GET")
     soup = BeautifulSoup.BeautifulSoup(content)
     dir = os.path.split(url)[0]+'/'
-    for a in soup.body.b.findAll('a'):
-        print dir + a['href']
+    urls = [dir+a['href'] for a in soup.body.b.findAll('a')]
+    return urls
     
-def saveAll():
-    f = open('doc/nasaErr.txt','a')
-    for line in open('doc/nasaAll.txt'):
-        try:
-            save(line.strip('\n'))
-        except Exception:
-            print "error:"+line
-            f.write(line)
-            f.flush()
-        finally:
-            print 'next'
-    f.close()
 
 if __name__ == '__main__':
-    #某天
-    save('http://apod.nasa.gov/apod/ap110314.html')
-    #saveAll()
-    
-
-
+    db = DB()
+    db.updateInfo()
+    db.updateLocal()
