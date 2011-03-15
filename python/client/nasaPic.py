@@ -44,7 +44,7 @@ class DB():
         """
         if apod is None:
             apod = Apod()
-        apod.url = url
+            apod.url = url
         h = httplib2.Http()
         print "load:" + url
         resp, content = h.request(url, "GET")
@@ -68,7 +68,7 @@ class DB():
     def updateLocal(self):
         for apod in self.session.query(Apod)\
                         .filter(Apod.date != '').filter(Apod.local == '')\
-                        .order_by(Apod.url.desc()).slice(0,10):
+                        .order_by(Apod.url.desc()).slice(0,1):
             ext = os.path.splitext(apod.src)[1]
             apod.local = apod.date + '-'\
                 + apod.remark.replace(' ','').replace(':','').replace('?','')\
@@ -86,7 +86,7 @@ class DB():
         """更新前几条,的基本信息,并不下载图片"""
         for a in self.session.query(Apod)\
                     .filter(Apod.date == '').filter(Apod.state == '')\
-                    .order_by(Apod.url.desc()).slice(0,1):
+                    .order_by(Apod.url.desc()).slice(0,3):
             try:
                 self.info(a.url,a)
             except:
@@ -108,5 +108,9 @@ def loadAll():
 
 if __name__ == '__main__':
     db = DB()
-    db.updateInfo()
+    #db.updateInfo()
     db.updateLocal()
+    a = Apod()
+    a.url = 'http://apod.nasa.gov/apod/ap101027.html'
+    db.session.add(a)
+    #db.session.commit()
