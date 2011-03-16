@@ -28,9 +28,10 @@ class static:
             pass
         finally:
             f.close()
+            
 #以上是静态文件的处理,现在开始有逻辑页面
-urls.extend(['/index.html', 'index',])#首页
-urls.extend(['/', 'index',])#首页
+urls.extend(['/index.html', 'index'])#首页
+urls.extend(['/', 'index'])#首页
 class index:
     def GET(self):
         return u'Hello, world!刘兴'
