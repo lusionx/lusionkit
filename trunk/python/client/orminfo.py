@@ -3,55 +3,49 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.schema import Table, MetaData, Column, ForeignKey
-from sqlalchemy.orm import mapper, Session, clear_mappers, relationship
-from sqlalchemy.types import *
+from sqlalchemy.orm import mapper, Session, clear_mappers, relationship, scoped_session, sessionmaker
+from sqlalchemy.types import Integer, String
 
 class User(object):
     pass
 class Email(object):
     pass
     
-def init():
+def init(create = False):
     db = create_engine('sqlite:///info.sqlite3')
     #db.echo = True
     metadata = MetaData(db)
-    
-    users = Table('users', metadata,
+    users = Table('ts_user', metadata,
         Column('id', Integer, primary_key=True),
         Column('name', String(40), nullable=False),
         Column('age', Integer, default=0),
         Column('password', String(40), default=''),
     )
-    
-    emails = Table('emails', metadata,
+    emails = Table('ts_email', metadata,
         Column('id', Integer, primary_key=True),
         Column('address', String(40), nullable=False),
-        Column('user_id', Integer, ForeignKey('users.id'), nullable=False),#
+        Column('user_id', Integer, ForeignKey('ts_user.id'), nullable=False),#
     )
-    
+    if create:
+        users.create()
+        emails.create()
     clear_mappers()
-    
     mapper(Email, emails, properties={
         'user': relationship(User)
     })
     mapper(User, users, properties={
         'emails': relationship(Email),
     })
+    return scoped_session(sessionmaker(bind=db))
 
-    
-def curr():
-    init()
-    return Session()
-    
-    
-    
+def getname():
+    ss = init()
+    a = ss.query(User).first()
+    return a.name
+
+import re
 if __name__ == '__main__':
-
-    ss = curr()
-    man = ss.query(User).filter(User.name == 'John').first()
-    print man.name
-    lxs = man.emails
-    print ','.join([a.address for a in lxs])
-    mail = ss.query(Email).filter(Email.id == 1).first()
-    print mail.address
-    print mail.user.name
+    print getname()
+    a = 'dasd ? dsada:dd?aa.'
+    
+    
