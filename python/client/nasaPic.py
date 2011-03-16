@@ -65,10 +65,10 @@ class DB():
         return bytes
         
         
-    def updateLocal(self):
+    def updateLocal(self,limit=1):
         for apod in self.session.query(Apod)\
                         .filter(Apod.date != '').filter(Apod.local == '')\
-                        .order_by(Apod.url.desc()).slice(0,1):
+                        .order_by(Apod.url.desc()).slice(0,limit):
             ext = os.path.splitext(apod.src)[1]
             apod.local = apod.date + '-'\
                 + apod.remark.replace(' ','').replace(':','').replace('?','')\
@@ -82,11 +82,11 @@ class DB():
                 f.close()
             self.session.commit()
         
-    def updateInfo(self):
+    def updateInfo(self,limit=10):
         """更新前几条,的基本信息,并不下载图片"""
         for a in self.session.query(Apod)\
                     .filter(Apod.date == '').filter(Apod.state == '')\
-                    .order_by(Apod.url.desc()).slice(0,3):
+                    .order_by(Apod.url.desc()).slice(0,limit):
             try:
                 self.info(a.url,a)
             except:
@@ -108,9 +108,9 @@ def loadAll():
 
 if __name__ == '__main__':
     db = DB()
-    #db.updateInfo()
-    db.updateLocal()
+    db.updateInfo(10)
+    #db.updateLocal()
     a = Apod()
-    a.url = 'http://apod.nasa.gov/apod/ap101027.html'
+    a.url = 'http://apod.nasa.gov/apod/ap110316.html'
     db.session.add(a)
     #db.session.commit()
