@@ -2,27 +2,24 @@
 #!/usr/bin/python
 
 import web
-import orminfo as DB
+import orminfo as info
 import os
-
-urls =  [
-    '/favicon.ico','fav',#图标
-    '/s/(.+)','static',#静态文件
-        ]
+#这里配置的url映射是大小写敏感的
+urls = []
+urls.extend(['/favicon.ico','fav'])#图标
 class fav:
     def GET(self):
         raise web.seeother('/s/favicon.ico')
+        
+urls.extend(['/s/(\w+)/(.+)','static'])#静态文件
 class static:
-    def GET(self,path):
+    def GET(self,dire,fname):
         dir = os.path.dirname(__file__)
-        path = os.path.join(dir,'static',path)
-        byts = ['.jpg','.png','.gif','.ico']
+        path = os.path.join(dir,'static',dire,fname)
         ext = os.path.splitext(path)[1].lower()
+        exts = ['.jpg','.png','.gif','.ico']
         try:
-            if ext in byts:
-                f = open(path,'rb')
-            else:
-                f = open(path,'r')
+            f = open(path,'rb') if ext in exts else open(path,'r')
             return f.read()
         except:
             pass
@@ -34,15 +31,17 @@ urls.extend(['/index.html', 'index'])#首页
 urls.extend(['/', 'index'])#首页
 class index:
     def GET(self):
-        return u'Hello, world!刘兴'
-        
-urls.extend(['/output','output'])
-class output:
+        return 'Hello, world!张三'
+
+urls.extend(['/m','Models'])#对象输出
+class Models:
     def GET(self):
-        return 'output'
-        
+        ss = info.init()
+        a = ss.query(info.User).first()
+        return a.name
         
 app = web.application(urls, locals())
 if __name__ == "__main__":
-    print 'running webapp'
-    app.run()
+    web.config.debug = True
+    #app.run()
+    print app.request('/m').data
