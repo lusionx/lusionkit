@@ -108,9 +108,9 @@ def loadAll():
 
 if __name__ == '__main__':
     db = DB()
-    db.updateInfo(10)
+    #db.updateInfo(10)
     #db.updateLocal()
     a = Apod()
     a.url = 'http://apod.nasa.gov/apod/ap110316.html'
     db.session.add(a)
-    #db.session.commit()
+    db.session.commit()
