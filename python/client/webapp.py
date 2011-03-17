@@ -4,44 +4,49 @@
 import web
 import orminfo as info
 import os
-#这里配置的url映射是大小写敏感的
+#这里配置的url映射是大小写敏感的 ;所以最好 类名,路径全是小写
 urls = []
 urls.extend(['/favicon.ico','fav'])#图标
 class fav:
     def GET(self):
-        raise web.seeother('/s/favicon.ico')
-        
-urls.extend(['/s/(\w+)/(.+)','static'])#静态文件
+        root = os.path.dirname(__file__)
+        path = os.path.join(root,'static/favicon.ico')
+        return open(path).read()
+
+urls.extend(['/s/(\w+)/(.+)','static'])#静态文件 图片,css,js,html
 class static:
     def GET(self,dire,fname):
-        dir = os.path.dirname(__file__)
-        path = os.path.join(dir,'static',dire,fname)
+        root = os.path.dirname(__file__)
+        path = os.path.join(root,'static',dire,fname)
         ext = os.path.splitext(path)[1].lower()
         exts = ['.jpg','.png','.gif','.ico']
-        try:
-            f = open(path,'rb') if ext in exts else open(path,'r')
-            return f.read()
-        except:
-            pass
-        finally:
-            f.close()
+        if ext in exts:
+            f = open(path,'rb')
+        else:
+            f = open(path,'r')
+        return f.read()
             
-#以上是静态文件的处理,现在开始有逻辑页面
+#以上是静态文件的处理,以下开始有逻辑页面
 urls.extend(['/index.html', 'index'])#首页
 urls.extend(['/', 'index'])#首页
 class index:
     def GET(self):
         return 'Hello, world!张三'
 
-urls.extend(['/m','Models'])#对象输出
-class Models:
+urls.extend(['/m','models'])#对象输出
+import json
+class models:
     def GET(self):
         ss = info.init()
-        a = ss.query(info.User).first()
-        return a.name
+        l = ss.query(info.User)
+        a = dict(
+                count=l.count(),
+                entities = [a.tdict() for a in l],
+                )
+        return json.dumps(a)
         
 app = web.application(urls, locals())
 if __name__ == "__main__":
-    web.config.debug = True
-    #app.run()
-    print app.request('/m').data
+    #web.config.debug = False
+    app.run()
+    #print app.request('/m').data

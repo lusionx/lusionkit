@@ -5,14 +5,30 @@ from sqlalchemy import create_engine
 from sqlalchemy.schema import Table, MetaData, Column, ForeignKey
 from sqlalchemy.orm import mapper, Session, clear_mappers, relationship, scoped_session, sessionmaker
 from sqlalchemy.types import Integer, String
+import os
 
-class User(object):
-    pass
-class Email(object):
+class BaseModel(object):
+    def tdict(self):
+        """将实例转换为字典"""
+        d = self.__dict__
+        k = '_sa_instance_state'
+        if d.has_key(k):
+            del d[k]
+        return d
+    def fdict(self,dic):
+        """用一个字典初始化本实例"""
+        pass
+
+class User(BaseModel):
+    def fun1(self):
+        return 'fun1'
+
+class Email(BaseModel):
     pass
     
 def init(create = False):
-    db = create_engine('sqlite:///info.sqlite3')
+    path = os.path.dirname(__file__)
+    db = create_engine('sqlite:///'+path+'/info.sqlite3')
     #db.echo = True
     metadata = MetaData(db)
     users = Table('ts_user', metadata,
@@ -36,16 +52,10 @@ def init(create = False):
     mapper(User, users, properties={
         'emails': relationship(Email),
     })
-    return scoped_session(sessionmaker(bind=db))
+    #return scoped_session(sessionmaker(bind=db))
+    return Session()
 
-def getname():
-    ss = init()
-    a = ss.query(User).first()
-    return a.name
-
-import re
 if __name__ == '__main__':
-    print getname()
-    a = 'dasd ? dsada:dd?aa.'
+    pass
     
     
