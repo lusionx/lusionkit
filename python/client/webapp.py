@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
-import web
+import web, os, sys
 import orminfo as info
-import os
 #这里配置的url映射是大小写敏感的 ;所以最好 类名,路径全是小写
 urls = []
 urls.extend(['/favicon.ico','fav'])#图标
@@ -46,7 +45,9 @@ class models:
         return json.dumps(a)
         
 app = web.application(urls, locals())
+
 if __name__ == "__main__":
     #web.config.debug = False
+    print 'run at port ' + sys.argv[1]
     app.run()
     #print app.request('/m').data

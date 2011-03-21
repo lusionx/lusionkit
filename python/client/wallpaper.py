@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
-import ctypes
-import Image
-import os
-import sys
-import extPy
+import ctypes, Image, os, sys
 from lxml import etree
 
 
