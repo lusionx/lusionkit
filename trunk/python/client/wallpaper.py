@@ -6,26 +6,22 @@ import Image
 import os
 import sys
 import extPy
+from lxml import etree
 
 
-def wallpaper_dir(path):
+def getWallpapers(dirpath):
     try:
-        directory = os.listdir(path)
+        directory = os.listdir(dirpath)
     except WindowsError:
         print "Directory does not exist"
         exit(0)
     wallpapers = []
-    types = ['.jpg', '.png', '.gif']
+    types = ['.jpg', '.png']
     for file in directory:
         ext = os.path.splitext(file)[1]
         if ext in types:
-            wallpapers.append(path + file)
+            wallpapers.append(dirpath + file)
     return wallpapers
-
-import random
-
-def pick(wallpapers):
-    return random.choice(wallpapers)
     
 def set(path):
     im = Image.open(path)
@@ -35,16 +31,22 @@ def set(path):
 
 
 def main(argv):
-    if len(argv) > 1:
-        wallpapers = wallpaper_dir(argv[1]);
-        if len(wallpapers) > 0:
-            path = pick(wallpapers)
-            set(path)
-        else:
-            print "No wallpapers were found."
-    else:
-        print "Usage: wallpaper.py <dir>"
+    cfg = os.path.dirname(__file__) + '/doc/Wallpapers.xml'
+    doc = etree.parse(cfg)
+    pics = []
+    for a in doc.getroot()[0]:
+        pics.extend(getWallpapers(a.text))
+    try:
+        i = pics.index(doc.getroot()[1].text) + 1
+        i = i % len(pics)
+    except ValueError:
+        i = 0
+    path = pics[i]
+    set(path)
+    doc.getroot()[1].text = path
+    doc.write(cfg,encoding = "utf-8")
+
 
 if __name__ == "__main__":
     #main(sys.argv)
-    main(['',os.path.todir(u'D:\\admin\\Pictures\\w我的壁纸不可能这么萌\\001')])
+    main('')
