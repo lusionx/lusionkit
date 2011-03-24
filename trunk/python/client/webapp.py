@@ -12,7 +12,7 @@ class fav:
     def GET(self):
         root = os.path.dirname(__file__)
         path = os.path.join(root,'static/favicon.ico')
-        return open(path).read()
+        return open(path,'rb').read()
 
 urls.extend(['/s/(\w+)/(.+)','static'])#静态文件 图片,css,js,html
 class static:
@@ -28,7 +28,6 @@ class static:
         return f.read()
             
 #以上是静态文件的处理,以下开始有逻辑页面
-urls.extend(['/index.html', 'index'])#首页
 urls.extend(['/', 'index'])#首页
 class index:
     def GET(self):
