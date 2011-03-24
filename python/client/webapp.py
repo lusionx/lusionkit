@@ -55,14 +55,13 @@ class nasa:
             htm += u'<p>远程<a href="'+a.src+'">'+a.date+' '+a.remark+'</a><br/>'
             htm += u'本地<a target="_blank" href="nasa/'+a.date+'">'+a.date+' '+a.remark+'</a>'
             htm += '</p>'
-            
         return htm
+        
 urls.extend(['/nasa/(.+)','nasaShow'])#nasa本地单张图片
 class nasaShow:
     def GET(self,date):
         ss = Context(constr).session
         a = ss.query(Apod).filter(Apod.date == date).first()
-        
         return open(os.path.dirname(__file__)+'/nasa/'+a.local,'rb')
         
 app = web.application(urls, locals())
