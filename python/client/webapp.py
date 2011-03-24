@@ -2,7 +2,9 @@
 #!/usr/bin/python
 
 import web, os, sys
-import orminfo as info
+from models import *
+import json
+constr = 'sqlite:///'+os.path.dirname(__file__)+'/info.sqlite3'
 #这里配置的url映射是大小写敏感的 ;所以最好 类名,路径全是小写
 urls = []
 urls.extend(['/favicon.ico','fav'])#图标
@@ -33,21 +35,20 @@ class index:
         return 'Hello, world!张三'
 
 urls.extend(['/m','models'])#对象输出
-import json
 class models:
     def GET(self):
-        ss = info.init()
-        l = ss.query(info.User)
+        ss = Context(constr).session
+        l = ss.query(User)
         a = dict(
                 count=l.count(),
                 entities = [a.tdict() for a in l],
                 )
+        ss.close()
         return json.dumps(a)
         
 app = web.application(urls, locals())
 
 if __name__ == "__main__":
     #web.config.debug = False
-    print 'run at port ' + sys.argv[1]
     app.run()
     #print app.request('/m').data

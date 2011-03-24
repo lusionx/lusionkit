@@ -7,35 +7,13 @@ import httplib2
 import BeautifulSoup
 import datetime
 import os
-from sqlalchemy import create_engine
-from sqlalchemy.schema import Table, MetaData, Column, ForeignKey
-from sqlalchemy.orm import mapper, Session, clear_mappers, relationship
-from sqlalchemy.types import Integer, String
-
-
-class Apod(object):
-    pass
+from models import *
+constr = 'sqlite:///'+os.path.dirname(__file__)+'/info.sqlite3'
 
 class DB():
     def __init__(self,create=False):
         """call this before tabels models operating"""
-        db = create_engine('sqlite:///info.sqlite3')
-        #db.echo = True
-        metadata = MetaData(db)
-        apods = Table('nasa_apod', metadata,
-            Column('url', String, primary_key=True),
-            Column('date', String, nullable=False, default=''),
-            Column('remark', String, nullable=False, default=''),
-            Column('src', String, nullable=False, default=''),
-            Column('state', String, nullable=False, default=''),
-            Column('local', String, nullable=False, default=''),
-        )
-
-        if create:
-            apods.create()
-        clear_mappers()
-        mapper(Apod, apods)
-        self.session=Session()
+        self.session = Context(constr).session
 
     def info(self,url,apod=None):
         """
@@ -73,10 +51,11 @@ class DB():
             apod.local = apod.date + '-'\
                 + apod.remark.replace(' ','').replace(':','').replace('?','')\
                 + ext
-            if os.path.exists('nasa/'+apod.local):
+            if os.path.exists(root+'/nasa/'+apod.local):
                 print "exists:" + apod.local
             else:
-                f = open('nasa/'+apod.local, 'wb')
+                f = open(root+'/nasa/'+apod.local, 'wb')
+                print 'download:'+apod.src+'@'+apod.date
                 bytes = self.download(apod.src)
                 f.write(bytes)
                 f.close()
@@ -108,9 +87,10 @@ def loadAll():
 
 if __name__ == '__main__':
     db = DB()
-    #db.updateInfo(10)
-    #db.updateLocal()
+    #db.updateInfo(5)
+    #db.updateLocal(6)
     a = Apod()
-    a.url = 'http://apod.nasa.gov/apod/ap110316.html'
+    a.url = 'http://apod.nasa.gov/apod/ap110323.html'
     db.session.add(a)
     db.session.commit()
+    #raw_input()
