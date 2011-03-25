@@ -30,15 +30,6 @@ def methodInfo(url):
     pars = [a['name'] for a in form.findAll('input',type='text')]
     return name, action, pars
 
-def genClient(f,name,action,pars):
-    f.write('def '+name+'('+','.join(pars)+'):\n')
-    f.write("    url = service+'"+name+"'\n")
-    f.write("    body = {"+','.join([ "'"+a+"':"+a for a in pars])+"}\n")
-    f.write("    headers = {'Content-type': 'application/x-www-form-urlencoded'}\n")
-    f.write('    http = httplib2.Http()\n')
-    f.write("    response, content = http.request(url, 'POST', headers=headers, body=urllib.urlencode(body))\n")
-    f.write("    return BeautifulSoup.BeautifulSoup(content)\n\n")
-
 
 from django.template import Template, Context
 from django.conf import settings
