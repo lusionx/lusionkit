@@ -20,10 +20,13 @@ def getWallpapers(dirpath):
     return wallpapers
     
 def set(path):
-    im = Image.open(path)
-    path = 'wallpaper.bmp'
-    im.save(path)
-    ctypes.windll.user32.SystemParametersInfoA(20, 0, path , 0)
+    try:#这里可能有未知的图片格式错误,如果出错就跳过
+        im = Image.open(path)
+        path = os.path.dirname(__file__) + '/wallpaper.bmp'
+        im.save(path)
+        ctypes.windll.user32.SystemParametersInfoA(20, 0, path , 0)
+    except:
+        pass
 
 
 def main(argv):

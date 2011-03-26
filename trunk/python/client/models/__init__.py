@@ -5,57 +5,44 @@ from sqlalchemy import create_engine
 from sqlalchemy.schema import Table, MetaData, Column, ForeignKey
 from sqlalchemy.orm import mapper, Session, clear_mappers, relationship
 from sqlalchemy.types import Integer, String
-
-class BaseObj(object):
-    def tdict(self):
-        """将实例转换为字典"""
-        d = self.__dict__
-        k = '_sa_instance_state'
-        #剔除sqlalchemy给对象的状态字段
-        if d.has_key(k):
-            del d[k]
-        return d
-    def __init__(self,dic=None):
-        """用一个字典初始化本实例,递归到底层
-        主要是用来接收 由json串反序列化出来的字典
-        """
-        if dic == None:
-            return
-        for k,v in dic.items():
-            exec('self.'+k+'=v')
-            if type(v) == list:
-                for i in xrange(len(v)):
-                    if type(v[i]) == dict:
-                        v[i] = BaseObj(v[i])
-
-        
-class User(BaseObj):
-    pass
-
-class Email(BaseObj):
-    pass
-    
-class Apod(BaseObj):
-    pass
+from cls import *
 
 class Context():
     def __init__(self,constr):
         db = create_engine(constr)
-        metadata = MetaData(db)
+        db.echo = True
+        self.meta = MetaData(db)
         table = {}
         clear_mappers()
-        table['users'] = Table('ts_user', metadata,
+        self.table = table
+        self.__init_ts()
+        self.__init_nasa()
+        self.__init_rss()
+        self.session = Session()
+        
+    def __init_ts(self):
+        table = self.table
+        table['ts_user'] = Table('ts_user', self.meta,
             Column('id', Integer, primary_key=True),
             Column('name', String(40), nullable=False),
             Column('age', Integer, default=0),
             Column('password', String(40), default=''),
         )
-        table['emails'] = Table('ts_email', metadata,
+        table['ts_email'] = Table('ts_email', self.meta,
             Column('id', Integer, primary_key=True),
             Column('address', String(40), nullable=False),
             Column('user_id', Integer, ForeignKey('ts_user.id'), nullable=False),
         )
-        table['apods'] = Table('nasa_apod', metadata,
+        mapper(User, table['ts_user'], properties={
+            'emails': relationship(Email),
+        })
+        mapper(Email, table['ts_email'], properties={
+            'user': relationship(User)
+        })
+        
+    def __init_nasa(self):
+        table = self.table
+        table['nasa_apod'] = Table('nasa_apod', self.meta,
             Column('url', String, primary_key=True),
             Column('date', String, nullable=False, default=''),
             Column('remark', String, nullable=False, default=''),
@@ -63,14 +50,38 @@ class Context():
             Column('state', String, nullable=False, default=''),
             Column('local', String, nullable=False, default=''),
         )
-
-        mapper(Email, table['emails'], properties={
-            'user': relationship(User)
-        })
-        mapper(User, table['users'], properties={
-            'emails': relationship(Email),
-        })
-        mapper(Apod, table['apods'])
+        mapper(Apod, table['nasa_apod'])
         
-        self.table = table
-        self.session = Session()
+    def __init_rss(self):
+        table = self.table
+        table['rss_feed'] = Table('rss_channel', self.meta,
+            Column('id', Integer, primary_key=True),
+            Column('title', String, nullable=False, default=''),
+            Column('link', String, nullable=False, default=''),
+            Column('description', String, nullable=False, default=''),
+            Column('author', String, nullable=False, default=''),
+        )
+        table['rss_item'] = Table('rss_item', self.meta,
+            Column('channel_id', Integer, ForeignKey('rss_channel.id'), nullable=False),
+            Column('link', String, primary_key=True),
+            Column('title', String, nullable=False, default=''),
+            Column('author', String, nullable=False, default=''),
+            Column('contentSnippet', String, nullable=False, default=''),
+            Column('content', String, nullable=False, default=''),
+            Column('categories', String, nullable=False, default=''),
+            Column('publishedDate', String, nullable=False, default=''),
+        )
+        mapper(Channel, table['rss_channel'], properties={
+            'items': relationship(Item)
+        })
+        mapper(Item, table['rss_item'], properties={
+            'channel': relationship(Channel),
+        })
+        
+import os
+if __name__ == '__main__':
+
+    constr = 'sqlite:///'+os.path.dirname(__file__)[:-7]+'/info.sqlite3'
+    print constr
+    db = Context(constr)
+    #db.table['rss_item'].create()

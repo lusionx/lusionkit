@@ -1,80 +1,40 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
-from sqlalchemy import create_engine
-from sqlalchemy.schema import Table, MetaData, Column, ForeignKey
-from sqlalchemy.orm import mapper, Session, clear_mappers, relationship
-from sqlalchemy.types import Integer, String
-import httplib2
-from pyquery import PyQuery as pq
+from models import *
+import httplib2, os
 from lxml import etree
+from pyquery import PyQuery as pq
 
-class Channel(object):
-    pass
-    
-class Item(object):
-    pass
+constr = 'sqlite:///'+os.path.dirname(__file__)+'/info.sqlite3'
 
 class DB():
     def __init__(self,create=False):
         """call this before tabels models operating"""
-        db = create_engine('sqlite:///info.sqlite3')
-        #db.echo = True
-        metadata = MetaData(db)
-
-        channels = Table('rss_channel', metadata,
-            Column('id', Integer, primary_key=True),
-            Column('title', String, nullable=False, default=''),
-            Column('link', String, nullable=False, default=''),
-            Column('description', String, nullable=False, default=''),
-            Column('language', String, nullable=False, default=''),
-            Column('lastBuildDate', String, nullable=False, default=''),
-            Column('generator', String, nullable=False, default=''),
-        )
-
-        items = Table('rss_item', metadata,
-            Column('id', Integer, primary_key=True),
-            Column('channel_id', Integer, ForeignKey('rss_channel.id'), nullable=False),
-            Column('link', String, nullable=False, default=''),
-            Column('title', String, nullable=False, default=''),
-            Column('description', String, nullable=False, default=''),
-            Column('author', String, nullable=False, default=''),
-            Column('comments', String, nullable=False, default=''),
-            Column('guid', String, nullable=False, default=''),
-            Column('pubDate', String, nullable=False, default=''),
-        )
-        if create:
-            items.create()
-            channels.create()
-
-        clear_mappers()
-
-        mapper(Channel, channels, properties={
-            'items': relationship(Item)
-        })
-        mapper(Item, items, properties={
-            'channel': relationship(Channel),
-        })
-        self.session=Session()
+        self.session=Context(constr).session
         
     def update(self,ch):
         sess = self.session
         ch_o = sess.query(Channel).filter(Channel.link == ch.link).first()
         i = 0
-        if ch_o == None:#is a new fesdd
+        if ch_o == None:#is a new feed
             sess.add(ch)
             i = len(ch.items)
             sess.commit()
         elif ch_o.lastBuildDate != ch.lastBuildDate:
             # add new items
-            dblinks = sess.query(Item.link).filter(Item.channel_id == ch_o.id)
-            dblinks = [a[0] for a in dblinks]
-            addlinks = [ item for item in ch.items if item.link not in dblinks]
+            #dblinks = sess.query(Item.link).filter(Item.channel_id == ch_o.id)
+            #dblinks = [a[0] for a in dblinks]
+            #addlinks = [ item for item in ch.items if item.link not in dblinks]
             i=0
-            for a in addlinks:
-                i+=1
-                a.channel = ch_o
-                sess.add(a)
+            #for a in addlinks:
+            #    i+=1
+            #    a.channel = ch_o
+            #   sess.add(a)
+            for a in ch.items:
+                a.channel_id = ch_o.id
+            sess.add_all(ch.items)
+            print 'add_all'
             sess.commit()
         else:
             pass #do nothing
@@ -131,4 +91,3 @@ if __name__ == '__main__':
     url.append('http://www.cnblogs.com/rss')
     url.append('http://bt.ktxp.com/rss-sort-1.xml')
     main(url[0])
-
