@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
-import ctypes, Image, os, sys
+import ctypes, os, sys
+import Image, ImageDraw
 from lxml import etree
 
 
@@ -16,21 +17,24 @@ def getWallpapers(dirpath):
     for file in directory:
         ext = os.path.splitext(file)[1]
         if ext in types:
-            wallpapers.append(dirpath + file)
+            wallpapers.append(os.path.join(dirpath,file))
     return wallpapers
     
 def set(path):
     try:#这里可能有未知的图片格式错误,如果出错就跳过
         im = Image.open(path)
-        path = os.path.dirname(__file__) + '/wallpaper.bmp'
+        draw = ImageDraw.Draw(im)
+        draw.text((20,im.size[1]-20),path)
+        path = os.path.join(os.path.dirname(__file__),'wallpaper.bmp')
         im.save(path)
+        del draw
         ctypes.windll.user32.SystemParametersInfoA(20, 0, path , 0)
     except:
         pass
 
 
 def main(argv):
-    cfg = os.path.dirname(__file__) + '/doc/Wallpapers.xml'
+    cfg = os.path.join(os.path.dirname(__file__),'doc/Wallpapers.xml')
     doc = etree.parse(cfg)
     pics = []
     for a in doc.getroot()[0]:

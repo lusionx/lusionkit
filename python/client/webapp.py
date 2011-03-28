@@ -40,19 +40,21 @@ urls['/select/(.+)'] = 'select'#对象输出
 class select:
     def GET(self,modelname):
         ss = Context(constr).session
-        l = ss.query(User)
+        exec('l = ss.query('+modelname+')')
         a = dict(
+                error=modelname,
                 count=l.count(),
                 entities = [a.tdict() for a in l],
                 )
         ss.close()
         return json.dumps(a)
-
-
-import dataSvc
-#urls['/blog'] = select.app #子程序
         
-
+urls['/test'] = 'test'
+class test:
+    def POST(self):
+        return 'test'+json.dumps(web.data())
+    def GET(self):
+        return 'test'+json.dumps(web.input())
         
 dic = urls
 urls = []
