@@ -71,7 +71,7 @@ class Context():
             Column('categories', String, nullable=False, default=''),
             Column('publishedDate', String, nullable=False, default=''),
         )
-        mapper(Channel, table['rss_channel'], properties={
+        mapper(Channel, table['rss_feed'], properties={
             'items': relationship(Item)
         })
         mapper(Item, table['rss_item'], properties={
