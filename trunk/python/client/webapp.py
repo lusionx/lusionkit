@@ -21,6 +21,9 @@ class static:
         path = os.path.join(root,'static',dire,fname)
         ext = os.path.splitext(path)[1].lower()
         exts = ['.jpg','.png','.gif','.ico']
+        htm = ['.html','.htm']
+        if ext in htm:
+            web.header('Content-Type', 'text/html')
         if ext in exts:
             f = open(path,'rb')
         else:
@@ -31,11 +34,11 @@ class static:
 urls['/'] = 'index'#首页
 class index:
     def GET(self):
-        return 'Hello, world!张三'
+        raise web.seeother('/s/v/index.html')
 
-urls['/m'] = 'models'#对象输出
-class models:
-    def GET(self):
+urls['/select/(.+)'] = 'select'#对象输出
+class select:
+    def GET(self,modelname):
         ss = Context(constr).session
         l = ss.query(User)
         a = dict(
@@ -45,24 +48,11 @@ class models:
         ss.close()
         return json.dumps(a)
 
-urls['/nasa'] = 'nasa'#nasa图片
-class nasa:
-    def GET(self):
-        ss = Context(constr).session
-        htm = ''
-        for a in ss.query(Apod).filter(Apod.local != '')\
-            .order_by(Apod.url.desc()).slice(0,10):
-            htm += u'<p>远程<a href="'+a.src+'">'+a.date+' '+a.remark+'</a><br/>'
-            htm += u'本地<a target="_blank" href="nasa/'+a.date+'">'+a.date+' '+a.remark+'</a>'
-            htm += '</p>'
-        return htm
+
+import dataSvc
+#urls['/blog'] = select.app #子程序
         
-urls['/nasa/(.+)'] = 'nasaShow'#nasa本地单张图片
-class nasaShow:
-    def GET(self,date):
-        ss = Context(constr).session
-        a = ss.query(Apod).filter(Apod.date == date).first()
-        return open(os.path.dirname(__file__)+'/nasa/'+a.local,'rb')
+
         
 dic = urls
 urls = []
