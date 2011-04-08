@@ -39,3 +39,6 @@ class Channel(BaseObj):
 
 class Item(BaseObj):
     pass
+    
+class Carton(BaseObj):
+    pass

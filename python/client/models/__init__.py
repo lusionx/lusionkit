@@ -18,6 +18,7 @@ class Context():
         self.__init_ts()
         self.__init_nasa()
         self.__init_rss()
+        self.__init_carton()
         self.session = Session()
         
     def __init_ts(self):
@@ -78,10 +79,24 @@ class Context():
             'channel': relationship(Channel),
         })
         
+    def __init_carton(self):
+        table = self.table
+        table['ct_carton'] = Table('ct_carton', self.meta,
+            Column('name', String, primary_key=True),
+            Column('name_jp', String, nullable=False, default=''),
+            Column('name_en', String, nullable=False, default=''),
+            Column('week', Integer, nullable=False, default=0),#星期X更新
+            Column('remark', String, nullable=False, default=''),#说明
+            Column('labels', String, nullable=False, default=''),#分类标签
+            Column('episode', Integer, nullable=False, default=0),#已更新集数
+            Column('start', String, nullable=False, default=''),#开播时间
+        )
+        mapper(Carton, table['ct_carton'])
+        
 import os
 if __name__ == '__main__':
 
     constr = 'sqlite:///'+os.path.dirname(__file__)[:-7]+'/info.sqlite3'
     print constr
     db = Context(constr)
-    #db.table['rss_item'].create()
+    #db.table['ct_carton'].create()

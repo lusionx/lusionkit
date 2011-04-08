@@ -24,7 +24,7 @@ def set(path):
     try:#这里可能有未知的图片格式错误,如果出错就跳过
         im = Image.open(path)
         draw = ImageDraw.Draw(im)
-        draw.text((20,im.size[1]-20),path)
+        #draw.text((20,im.size[1]-20),path) 不能写中文?
         path = os.path.join(os.path.dirname(__file__),'wallpaper.bmp')
         im.save(path)
         del draw
@@ -32,22 +32,25 @@ def set(path):
     except:
         pass
 
-
+import random
 def main(argv):
     cfg = os.path.join(os.path.dirname(__file__),'doc/Wallpapers.xml')
     doc = etree.parse(cfg)
     pics = []
     for a in doc.getroot()[0]:
         pics.extend(getWallpapers(a.text))
-    try:
-        i = pics.index(doc.getroot()[1].text) + 1
-        i = i % len(pics)
-    except ValueError:
-        i = 0
-    path = pics[i]
+    #try:
+    #    i = pics.index(doc.getroot()[1].text) + 1
+    #    i = i % len(pics)
+    #except ValueError:
+    #    i = 0
+    path = random.choice(pics)
     set(path)
-    doc.getroot()[1].text = path
-    doc.write(cfg,encoding = "utf-8")
+    #print path
+    print type(doc.getroot()[1].text)
+    print type(path)
+    #doc.getroot()[1].text = path.encode('utf-8')
+    #doc.write(cfg,encoding = "utf-8")
 
 
 if __name__ == "__main__":
