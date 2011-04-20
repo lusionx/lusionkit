@@ -1,7 +1,7 @@
 RewriteEngine on
-RewriteCond $1 !^(index\.php|user_guide|robots\.txt)
+RewriteCond $1 !^(index\.php|user_guide|static|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
 
-#如果有虚拟目录 RewriteRule ^(.*)$ /foldername/index.php/$1 [L]
-#在apache中配置,保证此配置此目录是<Directory/>节点的
-#AllowOverride All,使RewriteEngine生效
+#1,如果有虚拟目录 RewriteRule ^(.*)$ /foldername/index.php/$1 [L]
+#2,在apache中配置,保证此配置此目录是<Directory/>节点的AllowOverride All,使RewriteEngine生效
+#
