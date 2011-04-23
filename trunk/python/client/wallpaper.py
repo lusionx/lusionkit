@@ -46,9 +46,7 @@ def main(argv):
     #    i = 0
     path = random.choice(pics)
     set(path)
-    #print path
-    print type(doc.getroot()[1].text)
-    print type(path)
+    print path
     #doc.getroot()[1].text = path.encode('utf-8')
     #doc.write(cfg,encoding = "utf-8")
 
