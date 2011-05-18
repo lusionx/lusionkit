@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace System.Linq
+namespace Alx.ORM.Core
 {
     public static class Enumerable_my
     {
