@@ -124,7 +124,7 @@ def show(name):
         showone(name)
         
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     act = {}
     act['install'] = install
     act['remove'] = remove
@@ -133,9 +133,8 @@ if __name__ == '__main__':
         act[sys.argv[1]](sys.argv[2])
     else:
         print """e.g.
-python npm.py install packagename
-python npm.py install packagename
+python npm.py install <packagename>
+python npm.py remove <packagename>
+python npm.py show <all | packagename>
 """
 
-    #install('mongoose')
-    #test()
