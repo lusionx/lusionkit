@@ -129,7 +129,7 @@ if __name__ == '__main__':
     act['install'] = install
     act['remove'] = remove
     act['show'] = show
-    if act.has_key(sys.argv[1]) and len(sys.argv) == 3 and len(sys.argv[2]) > 0:
+    if len(sys.argv) == 3 and act.has_key(sys.argv[1]) and len(sys.argv[2]) > 0:
         act[sys.argv[1]](sys.argv[2])
     else:
         print """e.g.
