@@ -8,8 +8,8 @@
 import httplib2, json, os, tarfile, uuid, sys
 
 cfg = {}
-cfg['download'] = 'D:\\DevelopTool\\nodejs\\download\\'
-cfg['target'] = 'D:\\DevelopTool\\nodejs\\lib\\node\\'
+cfg['download'] = 'D:/DevelopTool/nodejs/tmp/'
+cfg['target'] = 'D:/DevelopTool/nodejs/lib/node/'
 
 def cleanDir(Dir):
     if not os.path.isdir(Dir):
@@ -43,7 +43,7 @@ def install(nname):
         return
     last = info['dist-tags']['latest']
     
-    print 'the last verson is %s' % last
+    print 'The last verson is %s' % last
     
     lastverson = info['versions'][last]
     url = lastverson['dist']['tarball']
@@ -62,7 +62,7 @@ def install(nname):
     f.close()
     
     #解压 tgz文件
-    print 'extract'
+    print 'Extracting'
     tar = tarfile.open(cfg['download'] + filename)
     uidf = cfg['download'] + nname + '-' + str(uuid.uuid4())
     tar.extractall(uidf)
@@ -73,7 +73,7 @@ def install(nname):
         cleanDir(cfg['target'] + nname)
         os.removedirs(cfg['target'] + nname)
     #复制文件夹到目标地址并改名
-    os.rename(uidf + '\\package' , cfg['target'] + nname)
+    os.rename(uidf + '/package' , cfg['target'] + nname)
     os.removedirs(uidf)
 
     print 'install ' + nname + ' v' + last + ' finished!'
@@ -81,7 +81,7 @@ def install(nname):
 def analysisDependencies(dpd):
     for k,v in dpd.items():
         localv = 'none'
-        path = cfg['target'] + k + '\\package.json'
+        path = cfg['target'] + k + '/package.json'
         if os.path.isfile(path):
             f = open(path)
             localv = json.loads(f.read())['version']
