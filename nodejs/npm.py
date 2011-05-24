@@ -85,6 +85,7 @@ def analysisDependencies(dpd):
         if os.path.isfile(path):
             f = open(path)
             localv = json.loads(f.read())['version']
+            f.close()
         print 'require %s : local %s %s, ' % (k, localv, v)
 
 
@@ -99,11 +100,35 @@ def remove(nname):
         print "Can't find %s from lib(%s)" % (nname, cfg['target'])
         return False
 
+def show(name):
+    def showone(nname):
+        path = cfg['target'] + nname + '/package.json'
+        if os.path.isfile(path):
+            f = open(path)
+            info = json.loads(f.read())
+            f.close()
+            keys = ['name','version','description']
+            for k in keys:
+                print '%s : %s' % (k,info[k])
+            if info.has_key('dependencies'):
+                print '%s : %s' % ('dependencies',info['dependencies'])
+            print ''
+    if name == 'all':
+        i = 0
+        for path in os.listdir(cfg['target']):
+            if os.path.isdir(os.path.join(cfg['target'],path)) and path[0] != '.':
+                showone(path)
+                i+=1
+        print 'There are %d packages.' % i
+    else:
+        showone(name)
+        
+
 if __name__ == '__main__':    
     act = {}
     act['install'] = install
     act['remove'] = remove
-    
+    act['show'] = show
     if act.has_key(sys.argv[1]) and len(sys.argv) == 3 and len(sys.argv[2]) > 0:
         act[sys.argv[1]](sys.argv[2])
     else:
