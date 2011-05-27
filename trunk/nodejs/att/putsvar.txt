@@ -25,4 +25,8 @@ this is forloop2 @for(var a in arrc){
     @=arrc[a].f2
 @}
 
+my foreach @each(arrc,function(loop,item){
+    @=loop.index
+    @=item.f1
+@})
 
