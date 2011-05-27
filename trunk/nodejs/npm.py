@@ -5,7 +5,7 @@
 使用python 下载 npmjs.org的模块
 """
 
-import httplib2, json, os, tarfile, uuid, sys
+import urllib2, json, os, tarfile, uuid, sys
 
 cfg = {}
 cfg['download'] = 'D:/DevelopTool/nodejs/tmp/'
@@ -30,11 +30,12 @@ def cleanDir(Dir):
 
 def install(nname):
     url = 'http://registry.npmjs.org/'+nname;
-    h = httplib2.Http(".cache")
+    #h = httplib2.Http(".cache")
     
     #分析json 得到最新版的地址,版本号
     print 'Get package info from %s' % url
-    resp, content = h.request(url, "GET")
+    #resp, content = h.request(url, "GET")
+    content = urllib2.urlopen(url).read()
     info = json.loads(content)
     
     #可能有找不到的情况
@@ -55,7 +56,8 @@ def install(nname):
 
     #下载 tgz文件
     print 'Download from %s' % url
-    resp, content = h.request(url,'GET')
+    #resp, content = h.request(url,'GET')
+    content = urllib2.urlopen(url).read()
     filename = nname + '-' + last + '.tgz'
     f = open(cfg['download'] + filename,'wb')
     f.write(content)
