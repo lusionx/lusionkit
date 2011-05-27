@@ -1,0 +1,16 @@
+{
+    "name": "att"
+  , "description": "a template engine"
+  , "version": "0.1"
+  , "author": "lusionx <lusionx@gmail.com>"
+  , "keywords": ["template"]
+  , "dependencies": {}
+  , "directories": { "lib": "./lib" }
+  , "scripts": { "test": "make test" }
+  , "main": "./index.js"
+  , "engines": { "node": ">= 0.4.0" }
+  , "repository": {
+        "type": ""
+      , "url": ""
+    }
+}

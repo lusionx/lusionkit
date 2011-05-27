@@ -1,0 +1,28 @@
+output this var name @=name
+no output literal
+output this var age @=age
+
+if test1 @if (name == 'lxing'){
+    if true output val name @=name
+xxx @} else {
+    if false not output val name @=name
+@}
+
+
+if test2 @if (age == 132){
+    if true output val age @=age
+@} else {
+    if false not output val age @=age
+@}
+
+
+this is forloop @for(var a in arrs){
+    @=arrs[a]
+@}
+
+this is forloop2 @for(var a in arrc){
+    @=arrc[a].f1
+    @=arrc[a].f2
+@}
+
+
