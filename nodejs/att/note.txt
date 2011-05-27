@@ -1,0 +1,38 @@
+实现一个模板引擎
+确定语法标记
+
+按行分析
+    认为@开始,到此行结尾是语法,其他的是普通输出
+    @及后边的一个字符有意义:
+        @=:表示输出;输出支持filter
+        @:之后是js支持的表达式
+    表达式 { 后必须换行,符合js语法要求,不过分
+    
+        
+e.g
+
+做异步的吗?
+
+this is a text @ if (1==1) {
+    output @=name
+@} else {
+output @=name2 | filter
+@}
+
+强化for循环,增加内部变量loop
+
+@ for (a in names) {
+    @=a
+    @=loop.index
+    @=loop.first
+    @=loop.last
+    @=loop.length
+@}
+
+可以传入函数作为上下文,
+默认有 include 实现
+@ include('./child.t');
+
+无计划
+@ base('../base.t');
+

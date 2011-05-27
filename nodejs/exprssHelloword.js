@@ -7,6 +7,8 @@ var express = require('express');
 
 var app = express.createServer();
 
+var cfg = [];
+
 app.get('/', function(req, res){
   res.send('Hello World');
 });
