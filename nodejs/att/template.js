@@ -22,6 +22,19 @@ var T = {
     }
 };
 
+var each = function (arr, callback) {
+    var loop = function (i, len) {
+        this.index = i;
+        this.length = len;
+        this.first = i == 0;
+        this.last = i == len - 1;
+    };
+    for (var i = 0; i < arr.length; i++) {
+        var lp = new loop(i,arr.length);
+        callback(lp,arr[i]);
+    }
+};
+
 exports.render = function (tpath, ctx, callback) {
     fs.readFile(tpath, 'utf8', function (err, data) {
         var gencode = [];
