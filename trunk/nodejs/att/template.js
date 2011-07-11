@@ -22,6 +22,7 @@ var T = {
     }
 };
 
+//内置函数 each
 var each = function (arr, callback) {
     var loop = function (i, len) {
         this.index = i;

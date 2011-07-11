@@ -4,9 +4,20 @@
 按行分析
     认为@开始,到此行结尾是语法,其他的是普通输出
     @及后边的一个字符有意义:
-        @=:表示输出;输出支持filter
-        @:之后是js支持的表达式
-    表达式 { 后必须换行,符合js语法要求,不过分
+        @@ 表示 引擎自定义的:
+            base 'master.path'
+            hold '占位名'
+            ext  '扩展的站位名'
+        @= 表示输出;输出支持filter @=name|tolow
+        @ 之后是js支持的表达式,注意分号:
+            表达式 { 后必须换行,符合js语法要求,不过分
+            内置更方便的循环函数
+                each(arr,function(loop,e){
+                    loop.index
+                    loop.last
+                    loop.first
+                    loop.lenth
+                });
     
         
 e.g

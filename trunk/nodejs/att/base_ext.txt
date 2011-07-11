@@ -1,0 +1,13 @@
+@@ base('./base.txt')
+
+name2 start
+
+@@ hold('name1)
+
+this this name1 end
+
+this is name2 start
+
+@@ hold('name2)
+
+this is name2 end;
