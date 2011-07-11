@@ -5,6 +5,7 @@ import ctypes, os, sys
 import Image, ImageDraw
 from lxml import etree
 
+types = ['.jpg', '.png']
 
 def getWallpapers(dirpath):
     try:
@@ -13,7 +14,6 @@ def getWallpapers(dirpath):
         print "Directory does not exist"
         exit(0)
     wallpapers = []
-    types = ['.jpg', '.png']
     for file in directory:
         ext = os.path.splitext(file)[1]
         if ext in types:
@@ -33,7 +33,7 @@ def set(path):
         pass
 
 import random
-def main(argv):
+def main2(argv):#通过xml 获取目录
     cfg = os.path.join(os.path.dirname(__file__),'doc/Wallpapers.xml')
     doc = etree.parse(cfg)
     pics = []
@@ -49,8 +49,18 @@ def main(argv):
     print path
     #doc.getroot()[1].text = path.encode('utf-8')
     #doc.write(cfg,encoding = "utf-8")
-
+    
+def main(root=u"D:\\lusionx\\Pictures\\h和谐社"):#就用和谐社的图片
+    pics = []
+    for a in os.listdir(root):
+        path = os.path.join(root,a)
+        #print path
+        if os.path.isdir(path) :
+            pics.extend(getWallpapers(path))
+    path = random.choice(pics)
+    set(path)
+    print path
 
 if __name__ == "__main__":
     #main(sys.argv)
-    main('')
+    main()
