@@ -4,11 +4,12 @@ class User extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-
     }
 
     public function index()
     {
-        $this->load->view('user/list');
+        $data['title'] = '页面标题';
+        $data['content'] = $this->load->view('user/list',$data,true);
+        $this->load->view('master',$data);
     }
 }
