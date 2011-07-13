@@ -11,6 +11,15 @@ Array.prototype.filter = function(fn){
     return arr;
 };
 
+module.exports.isFunction = function( obj ) {
+    return toString.call(obj) === "[object Function]";
+};
+
+module.exports.isArray = function( obj ) {
+    return toString.call(obj) === "[object Array]";
+};
+
+
 //Object.prototype.
 //console.log(Array
 
