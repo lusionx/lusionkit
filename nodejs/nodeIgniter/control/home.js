@@ -1,3 +1,3 @@
 module.exports.index = function(){
-    return  '首页';
+    return require('fs').readFileSync('./ff.html');
 };

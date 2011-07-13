@@ -4,20 +4,31 @@ var ext = require('./ext.js');
 var fs = require('fs');
 var util = require('util');
 var log = function (obj) {
-    console.log(JSON.stringify(obj));
+    //console.log(JSON.stringify(obj));
+    console.dir(obj);
 };
 
 //根据requset 初始化 上下文
-var Context = function (req) {
-    this.query = (function () {
+var Context = function (req,next) {
+    var query = (function () {
         if (req.url.split('?').length == 2) {
             return require('querystring').parse(req.url.split('?')[1]);
         } else {
             return {};
         }
     })();
-    this.form = (function () {})();
-    this.data = (function () {})();
+    var data = '';
+    req.setEncoding('utf8');
+    req.on('data',function(chunk){
+        data += chunk;
+    });
+    req.on('end',function(){
+        var context = {
+            query:query,
+            form : require('querystring').parse(data)
+        };
+        next(context);
+    });
 };
 
 var router = function (url) { //通过url分析control, action
@@ -55,7 +66,9 @@ var staticFile = function (url, response) { //路径是否直接指向静态文�
             response.writeHead(200, {
                 'Content-Type': mime.lookup(url)
             });
-            response.end(fs.readFileSync('.' + url));
+            fs.readFile('.' + url,function(err,data){
+                response.end(data);
+            });
             return true;
         } else {
             throw new Error('no file');
@@ -73,18 +86,19 @@ var execAct = function (rout, request, response) {
         if (!ext.isFunction(act)) {
             throw new Error('no act 400');
         }
-        try {
-            var context = new Context(request);
-            var result = act.apply(context, rout.ar);
-            response.writeHead(200, {
-                'Content-Type': 'text/html'
-            });
-            response.end(result);
-        } catch (ex) {
-            response.writeHead(500);
-            fs.writeFileSync(cfg.log, util.inspect(ex));
-            response.end();
-        }
+        Context(request,function(context){
+            try {
+                var result = act.apply(context, rout.ar);
+                response.writeHead(200, {
+                    'Content-Type': 'text/html'
+                });
+                response.end(result);
+            } catch (ex) {
+                response.writeHead(500);
+                fs.writeFileSync(cfg.log, util.inspect(ex));
+                response.end();
+            }
+        });
     } catch (ex) {
         response.writeHead(400);
         response.end();
