@@ -2,6 +2,7 @@ var http = require('http');
 var cfg = require('./config.js');
 require('./ext.js');
 var fs = require('fs');
+var util = require('util');
 
 //根据requset 初始化 上下文
 var Context = function (req) {
@@ -46,10 +47,10 @@ var router = function (url) { //通过url分析control, action
 
 var staticFile = function(url,response){//路径是否直接指向静态文件
     try {
-        if(fs.statSync(__dirname+url).isFile()){
+        if(fs.statSync('.'+url).isFile()){
             var mime = require('mime');
             response.writeHead(200, {
-                'Content-Type': mime.looup(url)
+                'Content-Type': mime.lookup(url)
             });
             response.end(fs.readFileSync('.'+url));
             return true;
@@ -57,24 +58,30 @@ var staticFile = function(url,response){//路径是否直接指向静态文件
             throw new Error('no file');
         }
     } catch (ex) {
-        console.log('no file: '+__dirname+url);
+        //console.log('no file: .'url+','+ex.toString());
         return false;
     }
 };
 
 var execAct = function(rout, request, response){
     try {
-        fs.statSync(__dirname + '/control/' + rout.ctrl + '.js'); //测试是否能找到 control
+        fs.statSync('./control/' + rout.ctrl + '.js'); //测试是否能找到 control
         try {
-            var context = new Context(request);
-            var result = require('./control/' + rout.ctrl + '.js')[rout.act].apply(context, rout.ar);
-            response.writeHead(200, {
-                'Content-Type': 'text/html'
-            });
-            response.end(result);
+            var act = require('./control/' + rout.ctrl + '.js')[rout.act];
+            if(act){
+                var context = new Context(request);
+                var result = act.apply(context, rout.ar);
+                response.writeHead(200, {
+                    'Content-Type': 'text/html'
+                });
+                response.end(result);
+            } else {
+                throw new Error('no act 400');
+            }
         } catch (ex) {
             response.writeHead(500);
-            response.end(ex.toString());
+            fs.writeFileSync(cfg.log,util.inspect(ex));
+            response.end();
         }
     } catch (ex) {
         response.writeHead(400);
