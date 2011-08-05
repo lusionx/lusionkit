@@ -12,7 +12,9 @@ class MainHandler(webapp.RequestHandler):
     def get(self):
         self.response.out.write(web3.render('home.html'))
 
-
-if __name__ == '__main__':
+def main():
     application = webapp.WSGIApplication([(a, eval(b)) for a, b in url.items()], debug=True)
     util.run_wsgi_app(application)
+
+if __name__ == '__main__':
+    main()
