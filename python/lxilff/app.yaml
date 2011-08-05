@@ -1,0 +1,29 @@
+application: lxilff
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /s
+  static_dir: static
+
+- url: /
+  script: home.py
+  
+- url: /ext/.*
+  script: $PYTHON_LIB/google/appengine/ext/zipserve
+  
+- url: /.*
+  script: notFind.py
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^ext_dir.*
