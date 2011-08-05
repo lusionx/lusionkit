@@ -1,0 +1,1 @@
+7z a ext.zip .\ext_dir\*

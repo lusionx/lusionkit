@@ -8,7 +8,7 @@ handlers:
   static_dir: static
 
 - url: /ckeditor/.*
-  script: ckeditor.py
+  script: $PYTHON_LIB/google/appengine/ext/zipserve
 
 - url: /.*
   script: main.py
