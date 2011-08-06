@@ -7,10 +7,10 @@ import web3
 
 url = {}
 
-url['/'] = 'MainHandler'
+url['/anime.*'] = 'MainHandler'
 class MainHandler(webapp.RequestHandler):
     def get(self):
-        self.response.out.write(web3.render('home.html'))
+        self.response.out.write('control.anime')
 
 def main():
     web3.run([(a, eval(b)) for a, b in url.items()])
