@@ -6,13 +6,18 @@ api_version: 1
 handlers:
 - url: /s
   static_dir: static
-
-- url: /
-  script: home.py
   
 - url: /ext/.*
   script: $PYTHON_LIB/google/appengine/ext/zipserve
   
+- url: /
+  script: home.py
+  
+- url: /anime.*
+  script: control/anime.py
+
+
+
 - url: /.*
   script: notFind.py
 
@@ -27,3 +32,4 @@ skip_files:
 - ^(.*/)?.*/RCS/.*
 - ^(.*/)?\..*
 - ^ext_dir.*
+- ^.*\.bat$
