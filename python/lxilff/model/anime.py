@@ -24,7 +24,7 @@ class Main(db.Model):
     episode = db.IntegerProperty(verbose_name='已经播放', default=1)
     lastModify = db.DateTimeProperty(verbose_name='上次更新时间', required=True)
     isEnd = db.BooleanProperty(verbose_name='完结', default=False)
-    castMode = db.StringProperty(verbose_name='播出方式', chices=['TV', '长篇', 'Moive', 'OVA', 'OAD',])
+    castMode = db.StringProperty(verbose_name='播出方式', choices=['TV', '长篇', 'Moive', 'OVA', 'OAD',])
 
 class Tag(db.Model):
     """标签"""
