@@ -1,8 +1,87 @@
-{% extends "../base.html" %}
+{% extends '../base.html' %}
 
 {% block title %}新番动漫{% endblock %}
 
 {% block content %}
-新番动漫
+<script type="text/javascript">
+    Ext.onReady(function () {
+        var addbtns = function () {
+            Ext.create('Ext.form.Panel', {
+                frame: true,
+                bodyPadding: 5,
+                title: '表单',
+                width: 350,
+                fieldDefaults: {
+                    msgTarget: 'side',
+                    labelWidth: 75
+                },
+                defaultType: 'textfield',
+                defaults: {
+                    anchor: '100%'
+                },
 
+                items: [{
+                    fieldLabel: 'First Name',
+                    name: 'first'
+                }, {
+                    fieldLabel: 'Company',
+                    name: 'company'
+                }, {
+                    fieldLabel: 'Email',
+                    name: 'email',
+                    vtype: 'email'
+                }],
+                renderTo: Ext.get('form'),
+                buttons: [{
+                    text: '保存'
+                }, {
+                    text: '取消'
+                }]
+            });
+        };
+        Ext.create('Ext.Button', {
+            text: '添加新番',
+            renderTo: Ext.get('btns'),
+            handler: addbtns
+        });
+    });
+</script>
+<div>
+    新番动漫</div>
+<table>
+    <tbody>
+        <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td id="btns" colspan="4">
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div id="form">
+</div>
 {% endblock %}
