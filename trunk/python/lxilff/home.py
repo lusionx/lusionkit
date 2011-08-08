@@ -10,7 +10,7 @@ url = {}
 url['/'] = 'MainHandler'
 class MainHandler(webapp.RequestHandler):
     def get(self):
-        self.response.out.write(web3.render('home.html'))
+        self.response.out.write(web3.render('home'))
 
 def main():
     web3.run([(a, eval(b)) for a, b in url.items()])
