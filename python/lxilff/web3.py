@@ -21,9 +21,10 @@ def render(path,vals=None):
         vals['AppPath'] = APPPATH
     path = os.path.join(os.path.dirname(__file__), TEMPLATEDIR, path + TEMPLATEEXT)
     return template.render(path, vals)
-    
-def run(maps):
+
+
+def run(url, scop):
+    maps = [(a, eval(b,scop)) for a, b in url.items()]
     maps.append(('.*',MainHandler))
     application = webapp.WSGIApplication(maps, debug=DEBUG)
     util.run_wsgi_app(application)
-    
