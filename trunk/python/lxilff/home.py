@@ -13,7 +13,7 @@ class MainHandler(webapp.RequestHandler):
         self.response.out.write(web3.render('home'))
 
 def main():
-    web3.run([(a, eval(b)) for a, b in url.items()])
+    web3.run(url,globals())
 
 if __name__ == '__main__':
     main()
