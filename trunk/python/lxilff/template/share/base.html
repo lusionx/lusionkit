@@ -3,6 +3,7 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {# css framework #}
     <script type="text/javascript" src="{{AppPath}}/s/js/modernizr-1.7.min.js" ></script>
     <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/css3.css" media="screen" />
@@ -10,13 +11,15 @@
     <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/forms.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/my.css" media="screen" />
+    {# scripts #}
+    <script type="text/javascript" src="{{AppPath}}/s/js/modernizr-1.7.min.js" ></script>
     {% block head %}{% endblock %}
 </head>
 <body>
     <div id="warper">
         <div class="row">
             <header>
-                <div class="logo col_7 col">First GAE App</div>
+                <div class="logo col_7 col"><a href="{{AppPath}}/">First GAE App</a></div>
                 <nav class="col_9 col"> 
                     <ul> 
                         <li><a href="{{AppPath}}/anime">新番</a></li> 
