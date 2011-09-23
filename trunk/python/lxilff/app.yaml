@@ -22,6 +22,9 @@ handlers:
 
 - url: /anime.*
   script: control/anime.py
+  
+- url: /dev.*
+  script: dev.py
 
 - url: /.*
   script: notFind.py

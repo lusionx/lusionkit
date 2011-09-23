@@ -14,5 +14,4 @@ class MainHandler(webapp.RequestHandler):
 
 
 if __name__ == '__main__':
-    application = webapp.WSGIApplication([(a, eval(b)) for a, b in url.items()], debug=True)
-    util.run_wsgi_app(application)
+    web3.run(url,globals())
