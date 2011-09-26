@@ -4,18 +4,7 @@
 
 {% block content %}
 <h2 class="fontface">新番动漫</h2>
-<script type="text/javascript">
-$(function () {
-    $('#form').dialog({
-        width: 600,
-        buttons: {
-            "保存": function () {
-                $(this).dialog("close");
-            }
-        }
-    });
-});
-</script>
+<script type="text/javascript" src="{{AppPath}}/s/app/anime.js"></script>
 <div id="grid" class="col col_5"></div>
 <div class="col_6" id="form">
     <form>
