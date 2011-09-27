@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {# css framework #}
+    <script type="text/javascript" src="{{AppPath}}/s/js/modernizr-1.7.min.js" ></script>
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/css3.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/general.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/grid.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/forms.css" media="screen" />
+    {# lib scripts #}
+    <script type="text/javascript" src="{{AppPath}}/s/js/jquery-1.6.2.min.js" ></script>
+    <script type="text/javascript" src="{{AppPath}}/s/js/jquery-ui-1.8.15.custom.min.js" ></script>
+    <script type="text/javascript" src="{{AppPath}}/s/js/flexigrid.pack.js" ></script>
+    {# lib css #}
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/start/jquery-ui-1.8.15.custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/flexigrid.pack.css" />
+    {# site css #}
+    <link rel="stylesheet" type="text/css" href="{{AppPath}}/s/css/my.css" />
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="warper">
+        <div class="row">
+            <header>
+                <div class="logo col_7 col"><a href="{{AppPath}}/">First GAE App</a></div>
+                <nav class="col_9 col"> 
+                    <ul> 
+                        <li><a href="{{AppPath}}/anime">新番</a></li> 
+                        <li><a href="#navigation">navigation 2</a></li> 
+                        <li class="last"><a href="#ssss">enavu network</a></li> 
+                    </ul> 
+                </nav>
+              <div class="clear"></div>
+            </header>
+        </div>
+        <section class="row"> 
+        {% block content %}
+            <p>It is master</p>
+        {% endblock %}
+        </section>
+        <footer class="row">
+            <div class="col_16 col">all rights reserved &copy; <a href="http://www.enavu.com">enavu network</a> | 52framework the framework from the future
+            </div> 
+        </footer> 
+    </div>
+</body>
+</html>

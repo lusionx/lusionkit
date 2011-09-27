@@ -1,0 +1,56 @@
+{% extends '../share/base.html' %}
+
+{% block title %}新番动漫{% endblock %}
+
+{% block content %}
+<h2 class="fontface">新番动漫</h2>
+<script type="text/javascript" src="{{AppPath}}/s/app/anime.js"></script>
+<div id="grid" class="col col_5"></div>
+<div class="col_6" id="form">
+    <form>
+    <fieldset>
+        <legend>基本信息</legend>
+        <div>
+            <label for="id_name">
+                名称</label>
+            <input type="text" name="name" id="id_name" required="required" class="box_shadow" /></div>
+        <div>
+            <label for="id_yearMM">
+                档期</label>
+            <input type="text" name="yearMM" id="id_yearMM" required="required" class="box_shadow" /></div>
+        <div>
+            <label for="id_episode">
+                已经播放</label>
+            <input type="number" name="episode" id="id_episode" required="required" class="box_shadow"
+                min="1" step="1" /></div>
+        <div>
+            <label for="id_lastModify">
+                上次更新时间</label>
+            <input type="text" name="lastModify" id="id_lastModify" required="required" class="box_shadow" /></div>
+        <div>
+            <label for="id_search">
+                下载链接</label>
+            <input type="url" name="search" id="id_search" required="required" class="box_shadow" /></div>
+        <div>
+            <label for="id_isEnd">
+                状态</label>
+            <select type="checkbox" name="isEnd" id="id_isEnd">
+                <option value="1">连载中</option>
+                <option value="0">已完结</option>
+            </select></div>
+        <div>
+            <label for="id_castMode">
+                播出方式</label>
+            <select name="castMode" id="id_castMode">
+                <option value="TV">TV</option>
+                <option value="长篇">长篇</option>
+                <option value="Moive">Moive</option>
+                <option value="OVA">OVA</option>
+                <option value="OAD">OAD</option>
+            </select></div>
+    </fieldset>
+    </form>
+    <div class="clear">
+    </div>
+</div>
+{% endblock %}
