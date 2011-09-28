@@ -24,8 +24,14 @@ namespace Alx.ORM.Core
 
         internal void SetValue(object instance, object val)
         {
-            object[] v = { val };
-            SetAct(instance, v);
+            if (val is ValueType)
+            {
+            }
+            else
+            {
+                object[] v = { val };
+                SetAct(instance, v);
+            }
         }
 
         internal Func<object, object[], object> GetFun;
