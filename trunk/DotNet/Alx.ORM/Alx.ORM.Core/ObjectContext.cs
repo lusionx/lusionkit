@@ -263,9 +263,16 @@ namespace Alx.ORM.Core
                 foreach (var column in tableAttr.Columns)
                 {
                     var vv = reader[column.Name];
-                    var method = column.Property.GetSetMethod();
-                    var v2 = Special.ChangeType(vv, column.Property.PropertyType);
-                    column.SetValue(model, v2);
+                    if (vv is DBNull)
+                    {
+                        column.SetValue(model, column.DefaultValue);
+                    }
+                    else
+                    {
+                        var method = column.Property.GetSetMethod();
+                        var v2 = Special.ChangeType(vv, column.Property.PropertyType);
+                        column.SetValue(model, v2);
+                    }
                 }
                 result.Add(model);
             }

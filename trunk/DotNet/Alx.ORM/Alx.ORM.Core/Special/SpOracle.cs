@@ -64,7 +64,7 @@ namespace Alx.ORM.Core
 
 
         public object ChangeType(object value, Type conversionType)
-        {
+        {   
             var t0 = value.GetType();
             var rels = new List<ConverRel>();
             rels.Add(new ConverRel

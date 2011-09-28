@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alx.ORM.Core
 {
-    public static class Enumerable_my
+    internal static class Enumerable_my
     {
         public static void Action<TSource>(this IEnumerable<TSource> source, Action<TSource> predicate)
         {
