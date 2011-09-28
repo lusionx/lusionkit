@@ -1,2 +1,13 @@
-string
-    char2
+C#          dbtype      oracle
+-------------------------------------------------
+string      string      varchar2,char
+Decimal     Decimal     number, number(x,y)
+datetime    datetime    date
+guid        Binary      raw(16)
+
+目前问题:
+    默认值无法赋值
+    不支持联合主键
+    少个事务入口
+
+分页?
