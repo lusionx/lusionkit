@@ -44,6 +44,7 @@
     <Compile Include="AttrCache.cs" />
     <Compile Include="Attribute\Column.cs" />
     <Compile Include="Attribute\Tabel.cs" />
+    <Compile Include="Dynamic.cs" />
     <Compile Include="Enumerable_my.cs" />
     <Compile Include="Special\ISpecial.cs" />
     <Compile Include="ObjectContext.cs" />

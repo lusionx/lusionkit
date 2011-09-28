@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace Alx.ORM.Core
 {
@@ -23,6 +24,17 @@ namespace Alx.ORM.Core
                 i++;
             }
         }
+
+        public static ArrayList ToList(IEnumerable source)
+        {
+            var ls = new ArrayList();
+            foreach (var a in source)
+            {
+                ls.Add(a);
+            }
+            return ls;
+        }
+
 
         public static bool In<T>(this T obj, IEnumerable<T> arr) where T : class
         {
