@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System.Linq.Dynamic;
 
 namespace Alx.ORM.Core
 {
@@ -94,6 +95,37 @@ namespace Alx.ORM.Core
             return sb.ToString();
         }
 
+        public int Delete(TableBase model)
+        {
+            var tableType = model.GetType();
+            var tableAttr = AttrCache.Get(tableType);
+            var cmd = Provider.CreateCommand();
+            cmd.CommandText = SqlUpdate(tableAttr);
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = Connection;
+            DbParameter par = null;
+            var pk = tableAttr.Columns.Single(c => c.IsPrimary);
+            par = Provider.CreateParameter();
+            par.Direction = ParameterDirection.Input;
+            par.ParameterName = ParamPerFix + pk.Name;
+            par.DbType = pk.DbType;
+            par.Value = Special.FixValue(pk.GetValue(model));
+            cmd.Parameters.Add(par);
+            try
+            {
+                Connection.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (DbException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
         public int Update(TableBase model)
         {
             var tableType = model.GetType();
@@ -150,6 +182,20 @@ namespace Alx.ORM.Core
                 sb.Append(", ");
             }
             sb.Remove(sb.Length - 2, 2);
+            sb.Append(" where ");
+            var pk = tableAttr.Columns.Single(c => c.IsPrimary).Name;
+            sb.Append(pk);
+            sb.Append(" = ");
+            sb.Append(ParamPerFix);
+            sb.Append(pk);
+            return sb.ToString();
+        }
+
+        private string SqlDelete(TabelAttribute tableAttr)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from ");
+            sb.Append(tableAttr.Name);
             sb.Append(" where ");
             var pk = tableAttr.Columns.Single(c => c.IsPrimary).Name;
             sb.Append(pk);
@@ -239,7 +285,15 @@ namespace Alx.ORM.Core
                 par = Provider.CreateParameter();
                 par.Direction = ParameterDirection.Input;
                 par.ParameterName = name;
-                par.Value = Special.FixValue(pars.ElementAt(i));
+                if (pars.ElementAt(i) is IEnumerable)
+                {
+                    par.DbType = (DbType)Enumerable_my.ToList(pars.ElementAt(i) as IEnumerable)[0];
+                    par.Value = Special.FixValue(Enumerable_my.ToList(pars.ElementAt(i) as IEnumerable)[1]);
+                }
+                else
+                {
+                    par.Value = Special.FixValue(pars.ElementAt(i));
+                }
                 cmd.Parameters.Add(par);
             });
             var ada = Provider.CreateDataAdapter();
@@ -265,7 +319,7 @@ namespace Alx.ORM.Core
                     var vv = reader[column.Name];
                     if (vv is DBNull)
                     {
-                        column.SetValue(model, column.DefaultValue);
+                        //column.SetValue(model, column.DefaultValue);
                     }
                     else
                     {

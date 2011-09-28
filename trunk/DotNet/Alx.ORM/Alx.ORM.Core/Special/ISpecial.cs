@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+
 
 namespace Alx.ORM.Core
 {
@@ -27,7 +29,20 @@ namespace Alx.ORM.Core
         /// <returns></returns>
         string SqlSelect(TabelAttribute tableAttr, string where, List<string> parNames, int skip, int take);
 
+        /// <summary>
+        /// 读取数据的时候,改变数据库类型为C# 类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="conversionType"></param>
+        /// <returns></returns>
         object ChangeType(object value, Type conversionType);
+
+        /// <summary>
+        /// 根据约定 从C# 类型 推导 DbType
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        //DbType GetDbType(object value);
     }
 
 }
