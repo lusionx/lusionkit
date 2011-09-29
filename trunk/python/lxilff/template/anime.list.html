@@ -1,0 +1,63 @@
+{% extends 'share.base.html' %}
+
+{% block title %}新番动漫{% endblock %}
+{% block head %}
+<script type="text/javascript" src="{{AppPath}}/s/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="{{AppPath}}/s/app/anime.js"></script>
+<script type="text/javascript">
+    var basePath = '{{AppPath}}{{basePath}}';
+</script>
+{% endblock %}
+
+{% block content %}
+<h2 class="fontface"><a href="#" class="op-add">添加</a></h2>
+
+<div id="grid" class="col col_5"></div>
+<div class="col_6" id="form">
+    <form>
+    <fieldset>
+        <legend class='hide'>基本信息</legend>
+        <input type='hidden' name="id" value="0" />
+        <div>
+            <label for="name">
+                名称</label>
+            <input type="text" name="name" id="name" class="box_shadow" /></div>
+        <div>
+            <label for="yearMM">
+                档期</label>
+            <input type="text" name="yearMM" id="yearMM" class="box_shadow" /></div>
+        <div>
+            <label for="episode">
+                已经播放</label>
+            <input type="text" name="episode" id="episode" class="box_shadow" /></div>
+        <div>
+            <label for="lastModify">
+                上次更新时间</label>
+            <input type="text" name="lastModify" id="lastModify" class="box_shadow" /></div>
+        <div>
+            <label for="search">
+                下载链接</label>
+            <input type="text" name="search" id="search" class="box_shadow" /></div>
+        <div>
+            <label for="isEnd">
+                完结</label>
+            <select type="checkbox" name="isEnd" id="isEnd">
+                <option value="0">连载中</option>
+                <option value="1">已完结</option>
+            </select></div>
+        <div>
+            <label for="castMode">
+                播出方式</label>
+            <select name="castMode" id="castMode">
+                <option value="TV">TV</option>
+                <option value="长篇">长篇</option>
+                <option value="Moive">Moive</option>
+                <option value="OVA">OVA</option>
+                <option value="OAD">OAD</option>
+            </select></div>
+    </fieldset>
+    </form>
+    <div class="clear">
+    </div>
+</div>
+{% endblock %}

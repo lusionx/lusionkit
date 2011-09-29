@@ -4,26 +4,28 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import web3
-from model import anime
+from model import Anime
 
 url = {}
 
-url['/anime/(\d+)'] = 'MainHandler'
-url['/anime'] = 'MainHandler'
-class MainHandler(webapp.RequestHandler):
+url['/anime'] = 'App'
+url['/anime/(\d+)'] = 'App'
+class App(webapp.RequestHandler):
     def get(self, skip=0):
-        htm = web3.render('anime/list')
+        vals = {'basePath':'/anime'}
+        htm = web3.render('anime.list',vals)
         self.response.out.write(htm)
         
 url['/anime/add'] = 'Add'
+url['/anime/add/(\d+)'] = 'Add'
 class Add(webapp.RequestHandler):
-    def get(self):
-        htm = web3.render('anime/one')
-        self.response.out.write(htm)
+    def get(self, id=0):
+        self.response.out.write(1)
+    def post(self, id=0):
+        a = Anime()
+        a.fill(self.request)
+        self.response.out.write(a.name)
 
-
-def main():
-    web3.run(url, globals())
 
 if __name__ == '__main__':
-    main()
+    web3.run(url, globals())
