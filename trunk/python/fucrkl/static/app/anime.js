@@ -3,6 +3,7 @@ $(function () {
         $('#form').dialog("option", "title", $('#form legend').text() );
         $('#form').dialog('open');
     });
+    $('#lastModify').datepicker();
     $('#form').dialog({
         width: 600,
         autoOpen: false,
