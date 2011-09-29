@@ -1,4 +1,4 @@
-﻿
+
 //收集 设置 表单
 (function ($) {
     $.fn.extend({
