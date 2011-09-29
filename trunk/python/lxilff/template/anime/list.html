@@ -1,10 +1,14 @@
 {% extends '../share/base.html' %}
 
 {% block title %}新番动漫{% endblock %}
+{% block head %}
+<script type="text/javascript" src="{{AppPath}}/s/js/jquery-form.js"></script>
+<script type="text/javascript" src="{{AppPath}}/s/app/anime.js"></script>
+{% endblock %}
 
 {% block content %}
-<h2 class="fontface">新番动漫</h2>
-<script type="text/javascript" src="{{AppPath}}/s/app/anime.js"></script>
+<h2 class="fontface">添加</h2>
+
 <div id="grid" class="col col_5"></div>
 <div class="col_6" id="form">
     <form>
