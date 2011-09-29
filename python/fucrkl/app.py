@@ -1,6 +1,6 @@
 # coding:utf-8
 import web3, web
-from google.appengine.ext import db
+import models
 
 urls = (
   '/', 'index',
@@ -25,12 +25,9 @@ class anime:
         return type(data)
         
 class animeUpdate:
-    def GET(self, id=0): #得到单条
+    def GET2(self, id=0): #得到单条
         pass
-    def POST(self, id=0): #更新
-        import models.anime.Main as mod
-        #a = mod()
-
+    def GET(self, id=0): #更新
         return '1'
 
         
