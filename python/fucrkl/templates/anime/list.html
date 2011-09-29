@@ -3,13 +3,16 @@
 {% block title %}新番动漫{% endblock %}
 
 {% block content %}
-<h2 class="fontface">新番动漫</h2>
+<h2 class="fontface"><a href="#" class='op-add'>添加</a></h2>
 <script type="text/javascript" src="{{AppPath}}/s/app/anime.js"></script>
+<script type="text/javascript">
+    var basePath = '{{AppPath}}{{basePath}}';
+</script>
 <div id="grid" class="col col_5"></div>
 <div class="col_6" id="form">
     <form>
     <fieldset>
-        <legend>基本信息</legend>
+        <legend class="hide">基本信息</legend>
         <div>
             <label for="id_name">
                 名称</label>
