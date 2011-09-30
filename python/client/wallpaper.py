@@ -59,7 +59,7 @@ def main(root=u"D:\\lusionx\\Pictures\\h和谐社"):#就用和谐社的图片
             pics.extend(getWallpapers(path))
     path = random.choice(pics)
     set(path)
-    #print path
+    open(os.path.join(os.path.dirname(__file__),'wallpaper.txt'),'a').write(path.encode('utf-8')+'\n')
 
 if __name__ == "__main__":
     #main(sys.argv)
