@@ -18,11 +18,12 @@
 from google.appengine.ext import db
 from datetime import datetime
 
+
 def _getdict(req):
     s = []
     for argname in req.arguments():
-        s.append(argname +'="'+ req.get(argname)+'"')
-    return eval('dict('+','.join(s)+')')
+        s.append([argname, req.get(argname).encode('utf-8')])
+    return dict(s)
 
 class Anime(db.Model):
     """主体"""
@@ -32,6 +33,7 @@ class Anime(db.Model):
     lastModify = db.DateTimeProperty(verbose_name=u'上次更新时间', default=datetime(2010,1,1))
     isEnd = db.BooleanProperty(verbose_name=u'完结', default=False)
     castMode = db.StringProperty(verbose_name=u'播出方式', default='TV')
+    search = db.StringProperty(verbose_name=u'搜索链接', default='')
      
     def fill(self, req):
         dic = _getdict(req)
@@ -41,6 +43,7 @@ class Anime(db.Model):
         self.lastModify = datetime.strptime(dic['lastModify'],'%Y-%m-%d')
         self.isEnd = dic['isEnd'] == '1'
         self.castMode = dic['castMode']
+        self.search = dic['search']
         
 
 

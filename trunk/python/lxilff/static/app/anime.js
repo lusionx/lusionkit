@@ -3,7 +3,7 @@ $(function () {
         $('#form').dialog("option", "title", $('#form legend').text() );
         $('#form form')[0].reset();
         $('#form').dialog('open');
-        $('#lastModify').click(function(){
+        $('#lastModify').focus(function(){
             WdatePicker();
         });
     });
