@@ -3,11 +3,16 @@
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
-import web3
+import web3, sys
 from model import Anime
 
-url = {}
+def reloadsys():
+    code = sys.getdefaultencoding()
+    if code != 'utf8':
+        reload(sys)
+        sys.setdefaultencoding('utf8')
 
+url = {}
 url['/anime'] = 'App'
 url['/anime/(\d+)'] = 'App'
 class App(webapp.RequestHandler):
@@ -24,7 +29,9 @@ class Add(webapp.RequestHandler):
     def post(self, id=0):
         a = Anime()
         a.fill(self.request)
-        self.response.out.write(a.name)
+        reloadsys()
+        key = a.put();
+        self.response.out.write(key.id())
 
 
 if __name__ == '__main__':
