@@ -21,7 +21,7 @@ handlers:
   script: home.py
 
 - url: /anime.*
-  script: control/anime.py
+  script: anime.py
   
 - url: /dev.*
   script: dev.py
