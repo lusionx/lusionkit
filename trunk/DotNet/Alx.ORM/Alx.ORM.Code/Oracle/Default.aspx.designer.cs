@@ -22,6 +22,15 @@ namespace Alx.ORM.Code.Oracle {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// hf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf;
+        
+        /// <summary>
         /// facstr control.
         /// </summary>
         /// <remarks>
@@ -40,15 +49,6 @@ namespace Alx.ORM.Code.Oracle {
         protected global::System.Web.UI.WebControls.TextBox constr;
         
         /// <summary>
-        /// btn_g control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_g;
-        
-        /// <summary>
         /// rpt_tables control.
         /// </summary>
         /// <remarks>
@@ -56,23 +56,5 @@ namespace Alx.ORM.Code.Oracle {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rpt_tables;
-        
-        /// <summary>
-        /// hf control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hf;
-        
-        /// <summary>
-        /// rpt_class control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpt_class;
     }
 }
