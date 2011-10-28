@@ -87,6 +87,9 @@
                 </tr>
             </tbody>
         </table>
+        连接串<asp:TextBox runat="server" TextMode="MultiLine" ID="constr">
+        
+        </asp:TextBox>
         <h4>
             表名 <i>
                 <input type="checkbox" id="cb_all" />全选</i>

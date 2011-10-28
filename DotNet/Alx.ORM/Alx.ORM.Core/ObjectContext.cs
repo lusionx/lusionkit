@@ -11,11 +11,28 @@ using System.Linq.Dynamic;
 
 namespace Alx.ORM.Core
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ObjectContext : IDisposable
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionStr"></param>
         public ObjectContext(string connectionStr)
+            : this(connectionStr, System.Configuration.ConfigurationManager.AppSettings["DbFactory"])
         {
-            var s = System.Configuration.ConfigurationManager.AppSettings["DbFactory"].Split(',').Select(a => a.Trim()).ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionStr">连接字符串</param>
+        /// <param name="factoryStr">工厂字符串 eg:Oracle.DataAccess, Oracle.DataAccess.Client.OracleClientFactory,Oracle</param>
+        public ObjectContext(string connectionStr, string factoryStr)
+        {
+            var s = factoryStr.Split(',').Select(a => a.Trim()).ToList();
             var ass = Assembly.Load(s[0]);
             Provider = ass.CreateInstance(s[1]) as DbProviderFactory;
             Connection = Provider.CreateConnection();
@@ -24,6 +41,9 @@ namespace Alx.ORM.Core
             Special = ass.CreateInstance(ass.FullName.Split(',')[0] + ".Sp" + s[2]) as ISpecial;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual string ParamPerFix
         {
             get
@@ -36,6 +56,11 @@ namespace Alx.ORM.Core
         private DbProviderFactory Provider;
         private ISpecial Special;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public int Insert(TableBase model)
         {
             var tableType = model.GetType();
