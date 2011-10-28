@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>模型生成-Oracle</title>
-    <link href="/Css/default.css" rel="stylesheet" type="text/css" />
-    <link href="/Css/page.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+    <link href="../Css/default.css" rel="stylesheet" type="text/css" />
+    <link href="../Css/page.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../js/jquery-1.5.2.min.js"></script>
 </head>
 <body>
     <form runat="server" id="form1">
@@ -16,12 +16,24 @@
                 var names = $.map($('.atab :checked'), function (e) {
                     return "'" + $.trim($(e).next().text()) + "'";
                 });
-                $('#<%=hf.ClientID %>').val(names.join(','));
+                names = names.join(',');
+                $('#<%=hf.ClientID %>').val(names);
+                return names;
             };
             $('#btn').click(function () {
+                var obj = { constr: $('#<%=constr.ClientID %>').val(), facstr: $('#<%=facstr.ClientID %>').val(), tabs: gettabs() };
+                window.location.href = 'GenCode.aspx?' + $.param(obj);
             });
             $('#cb_all').click(function () {
-
+                var ck = this.checked;
+                $('.atab :checkbox').each(function () {
+                    this.checked = ck;
+                });
+            });
+            $('#cb_rall').click(function () {
+                $('.atab :checkbox').each(function () {
+                    this.checked = !this.checked;
+                });
             });
         });
     </script>
@@ -103,7 +115,7 @@
     </form>
     <h4>
         表名 <i>
-            <input type="checkbox" id="cb_all" />全选<input type="checkbox" id="cb_all" />反选</i>
+            <input type="checkbox" id="cb_all" />全选<input type="checkbox" id="cb_rall" />反选</i>
         <input type="button" id="btn" value="生成" />
     </h4>
     <p>
