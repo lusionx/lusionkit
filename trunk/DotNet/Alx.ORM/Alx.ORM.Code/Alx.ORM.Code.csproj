@@ -54,11 +54,10 @@
     <Content Include="Css\default.css" />
     <Content Include="Css\page.css" />
     <Content Include="Default.aspx" />
+    <Content Include="js\jquery-1.5.2-vsdoc.js" />
+    <Content Include="js\jquery-1.5.2.min.js" />
     <Content Include="Oracle\Default.aspx" />
     <Content Include="Oracle\GenCode.aspx" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

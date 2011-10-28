@@ -21,7 +21,7 @@ public class <%# Eval("TABLE_NAME")%> : TableBase
     /// <summary>
     /// <%# Eval("COMMENTS")%>
     /// </summary>
-    [Column(Name = "<%#Eval("ColumnName")%>", DbType = DbType.String, Nullable = <%#Eval("nullable")%>)]
+    [Column(Name = "<%#Eval("ColumnName")%>", DbType = <%#Eval("dbtype")%>, Nullable = <%#Eval("nullable")%>)]
     public <%#Eval("systemtype")%> <%#Eval("proname")%> { get { return _<%#Eval("name")%>; } set { _<%#Eval("name")%> = value; } }
         </ItemTemplate></asp:Repeater>
 }
