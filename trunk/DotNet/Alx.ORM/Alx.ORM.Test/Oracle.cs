@@ -10,7 +10,8 @@ namespace Alx.ORM.Test
 {
     public class TestOracle : ITest
     {
-        string cnstr = "Data Source=sc1;User Id=hr_sc_spt;Password=1qaz2wsx;";
+        string cnstr = @"Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.179)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)));User Id=hr_pportal;Password=1qaz2wsx;";
+
 
         public void Test()
         {
@@ -152,7 +153,7 @@ namespace Alx.ORM.Test
         public System.Decimal Count { get { return _count; } set { _count = value; } }
 
         private System.Decimal _cc2;
-        [Column(Name = "CC2", DbType = DbType.Decimal, Nullable = false, IsPrimary = false, DefaultValue = 0)]
+        [Column(Name = "CC2", DbType = DbType.Decimal, Nullable = false, IsPrimary = false, DefaultValue = -1)]
         public System.Decimal Cc2 { get { return _cc2; } set { _cc2 = value; } }
 
     }

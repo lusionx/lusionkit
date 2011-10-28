@@ -31,11 +31,11 @@
         </h4>
         <asp:Repeater runat="server" ID="rpt_tables">
             <ItemTemplate>
-                <div class="atab">
+                <label class="atab">
                     <input type="checkbox" checked="checked" /><i>
                         <%#Eval("table_name")%>
                     </i>
-                </div>
+                </label>
             </ItemTemplate>
         </asp:Repeater>
         <div class="clr">
@@ -50,6 +50,9 @@ public class <%# Container.DataItem%> : TableBase
 {    <asp:Repeater runat="server" id="rpt_pro">
         <ItemTemplate>
     private <%#Eval("systemtype")%> _<%#Eval("name")%>;
+    /// <summary>
+    /// 
+    /// </summary>
     [Column(Name = "<%#Eval("ColumnName")%>", DbType = DbType.String, Nullable = false, IsPrimary = false)]
     public <%#Eval("systemtype")%> <%#Eval("proname")%> { get { return _<%#Eval("name")%>; } set { _<%#Eval("name")%> = value; } }
         </ItemTemplate></asp:Repeater>
