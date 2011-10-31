@@ -22,7 +22,7 @@
             };
             $('#btn').click(function () {
                 var obj = { constr: $('#<%=constr.ClientID %>').val(), facstr: $('#<%=facstr.ClientID %>').val(), tabs: gettabs() };
-                window.location.href = 'GenCode.aspx?' + $.param(obj);
+                window.open('GenCode.aspx?' + $.param(obj), '_blank');
             });
             $('#cb_all').click(function () {
                 var ck = this.checked;
@@ -34,6 +34,10 @@
                 $('.atab :checkbox').each(function () {
                     this.checked = !this.checked;
                 });
+            });
+            $('a.op-gena').click(function () {
+                var obj = { constr: $('#<%=constr.ClientID %>').val(), facstr: $('#<%=facstr.ClientID %>').val(), tabs: "'" + $.trim($(this).text()) + "'" };
+                window.open('GenCode.aspx?' + $.param(obj), '_blank');
             });
         });
     </script>
@@ -122,10 +126,9 @@
         <asp:Repeater runat="server" ID="rpt_tables">
             <ItemTemplate>
                 <label class="atab" title="<%#Eval("COMMENTS")%>">
-                    <input type="checkbox" /><i>
-                        <%#Eval("table_name")%>
-                    </i><code>
-                        <%#Eval("COMMENTS")%></code>
+                    <input type="checkbox" /><i><a href="#" class="op-gena">
+                        <%#Eval("table_name")%></a> </i><code>
+                            <%#Eval("COMMENTS")%></code>
                 </label>
             </ItemTemplate>
         </asp:Repeater>
