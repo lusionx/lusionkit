@@ -11,6 +11,18 @@ using System.Linq.Dynamic;
 
 namespace Alx.ORM.Core
 {
+
+    public class Parameter
+    {
+        public DbType DbType { get; set; }
+        public object Value { get; set; }
+        public Parameter(DbType t, object v)
+        {
+            DbType = t;
+            Value = v;
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -287,8 +299,7 @@ namespace Alx.ORM.Core
         /// 自定义查询
         /// </summary>
         /// <param name="sql">select a,b from tt where a= ? and b = ?</param>
-        /// <param name="pars"></param>
-        /// <param name="par"></param>
+        /// <param name="pars">object[],可夹杂  Alx.ORM.Core.Parameter实例</param>
         /// <returns></returns>
         public DataSet Query(string sql, IEnumerable<object> pars)
         {
@@ -306,31 +317,16 @@ namespace Alx.ORM.Core
             cmd.Connection = Connection;
             DbParameter par = null;
 
-            //测试 是否 为定义的DBtype new {new {dbtype.xxx  vvvv},...}
-            Func<object, bool> f_istv = arr1 =>
-                {
-                    if (arr1 is IEnumerable)
-                    {
-                        var arr = arr1 as IEnumerable;
-                        if (Enumerable_my.ToList(arr).Count == 2)
-                        {
-                            if (Enumerable_my.ToList(arr)[0] is DbType)
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                };
             parNames.Action((name, i) =>
             {
                 par = Provider.CreateParameter();
                 par.Direction = ParameterDirection.Input;
                 par.ParameterName = name;
-                if (f_istv(pars.ElementAt(i)))
+                if (pars.ElementAt(i) is Parameter)
                 {
-                    par.DbType = (DbType)Enumerable_my.ToList(pars.ElementAt(i) as IEnumerable)[0];
-                    par.Value = Special.FixValue(Enumerable_my.ToList(pars.ElementAt(i) as IEnumerable)[1]);
+                    par.DbType = (pars.ElementAt(i) as Parameter).DbType;
+                    //par.Value = Special.FixValue(Enumerable_my.ToList(pars.ElementAt(i) as IEnumerable)[1]);
+                    par.Value = (pars.ElementAt(i) as Parameter).Value;
                 }
                 else
                 {
