@@ -305,12 +305,29 @@ namespace Alx.ORM.Core
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = Connection;
             DbParameter par = null;
+
+            //测试 是否 为定义的DBtype new {new {dbtype.xxx  vvvv},...}
+            Func<object, bool> f_istv = arr1 =>
+                {
+                    if (arr1 is IEnumerable)
+                    {
+                        var arr = arr1 as IEnumerable;
+                        if (Enumerable_my.ToList(arr).Count == 2)
+                        {
+                            if (Enumerable_my.ToList(arr)[0] is DbType)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                };
             parNames.Action((name, i) =>
             {
                 par = Provider.CreateParameter();
                 par.Direction = ParameterDirection.Input;
                 par.ParameterName = name;
-                if (pars.ElementAt(i) is IEnumerable)
+                if (f_istv(pars.ElementAt(i)))
                 {
                     par.DbType = (DbType)Enumerable_my.ToList(pars.ElementAt(i) as IEnumerable)[0];
                     par.Value = Special.FixValue(Enumerable_my.ToList(pars.ElementAt(i) as IEnumerable)[1]);
