@@ -7,7 +7,7 @@
 </head>
 <body>
     <div>
-    <xmp>
+        <xmp>
         <asp:Repeater runat="server" ID="rpt_class" OnItemDataBound="rpt_class_ItemDataBound">
             <ItemTemplate>
 /// <summary>
@@ -21,7 +21,7 @@ public class <%# Eval("TABLE_NAME")%> : TableBase
     /// <summary>
     /// <%# Eval("COMMENTS")%>
     /// </summary>
-    [Column(Name = "<%#Eval("ColumnName")%>", DbType = <%#Eval("dbtype")%>, Nullable = <%#Eval("nullable")%>)]
+    [Column(Name = "<%#Eval("ColumnName")%>", DbType = <%#Eval("dbtype")%>, Nullable = <%#Eval("nullable")%><%#Eval("pk") %>)]
     public <%#Eval("systemtype")%> <%#Eval("proname")%> { get { return _<%#Eval("name")%>; } set { _<%#Eval("name")%> = value; } }
         </ItemTemplate></asp:Repeater>
 }
