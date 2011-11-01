@@ -55,17 +55,21 @@ namespace Alx.ORM.Core
             sb.Append(" ) select * from pager where rn > " + skip);
             if (take > 0)
             {
-                sb.Append(" and rn < " + (skip + take));
+                sb.Append(" and rn <= " + (skip + take));
             }
 
             //sb.Append(" limit " + skip + " " + take);
             return sb.ToString();
         }
 
-
+        /// <summary>
+        /// oracle 类型转换 raw => byte[] => Guid
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="conversionType"></param>
+        /// <returns></returns>
         public object ChangeType(object value, Type conversionType)
-        {   
-            var t0 = value.GetType();
+        {    
             var rels = new List<ConverRel>();
             rels.Add(new ConverRel
             {
@@ -77,7 +81,7 @@ namespace Alx.ORM.Core
                     return new Guid(b);
                 }
             });
-            var rel = rels.FirstOrDefault(a => a.Original == t0 && a.Target == conversionType);
+            var rel = rels.FirstOrDefault(a => a.Original == value.GetType() && a.Target == conversionType);
             if (rel != null)
             {
                 return rel.Conver(value);

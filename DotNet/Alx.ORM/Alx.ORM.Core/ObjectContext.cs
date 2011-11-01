@@ -242,10 +242,24 @@ namespace Alx.ORM.Core
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 未实现 不要调用
+        /// </summary>
+        /// <typeparam name="Model"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Model> Query<Model>(Func<Model, bool> predicate) where Model : TableBase, new()
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// 单表查询
+        /// </summary>
+        /// <typeparam name="Model"></typeparam>
+        /// <param name="where">name = ? and age = ?</param>
+        /// <param name="pars"></param>
+        /// <returns></returns>
         public IEnumerable<Model> Query<Model>(string where, IEnumerable<object> pars) where Model : TableBase, new()
         {
             return Query<Model>(where, pars, 0, -1);
@@ -256,7 +270,7 @@ namespace Alx.ORM.Core
         /// </summary>
         /// <typeparam name="Model"></typeparam>
         /// <param name="where">name = ? and age = ?</param>
-        /// <param name="pars">Parameter.DbType 全按照字符串处理,请自行转换好</param>
+        /// <param name="pars">有默认DbType规则,也可指定Parameter </param>
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
@@ -281,18 +295,54 @@ namespace Alx.ORM.Core
             });
             try
             {
-                Connection.Open();
-                var reader = cmd.ExecuteReader();
-                return ReaderBind<Model>(tableAttr, reader);
+                var ada = Provider.CreateDataAdapter();
+                ada.SelectCommand = cmd;
+                var ds = new DataSet();
+                ada.Fill(ds);
+                return TableBind<Model>(tableAttr, ds.Tables[0]);
+                //var reader = cmd.ExecuteReader();
+                //return ReaderBind<Model>(tableAttr, reader);
+
             }
             catch (DbException ex)
             {
                 throw ex;
             }
-            finally
+        }
+
+        private IEnumerable<Model> TableBind<Model>(TabelAttribute tableAttr, DataTable dataTable) where Model : TableBase, new()
+        {
+            var result = new List<Model>();
+            foreach (DataRow dr in dataTable.Rows)
             {
-                Connection.Close();
+                var model = new Model();
+                foreach (var column in tableAttr.Columns)
+                {
+                    var vv = dr[column.Name];
+                    if (vv is DBNull)
+                    {
+                        //column.SetValue(model, column.DefaultValue);
+                    }
+                    else
+                    {
+                        object v2 = null;
+                        //处理可空 类型 datetime?
+                        if (column.Property.PropertyType.IsGenericType &&
+                            column.Property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                        {
+                            v2 = Special.ChangeType(vv, column.Property.PropertyType.GetGenericArguments()[0]);
+                        }
+                        else
+                        {
+                            v2 = Special.ChangeType(vv, column.Property.PropertyType);
+                        }
+                        var method = column.Property.GetSetMethod();
+                        column.SetValue(model, v2);
+                    }
+                }
+                result.Add(model);
             }
+            return result;
         }
 
         /// <summary>
@@ -341,6 +391,11 @@ namespace Alx.ORM.Core
             return ds;
         }
 
+        /// <summary>
+        /// 单表 全表查询
+        /// </summary>
+        /// <typeparam name="Model"></typeparam>
+        /// <returns></returns>
         public IEnumerable<Model> Query<Model>() where Model : TableBase, new()
         {
             return Query<Model>(null, null, 0, -1);
