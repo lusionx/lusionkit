@@ -17,12 +17,12 @@
 public class <%# Eval("TABLE_NAME")%> : TableBase
 {    <asp:Repeater runat="server" id="rpt_pro">
         <ItemTemplate>
-    private <%#Eval("systemtype")%> _<%#Eval("name")%>;
+    private <%#Eval("systemtype")%><%#Eval("dbnull")%> _<%#Eval("name")%>;
     /// <summary>
     /// <%# Eval("COMMENTS")%>
     /// </summary>
     [Column(Name = "<%#Eval("ColumnName")%>", DbType = <%#Eval("dbtype")%>, Nullable = <%#Eval("nullable")%><%#Eval("pk") %>)]
-    public <%#Eval("systemtype")%> <%#Eval("proname")%> { get { return _<%#Eval("name")%>; } set { _<%#Eval("name")%> = value; } }
+    public <%#Eval("systemtype")%><%#Eval("dbnull")%> <%#Eval("proname")%> { get { return _<%#Eval("name")%>; } set { _<%#Eval("name")%> = value; } }
         </ItemTemplate></asp:Repeater>
 }
             </ItemTemplate>

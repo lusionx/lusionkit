@@ -71,6 +71,7 @@ where con.constraint_name = col.constraint_name and con.constraint_type='P' and 
                         name = a.Field<string>("COLUMN_name").ToLower(),
                         ColumnName = a.Field<string>("COLUMN_name"),
                         proname = a.Field<string>("COLUMN_name"),
+                        dbnull = a.Field<string>("nullable") == "Y" && a.Field<string>("data_type") == "DATE" ? "?" : "",
                         pk = a.Field<string>("COLUMN_name") == pkCol ? ", IsPrimary = true" : ""
                     };
 
