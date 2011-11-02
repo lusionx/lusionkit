@@ -28,6 +28,16 @@ namespace Alx.ORM.Core
     /// </summary>
     public class ObjectContext : IDisposable
     {
+        public bool Trans()
+        {
+            using (var tr = Connection.BeginTransaction())
+            {
+                
+            }
+            return true;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
