@@ -14,7 +14,7 @@
 /// <%# Eval("COMMENTS")%>
 /// </summary>
 [Tabel(Name = "<%# Eval("TABLE_NAME") %>")]
-public class <%# Eval("TABLE_NAME")%> : TableBase
+public partial class <%# Eval("TABLE_NAME")%> : TableBase
 {    <asp:Repeater runat="server" id="rpt_pro">
         <ItemTemplate>
     private <%#Eval("systemtype")%><%#Eval("dbnull")%> _<%#Eval("name")%>;
