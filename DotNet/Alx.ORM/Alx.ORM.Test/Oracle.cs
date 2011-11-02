@@ -10,18 +10,19 @@ namespace Alx.ORM.Test
 {
     public class TestOracle : ITest
     {
-        string cnstr = @"Data Source=guolei;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+
 
 
         public void Test()
         {
-            //TestInsert();
-            TestSelect();
+            TestInsert();
+            //TestSelect();
 
         }
 
         public void TestSelect()
         {
+            string cnstr = @"Data Source=guolei;User Id=HR_PPORTAL;Password=1qaz2wsx;";
             var db = new ObjectContext(cnstr);
             var a = db.Query<INF_PERSON>("", null, 0, 1);
 
@@ -29,134 +30,102 @@ namespace Alx.ORM.Test
 
         public void TestInsert()
         {
+            string cnstr = @"Data Source=guolei;User Id=HR_PPORTAL;Password=1qaz2wsx;";
             var db = new ObjectContext(cnstr);
-            var obj = new ALXTEST();
-            obj.Code = "1234";
-            obj.Count = 12321;
-            obj.DATE_CREATE = DateTime.Now;
-            obj.Id = Guid.NewGuid();
-            obj.Name = "类型";
-            obj.Cc2 = 123.33M;
+            var obj = new SYS_USER()
+            {
+                CREATEDATE = DateTime.Now,
+                EMAIL = "aaaa"
+            };
+
             db.Insert(obj);
         }
 
         public void Test1()
         {
-            var Provider = new Oracle.DataAccess.Client.OracleClientFactory();
-            var Connection = Provider.CreateConnection();
-            Connection.ConnectionString = cnstr;
-            var cmd = Provider.CreateCommand();
-            cmd.CommandText = "insert into test (id) values (:a) ";
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = Connection;
-            var par = Provider.CreateParameter();
-            par.Direction = ParameterDirection.Input;
-            par.ParameterName = ":a";
-            par.DbType = DbType.Binary;
-            par.Value = Guid.NewGuid().ToByteArray();
-            cmd.Parameters.Add(par);
-            Connection.Open();
-            cmd.ExecuteNonQuery();
-            Connection.Close();
+             
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [Tabel(Name = "SYS_USER")]
     public class SYS_USER : TableBase
     {
-        private System.Guid _id;
-        [Column(Name = "ID", DbType = DbType.Binary, Nullable = false, IsPrimary = true)]
-        public System.Guid ID { get { return _id; } set { _id = value; } }
+        public string Txt { get; set; }
+
+        private System.Guid _person_key;
+        /// <summary>
+        /// 注册用户的用户编号（主键）
+        /// </summary>
+        [Column(Name = "PERSON_KEY", DbType = DbType.Binary, Nullable = false, IsPrimary = true)]
+        public System.Guid PERSON_KEY { get { return _person_key; } set { _person_key = value; } }
 
         private System.String _name;
-        [Column(Name = "NAME", DbType = DbType.String, Nullable = true, IsPrimary = false)]
-        public System.String Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
+        /// <summary>
+        /// 注册用户的用户名
+        /// </summary>
+        [Column(Name = "NAME", DbType = DbType.String, Nullable = false)]
+        public System.String NAME { get { return _name; } set { _name = value; } }
 
         private System.String _password;
-        [Column(Name = "PASSWORD", DbType = DbType.String, Nullable = true, IsPrimary = false)]
-        public System.String Password
-        {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-            }
-        }
+        /// <summary>
+        /// 注册用户的密码
+        /// </summary>
+        [Column(Name = "PASSWORD", DbType = DbType.String, Nullable = false)]
+        public System.String PASSWORD { get { return _password; } set { _password = value; } }
 
-        private System.String _remark;
-        [Column(Name = "REMARK", DbType = DbType.String, Nullable = true, IsPrimary = false)]
-        public System.String Reamrk
-        {
-            get
-            {
-                return _remark;
-            }
-            set
-            {
-                _remark = value;
-            }
-        }
+        private System.String _tel;
+        /// <summary>
+        /// 用户的电话号码（必填项）
+        /// </summary>
+        [Column(Name = "TEL", DbType = DbType.String, Nullable = false)]
+        public System.String TEL { get { return _tel; } set { _tel = value; } }
 
-        private System.String _area_code;
-        [Column(Name = "AREA_CODE", DbType = DbType.String, Nullable = true, IsPrimary = false)]
-        public System.String AreaCode
-        {
-            get
-            {
-                return _area_code;
-            }
-            set
-            {
-                _area_code = value;
-            }
-        }
+        private System.String _email;
+        /// <summary>
+        /// 用户的邮箱
+        /// </summary>
+        [Column(Name = "EMAIL", DbType = DbType.String, Nullable = true)]
+        public System.String EMAIL { get { return _email; } set { _email = value; } }
 
-    }
+        private System.DateTime? _createdate;
+        /// <summary>
+        /// 用户注册日期
+        /// </summary>
+        [Column(Name = "CREATEDATE", DbType = DbType.DateTime, Nullable = true)]
+        public System.DateTime? CREATEDATE { get { return _createdate; } set { _createdate = value; } }
 
-    [Tabel(Name = "ALXTEST")]
-    public class ALXTEST : TableBase
-    {
-        private const decimal _defult = 0;
+        private System.String _hr_code;
+        /// <summary>
+        /// 健康档案编号
+        /// </summary>
+        [Column(Name = "HR_CODE", DbType = DbType.String, Nullable = true)]
+        public System.String HR_CODE { get { return _hr_code; } set { _hr_code = value; } }
 
-        private System.Guid _id;
-        [Column(Name = "ID", DbType = DbType.Binary, Nullable = false, IsPrimary = true)]
-        public System.Guid Id { get { return _id; } set { _id = value; } }
+        private System.String _id_no;
+        /// <summary>
+        /// 身份证号
+        /// </summary>
+        [Column(Name = "ID_NO", DbType = DbType.String, Nullable = true)]
+        public System.String ID_NO { get { return _id_no; } set { _id_no = value; } }
 
-        private System.String _name;
-        [Column(Name = "NAME", DbType = DbType.String, Nullable = true, IsPrimary = false)]
-        public System.String Name { get { return _name; } set { _name = value; } }
+        private System.String _region;
+        /// <summary>
+        /// 所在县行政区划编码
+        /// </summary>
+        [Column(Name = "REGION", DbType = DbType.String, Nullable = false)]
+        public System.String REGION { get { return _region; } set { _region = value; } }
 
-        private System.String _code;
-        [Column(Name = "CODE", DbType = DbType.String, Nullable = false, IsPrimary = false)]
-        public System.String Code { get { return _code; } set { _code = value; } }
-
-        private System.DateTime _date_create;
-        [Column(Name = "DATE_CREATE", DbType = DbType.DateTime, Nullable = false, IsPrimary = false)]
-        public System.DateTime DATE_CREATE { get { return _date_create; } set { _date_create = value; } }
-
-        private System.Decimal _count;
-        [Column(Name = "COUNT", DbType = DbType.Decimal, Nullable = false, IsPrimary = false, DefaultValue = 0)]
-        public System.Decimal Count { get { return _count; } set { _count = value; } }
-
-        private System.Decimal _cc2;
-        [Column(Name = "CC2", DbType = DbType.Decimal, Nullable = false, IsPrimary = false, DefaultValue = -1)]
-        public System.Decimal Cc2 { get { return _cc2; } set { _cc2 = value; } }
+        private System.String _real_name;
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
+        [Column(Name = "REAL_NAME", DbType = DbType.String, Nullable = true)]
+        public System.String REAL_NAME { get { return _real_name; } set { _real_name = value; } }
 
     }
-
 
 
     /// <summary>

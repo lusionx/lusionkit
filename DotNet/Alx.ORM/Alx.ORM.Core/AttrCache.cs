@@ -30,7 +30,11 @@ namespace Alx.ORM.Core
                 var tableProperties = tableType.GetProperties();
                 foreach (var property in tableProperties)
                 {
-                    var col = property.GetCustomAttributes(false).Single(a => a is ColumnAttribute) as ColumnAttribute;
+                    var col = property.GetCustomAttributes(false).FirstOrDefault(a => a is ColumnAttribute) as ColumnAttribute;
+                    if (col == null)
+                    {
+                        continue;
+                    }
                     col.Property = property;
                     //缓存 2个 委托
                     col.SetAct = SetDelegate(property.GetSetMethod());

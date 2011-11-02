@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alx.ORM.Core
 {
-    public class TableBase
+    public interface TableBase
     {
        
     }
