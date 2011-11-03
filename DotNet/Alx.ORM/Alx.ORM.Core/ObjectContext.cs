@@ -32,7 +32,7 @@ namespace Alx.ORM.Core
         {
             using (var tr = Connection.BeginTransaction())
             {
-                
+
             }
             return true;
         }
@@ -147,7 +147,7 @@ namespace Alx.ORM.Core
             var tableType = model.GetType();
             var tableAttr = AttrCache.Get(tableType);
             var cmd = Provider.CreateCommand();
-            cmd.CommandText = SqlUpdate(tableAttr);
+            cmd.CommandText = SqlDelete(tableAttr);
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = Connection;
             DbParameter par = null;
