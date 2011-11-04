@@ -22,7 +22,7 @@ public partial class <%# Eval("TABLE_NAME")%> : TableBase
     /// <%# Eval("COMMENTS")%>
     /// </summary>
     [Column(Name = "<%#Eval("ColumnName")%>", DbType = <%#Eval("dbtype")%>, Nullable = <%#Eval("nullable")%><%#Eval("pk") %>)]
-    public <%#Eval("systemtype")%><%#Eval("dbnull")%> <%#Eval("proname")%> { get { return _<%#Eval("name")%>; } set { _<%#Eval("name")%> = value; } }
+    public <%#Eval("systemtype")%><%#Eval("dbnull")%> <%#Eval("proname")%> { get { return _<%#Eval("name")%>; } set { if (_<%#Eval("name")%> != value) { _<%#Eval("name")%> = value; ChangeColumn.Add("<%#Eval("ColumnName")%>"); } } }
         </ItemTemplate></asp:Repeater>
 }
             </ItemTemplate>

@@ -114,7 +114,7 @@
         </p>
         <p>
             连接串
-            <asp:TextBox runat="server" ID="constr" TextMode="MultiLine" Width="800px" Text="Data Source=guolei;User Id=HR_PPORTAL;Password=1qaz2wsx;" />
+            <asp:TextBox runat="server" ID="constr" TextMode="MultiLine" Width="800px" Text="Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;" />
         </p>
     </form>
     <h4>
