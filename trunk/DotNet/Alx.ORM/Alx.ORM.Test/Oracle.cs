@@ -13,29 +13,41 @@ namespace Alx.ORM.Test
         public void Test()
         {
             //TestInsert();
-            TestDelete();
+            //TestDelete();
             //TestSelect();
+            TestUpdate();
 
+        }
+
+        public void TestUpdate()
+        {
+            string cnstr = @"Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+            var db = new ObjectContext(cnstr);
+            var a = new HEALTH_REMIND_ASYNC { ID = new Guid("4fea215d-74a4-433c-8612-8b8a42077f9d") };
+            a.DOCTOR_NAME = "xxxxxxxx";
+            db.Update(a);
         }
 
         public void TestDelete()
         {
-            string cnstr = @"Data Source=guolei;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+            string cnstr = @"Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;";
             var db = new ObjectContext(cnstr);
             db.Delete(new HEALTH_REMIND_ASYNC { ID = new Guid("63ce7844-5d73-401e-b1e4-bee8b31dc9b0") });
         }
 
         public void TestSelect()
         {
-            string cnstr = @"Data Source=guolei;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+            string cnstr = @"Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+            var parms = new List<object> { Guid.Empty, DateTime.Now };
             var db = new ObjectContext(cnstr);
-            var a = db.Query<INF_PERSON>("", null, 0, 1);
+            //var a = db.Query<INF_PERSON>("", null, 0, 1);
+            var a = db.Query("delete from inf_person where person_key = ? and aa= ? ", parms);
 
         }
 
         public void TestInsert()
         {
-            string cnstr = @"Data Source=guolei;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+            string cnstr = @"Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;";
             var db = new ObjectContext(cnstr);
             var obj = new SYS_USER()
             {
@@ -429,6 +441,7 @@ namespace Alx.ORM.Test
     }
 
 
+
     /// <summary>
     /// 从公服同步的 个人健康提醒
     /// </summary>
@@ -440,50 +453,52 @@ namespace Alx.ORM.Test
         /// 
         /// </summary>
         [Column(Name = "ID", DbType = DbType.Binary, Nullable = false, IsPrimary = true)]
-        public System.Guid ID { get { return _id; } set { _id = value; } }
+        public System.Guid ID { get { return _id; } set { if (_id != value) { _id = value; ChangeColumn.Add("ID"); } } }
 
         private System.Guid _person_key;
         /// <summary>
         /// 
         /// </summary>
         [Column(Name = "PERSON_KEY", DbType = DbType.Binary, Nullable = false)]
-        public System.Guid PERSON_KEY { get { return _person_key; } set { _person_key = value; } }
+        public System.Guid PERSON_KEY { get { return _person_key; } set { if (_person_key != value) { _person_key = value; ChangeColumn.Add("PERSON_KEY"); } } }
 
         private System.String _doctor_name;
         /// <summary>
         /// 随访医生
         /// </summary>
         [Column(Name = "DOCTOR_NAME", DbType = DbType.String, Nullable = false)]
-        public System.String DOCTOR_NAME { get { return _doctor_name; } set { _doctor_name = value; } }
+        public System.String DOCTOR_NAME { get { return _doctor_name; } set { if (_doctor_name != value) { _doctor_name = value; ChangeColumn.Add("DOCTOR_NAME"); } } }
 
         private System.DateTime _date_update;
         /// <summary>
         /// 
         /// </summary>
         [Column(Name = "DATE_UPDATE", DbType = DbType.DateTime, Nullable = false)]
-        public System.DateTime DATE_UPDATE { get { return _date_update; } set { _date_update = value; } }
+        public System.DateTime DATE_UPDATE { get { return _date_update; } set { if (_date_update != value) { _date_update = value; ChangeColumn.Add("DATE_UPDATE"); } } }
 
         private System.DateTime _deadline;
         /// <summary>
         /// 截止时间
         /// </summary>
         [Column(Name = "DEADLINE", DbType = DbType.DateTime, Nullable = false)]
-        public System.DateTime DEADLINE { get { return _deadline; } set { _deadline = value; } }
+        public System.DateTime DEADLINE { get { return _deadline; } set { if (_deadline != value) { _deadline = value; ChangeColumn.Add("DEADLINE"); } } }
 
         private System.Guid _exam_key;
         /// <summary>
         /// 对应公服的随访exam_key
         /// </summary>
         [Column(Name = "EXAM_KEY", DbType = DbType.Binary, Nullable = false)]
-        public System.Guid EXAM_KEY { get { return _exam_key; } set { _exam_key = value; } }
+        public System.Guid EXAM_KEY { get { return _exam_key; } set { if (_exam_key != value) { _exam_key = value; ChangeColumn.Add("EXAM_KEY"); } } }
 
         private System.String _type;
         /// <summary>
         /// (精神病:1)(高血压:2)(糖尿病:3)(混合:4)
         /// </summary>
         [Column(Name = "TYPE", DbType = DbType.String, Nullable = false)]
-        public System.String TYPE { get { return _type; } set { _type = value; } }
+        public System.String TYPE { get { return _type; } set { if (_type != value) { _type = value; ChangeColumn.Add("TYPE"); } } }
 
     }
+
+
 
 }

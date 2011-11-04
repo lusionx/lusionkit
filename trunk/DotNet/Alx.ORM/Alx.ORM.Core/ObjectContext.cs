@@ -173,17 +173,26 @@ namespace Alx.ORM.Core
             }
         }
 
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public int Update(TableBase model)
         {
             var tableType = model.GetType();
             var tableAttr = AttrCache.Get(tableType);
             var cmd = Provider.CreateCommand();
-            cmd.CommandText = SqlUpdate(tableAttr);
+            cmd.CommandText = SqlUpdate(tableAttr, model);
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = Connection;
             DbParameter par = null;
             foreach (var column in tableAttr.Columns.Where(c => c.IsPrimary == false))
             {
+                if (!model.IsChangeColumn(column.Name))
+                {
+                    continue;
+                }
                 par = Provider.CreateParameter();
                 par.Direction = ParameterDirection.Input;
                 par.ParameterName = ParamPerFix + column.Name;
@@ -214,7 +223,7 @@ namespace Alx.ORM.Core
 
         }
 
-        private string SqlUpdate(TabelAttribute tableAttr)
+        private string SqlUpdate(TabelAttribute tableAttr, TableBase model)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("update ");
@@ -222,11 +231,14 @@ namespace Alx.ORM.Core
             sb.Append(" set ");
             foreach (var a in tableAttr.Columns.Where(c => c.IsPrimary == false))
             {
-                sb.Append(a.Name);
-                sb.Append(" = ");
-                sb.Append(ParamPerFix);
-                sb.Append(a.Name);
-                sb.Append(", ");
+                if (model.IsChangeColumn(a.Name))
+                {
+                    sb.Append(a.Name);
+                    sb.Append(" = ");
+                    sb.Append(ParamPerFix);
+                    sb.Append(a.Name);
+                    sb.Append(", ");
+                }
             }
             sb.Remove(sb.Length - 2, 2);
             sb.Append(" where ");
