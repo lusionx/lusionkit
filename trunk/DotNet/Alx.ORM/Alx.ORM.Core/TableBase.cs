@@ -9,7 +9,11 @@ namespace Alx.ORM.Core
     {
         protected List<string> ChangeColumn = new List<string>();
         public bool IsChangeColumn(string columnName)
-        {   
+        {
+            if (ChangeColumn.Count == 0)
+            {
+                return true;
+            }
             foreach (var a in ChangeColumn)
             {
                 if (a.Equals(columnName, StringComparison.OrdinalIgnoreCase))
