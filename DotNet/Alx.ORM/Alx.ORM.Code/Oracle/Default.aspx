@@ -13,11 +13,10 @@
     <script type="text/javascript">
         $(function () {
             var gettabs = function () {
-                var names = $.map($('.atab :checked'), function (e) {
+                var names = $.map($('.tables :checked'), function (e) {
                     return "'" + $.trim($(e).next().text()) + "'";
                 });
                 names = names.join(',');
-                $('#<%=hf.ClientID %>').val(names);
                 return names;
             };
             $('#btn').click(function () {
@@ -26,12 +25,12 @@
             });
             $('#cb_all').click(function () {
                 var ck = this.checked;
-                $('.atab :checkbox').each(function () {
+                $('.tables :checkbox').each(function () {
                     this.checked = ck;
                 });
             });
             $('#cb_rall').click(function () {
-                $('.atab :checkbox').each(function () {
+                $('.tables :checkbox').each(function () {
                     this.checked = !this.checked;
                 });
             });
@@ -41,8 +40,7 @@
             });
         });
     </script>
-    <div class="tables">
-        <asp:HiddenField ID="hf" runat="server" />
+    <div style="margin-left: 10px">
         <p>
             <table>
                 <caption>
@@ -108,31 +106,35 @@
                 </tbody>
             </table>
         </p>
-        <p>
-            工厂串<asp:TextBox runat="server" TextMode="MultiLine" Width="800px" Text="Oracle.DataAccess, Oracle.DataAccess.Client.OracleClientFactory,Oracle"
-                ID="facstr" />
+        <p class="nn">
+            工厂串<asp:TextBox runat="server" TextMode="MultiLine" Width="800px" ID="facstr" />
         </p>
-        <p>
+        <p class="nn">
             连接串
-            <asp:TextBox runat="server" ID="constr" TextMode="MultiLine" Width="800px" Text="Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;" />
+            <asp:TextBox runat="server" ID="constr" TextMode="MultiLine" Width="800px" />
         </p>
+        <h4>
+            选择<i>
+                <input type="checkbox" id="cb_all" />全选<input type="checkbox" id="cb_rall" />反选</i>
+            <input type="button" id="btn" value="生成" />
+        </h4>
+        <div class="tables">
+            <asp:Repeater runat="server" ID="rpt_tables">
+                <ItemTemplate>
+                    <p>
+                        <label title="<%#Eval("COMMENTS")%>">
+                            <input type="checkbox" /><i>
+                                <%#Eval("table_name")%>
+                            </i><code>
+                                <%#Eval("COMMENTS")%></code>
+                        </label>
+                        <a href="#" class="op-gena">
+                            <%#Eval("table_name")%></a>
+                    </p>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+    </div>
     </form>
-    <h4>
-        表名 <i>
-            <input type="checkbox" id="cb_all" />全选<input type="checkbox" id="cb_rall" />反选</i>
-        <input type="button" id="btn" value="生成" />
-    </h4>
-    <p>
-        <asp:Repeater runat="server" ID="rpt_tables">
-            <ItemTemplate>
-                <label class="atab" title="<%#Eval("COMMENTS")%>">
-                    <input type="checkbox" /><i><a href="#" class="op-gena">
-                        <%#Eval("table_name")%></a> </i><code>
-                            <%#Eval("COMMENTS")%></code>
-                </label>
-            </ItemTemplate>
-        </asp:Repeater>
-    </p>
-    </div> </form>
 </body>
 </html>

@@ -3,9 +3,7 @@
     margin: 10px 0px 0 20px;
 }
 
-.tables .atab
+.tables p
 {
-    float: left;
-    width: 150px;
-    margin-right: 50px;
+    margin: 5px;
 }

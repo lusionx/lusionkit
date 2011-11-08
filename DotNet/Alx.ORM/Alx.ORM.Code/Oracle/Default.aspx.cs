@@ -16,9 +16,12 @@ namespace Alx.ORM.Code.Oracle
         {
             if (!IsPostBack)
             {
+                this.constr.Text = Request.Params["constr"];
+                this.facstr.Text = Request.Params["facstr"];
                 ObjectContext db = new ObjectContext(this.constr.Text, this.facstr.Text);
-                this.rpt_tables.DataSource = db.Query(@"SELECT TABLE_NAME, COMMENTS 
-                FROM USER_TAB_COMMENTS a inner join user_objects b on a.TABLE_NAME = b.object_name and b.object_type = 'TABLE'", null).Tables[0];
+                this.rpt_tables.DataSource = db.Query(@"SELECT a.TABLE_NAME, a.COMMENTS 
+                FROM USER_TAB_COMMENTS a inner join user_objects b on a.TABLE_NAME = b.object_name
+where b.object_type = 'TABLE' order by a.table_name", null).Tables[0];
                 this.rpt_tables.DataBind();
             }
         }
