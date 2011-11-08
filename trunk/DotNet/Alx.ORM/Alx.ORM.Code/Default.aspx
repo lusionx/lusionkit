@@ -6,10 +6,18 @@
     <title>模型生成</title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form action="./Oracle/" method="get">
     <div>
         <p>
-            <a href="/oracle/">oracle</a>
+            工厂串
+            <textarea name="facstr" rows="2" cols="20" id="facstr" style="width: 800px;">Oracle.DataAccess,Oracle.DataAccess.Client.OracleClientFactory,Oracle</textarea>
+        </p>
+        <p>
+            连接串
+            <textarea name="constr" rows="2" cols="20" id="constr" style="width: 800px;">Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;</textarea>
+        </p>
+        <p>
+            <input type="submit" value="Oracle" />
         </p>
     </div>
     </form>
