@@ -7,13 +7,20 @@ using System.Data;
 
 namespace Alx.ORM.Core
 {
+    public interface IDefultVal
+    {
+        object GetVal();
+    }
+
     public class ColumnAttribute : System.Attribute
     {
         public string Name { get; set; }
         public DbType DbType { get; set; }
         public bool IsPrimary { get; set; }
         public bool Nullable { get; set; }
-        public object DefaultValue { get; set; }
+        public System.Type DefaultValue { get; set; }
+
+        internal object DefaultVal { get; set; }
 
         /// <summary>
         /// 本Attr修饰的属性

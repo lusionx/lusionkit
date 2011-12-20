@@ -98,8 +98,19 @@ namespace Alx.ORM.Core
                 par = Provider.CreateParameter();
                 par.Direction = ParameterDirection.Input;
                 par.ParameterName = ParamPerFix + column.Name;
-                par.Value = Special.FixValue(column.GetValue(model));
                 par.DbType = column.DbType;
+                if (model.IsChangeColumn(column.Name))
+                {
+                    par.Value = Special.FixValue(column.GetValue(model));
+                }
+                else
+                {
+                    par.Value = column.DefaultVal;
+                }
+                if (!column.Nullable && par == null)
+                {
+                    throw new System.Data.NoNullAllowedException(tableAttr.Name + "." + column.Name);
+                }
                 cmd.Parameters.Add(par);
             }
             try

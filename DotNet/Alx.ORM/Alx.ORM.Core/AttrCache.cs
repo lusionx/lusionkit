@@ -39,6 +39,11 @@ namespace Alx.ORM.Core
                     //缓存 2个 委托
                     col.SetAct = SetDelegate(property.GetSetMethod());
                     col.GetFun = GetDelegate(property.GetGetMethod());
+                    if (col.DefaultValue != null)
+                    {
+                        col.DefaultVal = (System.Activator.CreateInstance(col.DefaultValue) as IDefultVal).GetVal();
+                    }
+
                     columnsAttr.Add(col);
                 }
                 TableAttrs.Add(tableType, tableAttr);
