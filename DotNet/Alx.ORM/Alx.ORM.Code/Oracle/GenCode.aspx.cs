@@ -21,6 +21,7 @@ from user_tab_columns A,user_col_comments B where a.COLUMN_NAME=b.column_name an
                 var dt_comments = db.Query("SELECT TABLE_NAME, COMMENTS FROM USER_TAB_COMMENTS WHERE TABLE_NAME in (" + Request.Params["tabs"] + ")", null).Tables[0];
                 this.rpt_class.DataSource = dt_comments;
                 this.rpt_class.DataBind();
+                this.Title = Request.Params["tabs"];
             }
         }
 
