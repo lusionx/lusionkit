@@ -8,9 +8,9 @@
 import urllib2, json, os, tarfile, uuid, sys
 
 cfg = {}
-cfg['base'] = 'D:/DevelopTool/nodejs'
+cfg['base'] = 'D:/app/nodejs'
 cfg['download'] = cfg['base'] + '/tmp/'
-cfg['target'] = cfg['base'] + '/lib/node_modules/'
+cfg['target'] = cfg['base'] + '/node_modules/'
 
 def cleanDir(Dir):
     if not os.path.isdir(Dir):

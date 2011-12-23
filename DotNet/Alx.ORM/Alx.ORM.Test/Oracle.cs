@@ -12,10 +12,10 @@ namespace Alx.ORM.Test
     {
         public void Test()
         {
-            //TestInsert();
+            TestInsert();
             //TestDelete();
             //TestSelect();
-            TestUpdate();
+            //TestUpdate();
 
         }
 
@@ -40,8 +40,15 @@ namespace Alx.ORM.Test
 
         public void TestInsert()
         {
-            string cnstr = @"Data Source=dev;User Id=HR_PPORTAL;Password=1qaz2wsx;";
-
+            string cnstr = @"Data Source=testbj;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+            var db = new ObjectContext(cnstr);
+            db.Insert(new TMP_TEST
+            {
+                CREATEDATE = DateTime.Now,
+                NAME = "lxx",
+                PERSON_KEY = Guid.NewGuid(),
+                VISIBLE = "4"
+            });
         }
 
         public void Test1()
@@ -85,28 +92,17 @@ namespace Alx.ORM.Test
         /// <summary>
         /// 
         /// </summary>
-        [Column(Name = "AGE", DbType = DbType.Decimal, Nullable = false, DefaultValue = DD.fu1)]
+        [Column(Name = "AGE", DbType = DbType.Decimal, Nullable = false, DefaultValue = typeof(NumNull))]
         public System.Decimal AGE { get { return _age; } set { if (_age != value) { _age = value; ChangeColumn.Add("AGE"); } } }
     }
 
 
-
-
-    public class DD : IDefultVal
+    public class NumNull : IDefultVal
     {
-        public const object fu1 = null;
-
-        public Func<object> ss()
-        {
-            Func<object> fn = null;
-            fn = () => 1;
-            return fn;
-        }
-
         public object GetVal()
         {
-
-            return -1;
+            decimal dd = -1;
+            return dd;
         }
     }
 
