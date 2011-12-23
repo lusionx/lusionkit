@@ -15,4 +15,4 @@ app.get('/', function(req, res){
 
 app.listen(8202);
 
-console.log('http://localhsot:8202')
+console.log('http://localhost:8202')

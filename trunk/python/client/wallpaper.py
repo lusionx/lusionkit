@@ -3,7 +3,7 @@
 
 import ctypes, os, sys
 import Image, ImageDraw
-from lxml import etree
+#from lxml import etree
 
 types = ['.jpg', '.png']
 
@@ -54,7 +54,7 @@ def main2(argv):#通过xml 获取目录
     #doc.getroot()[1].text = path.encode('utf-8')
     #doc.write(cfg,encoding = "utf-8")
     
-def main(root=u"D:\\lusionx\\Pictures\\h和谐社"):#就用和谐社的图片
+def main(root=u"D:\\lusionx\\H和邪社"):#就用和谐社的图片
     pics = []
     for a in os.listdir(root):
         path = os.path.join(root,a)
