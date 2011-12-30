@@ -1,0 +1,1 @@
+mongod.exe --dbpath=d:/app/mongodb/data --logpath=d:/app/mongodb/data/db.log --install
