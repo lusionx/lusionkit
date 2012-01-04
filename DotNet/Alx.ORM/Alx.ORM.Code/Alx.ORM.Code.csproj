@@ -58,6 +58,8 @@
     <Content Include="js\jquery-1.5.2.min.js" />
     <Content Include="Oracle\Default.aspx" />
     <Content Include="Oracle\GenCode.aspx" />
+    <Content Include="Oracle\ProcGen.aspx" />
+    <Content Include="Oracle\ProcList.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -83,6 +85,20 @@
     </Compile>
     <Compile Include="Oracle\GenCode.aspx.designer.cs">
       <DependentUpon>GenCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Oracle\ProcGen.aspx.cs">
+      <DependentUpon>ProcGen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Oracle\ProcGen.aspx.designer.cs">
+      <DependentUpon>ProcGen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Oracle\ProcList.aspx.cs">
+      <DependentUpon>ProcList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Oracle\ProcList.aspx.designer.cs">
+      <DependentUpon>ProcList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
