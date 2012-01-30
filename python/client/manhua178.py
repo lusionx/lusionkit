@@ -18,7 +18,7 @@ def loadDir(u):
         print '%s : %s' % (k,v)
         
 def downImg(u):
-    h = httplib2.Http(".cache")
+    h = httplib2.Http()
     resp, content = h.request(u, "GET")
     content = content.decode('utf-8')
     content = content.split('\n')
@@ -27,11 +27,9 @@ def downImg(u):
     ss = json.loads(ss)
     domain = u'http://imgfast.manhua.178.com/'
     for a in ss:
-        u = domain + a
-        s = title + u'_' + os.path.split(a)[1]
-        print 'Download %s to %s' % (u,s)
-        resp, byts = h.request(u, "GET")
-        f = open(s,'wb')
+        f = open(title + u'_' + os.path.split(a)[1],'wb')
+        print 'Download %s to %s' % (a, f.name)
+        resp, byts = h.request(domain + a, "GET")
         f.write(byts)
         f.close()
     
