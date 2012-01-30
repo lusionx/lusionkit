@@ -40,7 +40,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', action="store", dest='url', help='load list')
     parser.add_argument('-d', action="store", dest='url2', help='down img')
-    u = u'http://manhua.178.com/jlynzglwy/'
     results = parser.parse_args()
     if results.url :
         loadDir(results.url)
