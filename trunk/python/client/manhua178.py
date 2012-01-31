@@ -13,7 +13,7 @@ def loadDir(u):
     for div in soup.findAll('div',attrs={'class':'cartoon_online_border'}):
         for a in div.findAll('a'):
             links.append((a['href'],a.string))
-    links = sorted(links,key = lambda x:x[0])
+    links = sorted(links,key = lambda x:x[1])
     for k,v in links:
         print '%s : %s' % (k,v)
         
@@ -36,11 +36,16 @@ def downImg(u):
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-l', action="store", dest='url', help='load list')
-    parser.add_argument('-d', action="store", dest='url2', help='down img')
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-l', action="store_true", help='load list from URL')
+    group.add_argument('-d', action="store_true", help='down imgs from URL')
+    parser.add_argument('URL', nargs=1, help='[http://manhua.178.com/]<xxxx> | URL')
     results = parser.parse_args()
-    if results.url :
-        loadDir(results.url)
-    if results.url2 :
-        downImg(results.url2)
+    if results.l :
+        u = results.URL[0]
+        if u[:4] != 'http':
+            u = 'http://manhua.178.com/' + u
+        loadDir(u)
+    if results.d :
+        downImg(results.URL[0])
     
