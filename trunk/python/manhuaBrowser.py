@@ -1,15 +1,22 @@
 # coding: utf-8
 
-from bottle import route, run, request, response, template
+from bottle import route, run, request, response, template, redirect
 import os, zipfile
+
+@route('/favicon.ico')
+def favicon():
+    redirect("http://bottlepy.org/docs/dev/_static/favicon.ico")
+
 
 PATH = u'd:/lusionx/Desktop/tmppic'
 DIRS = (u'/Bleach',u'/Naruto',u'/极乐院女子高寮物语')
 
+
+
 @route('/')
 @route('/index.html')
 def index():
-    return '<br/>'.join([ u'<a href="%s/index.html" >%s</a>' % (a,a[1:]) for a in DIRS])
+    return '<bra/>'.join([ u'<a href="%s/index.html" >%s</a>' % (a,a[1:]) for a in DIRS])
 
 @route('/<dir>/index.html')
 def section(dir):
@@ -58,7 +65,7 @@ def browser(dir,file,i=1):
 %end
 </select>
 <a class="op-next">next</a>
-<p><img src="/img/{{dir}}/{{file}}/{{curr}}"></p>
+<div><img src="/img/{{dir}}/{{file}}/{{curr}}"></div>
 """
     dir = dir.decode('utf-8')
     file = file.decode('utf-8')
@@ -81,4 +88,7 @@ def img(dir,file,name):
     import mimetypes
     response.content_type = mimetypes.guess_type(name)[0]
     return bytes
+
 run(host='localhost', port=8080)
+
+
