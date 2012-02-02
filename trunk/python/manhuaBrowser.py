@@ -26,8 +26,24 @@ def browser(dir,file,i=1):
 <script>
     $(function(){
         $('select').change(function(){
-            window.location.href=$("option['selected']",this).attr('url');
+            window.location.href=$(this.options[this.selectedIndex]).attr('url');
         });
+        $('a.op-prev').attr('href',function(){
+            var slt = $('select')[0];
+            return $(slt.options[slt.selectedIndex]).prev().attr('url');
+        })
+        $('a.op-next').attr('href',function(){
+            var slt = $('select')[0];
+            return $(slt.options[slt.selectedIndex]).next().attr('url');
+        })
+        $(document).keydown(function (e) {
+            if (e.which == 37) {
+                window.location.href = $('a.op-prev').attr('href');
+            }
+            if (e.which == 39) {
+                window.location.href = $('a.op-next').attr('href');
+            }
+        })
     });
 </script>
 <a href="/" >首页</a> <a href="/{{dir}}/index.html" >{{dir}}</a>
@@ -37,12 +53,12 @@ def browser(dir,file,i=1):
     %if files[a] == curr:
 <option selected = "selected" url="/{{dir}}/{{file}}/index_{{a+1}}.html" value="{{files[a]}}">{{a+1}}</option>
     %else :
-<option url="{{dir}}/{{file}}/index_{{a+1}}.html" value="{{files[a]}}">{{a+1}}</option>
+<option url="/{{dir}}/{{file}}/index_{{a+1}}.html" value="{{files[a]}}">{{a+1}}</option>
     %end
 %end
 </select>
 <a class="op-next">next</a>
-<p><img src="/img/{{dir}}/{{file}}/{{curr}}."></p>
+<p><img src="/img/{{dir}}/{{file}}/{{curr}}"></p>
 """
     dir = dir.decode('utf-8')
     file = file.decode('utf-8')
