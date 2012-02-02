@@ -81,7 +81,7 @@ namespace Alx.ORM.Code.Oracle
             Rules.Clear();
             Rules.Add(new List<string> { "VARCHAR2", "System.String", "DbType.String" });
             Rules.Add(new List<string> { "CHAR", "System.String", "DbType.String" });
-            Rules.Add(new List<string> { "DATE", "System.Date", "DbType.Date" });
+            Rules.Add(new List<string> { "DATE", "System.DateTime", "DbType.Date" });
             Rules.Add(new List<string> { "RAW", "System.Guid", "DbType.Binary" });
             Rules.Add(new List<string> { "NUMBER", "System.Decimal", "DbType.Decimal" });
         }
@@ -111,7 +111,7 @@ namespace Alx.ORM.Code.Oracle
             }
             if (Rules.Any(a => a[0] == oracleType))
             {
-                return Rules.First(a => a[0] == oracleType)[1];
+                return Rules.First(a => a[0] == oracleType)[2];
             }
             else
             {
