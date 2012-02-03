@@ -9,22 +9,24 @@ def favicon():
 
 
 PATH = u'd:/lusionx/Desktop/tmppic'
-DIRS = (u'/Bleach',u'/Naruto',u'/极乐院女子高寮物语')
+DIRS = (u'Bleach',u'Naruto',u'极乐院女子高寮物语',u'天降之物')
 
 
 
 @route('/')
 @route('/index.html')
 def index():
-    return '<bra/>'.join([ u'<a href="%s/index.html" >%s</a>' % (a,a[1:]) for a in DIRS])
+    return '<br/>'.join([ u'<a href="/%s/index.html" >%s</a>' % (a,a) for a in DIRS])
 
 @route('/<dir>/index.html')
+@route('/<dir>/')
 def section(dir):
     dir = dir.decode('utf-8')
     htm = [  u'<a href="/%s/%s/index.html" >%s</a>' % (dir, a, a) for a in os.listdir(os.path.join(PATH,dir))]
     htm.insert(0, u'<a href="/" >首页</a>')
     return '<br/>'.join(htm)
 
+@route('/<dir>/<file>/')
 @route('/<dir>/<file>/index.html')
 @route('/<dir>/<file>/index_<i:int>.html')
 def browser(dir,file,i=1):
@@ -75,8 +77,9 @@ def browser(dir,file,i=1):
     #htm.insert(0, u'<a href="/%s/index.html" >%s</a>' % (dir,dir)) #章节
     #htm.insert(0, u'<a href="/" >首页</a>')
     files = [ a.decode('gb2312') for a in zf.namelist()]
+    (lambda f, d : f.write(d+'\n'))(open('manhuaBrowser.log','a'), request.url)
     return template(tpl,dir = dir, files = files, file = file, curr = files[i])
-    #return '<br/>'.join(htm)
+    
 
 @route('/img/<dir>/<file>/<name>')
 def img(dir,file,name):
