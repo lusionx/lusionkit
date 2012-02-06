@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
-files = [
-        u'D:\91huayi\健康档案\BusinessLayer\BusinessLayer.csproj',
-        u'D:\91huayi\健康档案\DataModule\DataModule.csproj',
-        u'D:\91huayi\健康档案\HandlerLayer\HandlerLayer.csproj',
-        u'D:\91huayi\健康档案\Substructure\Substructure.csproj',
-        u'D:\91huayi\健康档案\Web\Web.csproj',
-        u'D:\91huayi\健康档案\RemoteTraining\RemoteTraining.csproj',
-        u'D:\91huayi\健康档案\ClassWebServesTest\ClassWebServesTest.csproj'
+PATH = u'D:/91huayi/公服'
+
+FILES = [
+        u'/BusinessLayer/BusinessLayer.csproj',
+        u'/DataModule/DataModule.csproj',
+        u'/HandlerLayer/HandlerLayer.csproj',
+        u'/Substructure/Substructure.csproj',
+        u'/Web\Web.csproj',
+        u'/RemoteTraining/RemoteTraining.csproj',
+        #u'/ClassWebServesTest/ClassWebServesTest.csproj'
         ]
+files = [ PATH + a for a in FILES]
 i=0
 to = 32
 for path in files:
@@ -29,7 +32,7 @@ for path in files:
     fw.write(data)
     fw.close()
     
-path = u'D:\91huayi\健康档案\DataModule\DataModule.csproj'
+path = PATH + u'/DataModule/DataModule.csproj'
 fr=open(path,'r')
 data=''
 for line in fr.readlines():
