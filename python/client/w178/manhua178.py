@@ -13,9 +13,10 @@ def loadDir(u):
     for div in soup.findAll('div',attrs={'class':'cartoon_online_border'}):
         for a in div.findAll('a'):
             links.append((a['href'],a.string))
-    links = sorted(links,key = lambda x:x[1])
+    #links = sorted(links,key = lambda x:x[1].replace(u'第',''))
     for k,v in links:
-        print '%s : %s' % (k,v)
+        print 'python manhua178.py -d %s %s' % (k,v)
+    return links
         
 def downImg(u):
     h = httplib2.Http()
