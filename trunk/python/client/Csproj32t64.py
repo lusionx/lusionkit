@@ -22,9 +22,9 @@ for path in files:
         if line.find('Microsoft.Practices.EnterpriseLibrary.Data.dll') > -1:
             i+=1
             if to == 64:
-                data+='<HintPath>..\x64\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>\n'
+                data+='      <HintPath>..\\x64\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>\n'
             elif to == 32:
-                data+='<HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>\n'
+                data+='      <HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>\n'
         else:
             data+=line
     fr.close()
@@ -39,9 +39,9 @@ for line in fr.readlines():
     if line.find('Oracle.DataAccess.dll') > -1:
         i+=1
         if to==64:
-            data+='<HintPath>..\x64\Oracle.DataAccess.dll</HintPath>\n'
+            data+='    <HintPath>..\\x64\Oracle.DataAccess.dll</HintPath>\n'
         elif to==32:
-            data+='<HintPath>..\References\Oracle.DataAccess.dll</HintPath>\n'
+            data+='    <HintPath>..\References\Oracle.DataAccess.dll</HintPath>\n'
     else:
         data+=line
 fr.close()
