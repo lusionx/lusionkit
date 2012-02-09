@@ -5,7 +5,7 @@ from BeautifulSoup import BeautifulSoup
 import argparse, json, os
 
 def loadDir(u):
-    h = httplib2.Http(".cache")
+    h = httplib2.Http()
     resp, content = h.request(u, "GET")
     content = content.decode('utf-8')
     soup = BeautifulSoup(content)
@@ -45,7 +45,7 @@ def downImg(u):
         f.close()
     
         
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-l', action="store_true", help='load list from URL')
@@ -54,12 +54,13 @@ if __name__ == '__main__':
     parser.add_argument('URL', nargs=1, help='[http://manhua.178.com/]<xxxx> | URL')
     results = parser.parse_args()
     u = results.URL[0]
-    if len(u) < 5 or u[:4] == 'http':
-            u = 'http://manhua.178.com/' + u
+    if len(u) < 5 or u[:4] != u'http':
+        u = 'http://manhua.178.com/' + u
     if results.l :
         loadDir(u)
     if results.i:
         loadInfo(u)
     if results.d :
         downImg(results.URL[0])
-    
+if __name__ == '__main__':
+    main()
