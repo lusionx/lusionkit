@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-将zip文件中目录去掉
+将zip文件中唯一目录去掉
 old.zip
     dir1
         file1
