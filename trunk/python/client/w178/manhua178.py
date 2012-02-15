@@ -37,9 +37,11 @@ def downImg(u):
     title = [line for line in content if line[:21]=='var g_chapter_name = '][0][22:-3]
     ss = json.loads(ss)
     domain = u'http://imgfast.manhua.178.com/'
+    i = 0
     for a in ss:
+        i+=1
         f = open(title + u'_' + os.path.split(a)[1],'wb')
-        print 'Download %s to %s' % (a, f.name)
+        print '%s/%s %s to %s ' % (i, len(ss), a, f.name, )
         resp, byts = h.request(domain + a, "GET")
         f.write(byts)
         f.close()
