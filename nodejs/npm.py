@@ -112,16 +112,21 @@ def remove(nname):
 
 def show(name):
     def showone(nname):
-        path = cfg['target'] + nname + '/package.json'
+        path = os.path.join(cfg['target'], nname, 'package.json')
         if os.path.isfile(path):
             f = open(path)
             info = json.loads(f.read())
             f.close()
-            keys = ['name','version','description']
+            keys = ['name','version']
             for k in keys:
                 print '%s : %s' % (k,info[k])
-            if info.has_key('dependencies'):
-                print '%s : %s' % ('dependencies',info['dependencies'])
+            if info.has_key('description'):
+                k = 'description'
+                print '%s : %s' % (k,info[k])
+            if info.has_key('dependencies') and len(info['dependencies']):
+                print 'dependencies:'
+                for k,v in info['dependencies'].items():
+                    print '    %s : %s' % (k, v)
             print ''
     if name == 'all':
         i = 0
