@@ -80,16 +80,23 @@ def install(nname):
     os.removedirs(uidf)
 
     print 'install ' + nname + ' v' + last + ' finished!'
+    if len(cfg['childPkg']) > 0:
+        a = cfg['childPkg'][0]
+        del cfg['childPkg'][0]
+        install(a)
+        
 
 def analysisDependencies(dpd):
     for k,v in dpd.items():
         localv = 'none'
-        path = cfg['target'] + k + '/package.json'
+        path = os.path.join(cfg['target'], k, 'package.json')
         if os.path.isfile(path):
             f = open(path)
             localv = json.loads(f.read())['version']
             f.close()
         print 'require %s %s : local %s, ' % (k, v, localv)
+        if localv == 'none':
+            cfg['childPkg'].append(k)
 
 
 def remove(nname):
@@ -138,9 +145,9 @@ if __name__ == '__main__':
     parser.add_argument('PKG', nargs=1, help='pkg name')
     results = parser.parse_args()
     if results.r:
-      remove(results.PKG[0])
+        remove(results.PKG[0])
     if results.i:
-      install(results.PKG[0])
+        install(results.PKG[0])
     if results.s:
-      show(results.PKG[0])
+        show(results.PKG[0])
 
