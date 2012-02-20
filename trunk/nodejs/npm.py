@@ -8,9 +8,10 @@
 import urllib2, json, os, tarfile, uuid, sys
 
 cfg = {}
-cfg['base'] = 'D:/app/nodejs'
-cfg['download'] = cfg['base'] + '/tmp/'
-cfg['target'] = cfg['base'] + '/node_modules/'
+cfg['base'] = 'D:\\app\\nodejs'
+cfg['download'] = os.path.join(cfg['base'], 'tmp')
+cfg['target'] = os.path.join(cfg['base'], 'node_modules')
+cfg['childPkg'] = []
 
 def cleanDir(Dir):
     if not os.path.isdir(Dir):
@@ -21,7 +22,6 @@ def cleanDir(Dir):
         if os.path.isfile(filePath):
             os.remove(filePath)
         elif os.path.isdir(filePath):
-            os.path.isdir(filePath)
             cleanDir(filePath)
             os.rmdir(filePath)
         else:
@@ -30,7 +30,7 @@ def cleanDir(Dir):
 
 
 def install(nname):
-    url = 'http://registry.npmjs.org/'+nname;
+    url = 'http://registry.npmjs.org/' + nname;
     #h = httplib2.Http(".cache")
     
     #分析json 得到最新版的地址,版本号
@@ -60,23 +60,23 @@ def install(nname):
     #resp, content = h.request(url,'GET')
     content = urllib2.urlopen(url).read()
     filename = nname + '-' + last + '.tgz'
-    f = open(cfg['download'] + filename,'wb')
+    f = open(os.path.join(cfg['download'], filename),'wb')
     f.write(content)
     f.close()
     
     #解压 tgz文件
     print 'Extracting'
-    tar = tarfile.open(cfg['download'] + filename)
-    uidf = cfg['download'] + nname + '-' + str(uuid.uuid4())
+    tar = tarfile.open(os.path.join(cfg['download'], filename))
+    uidf = os.path.join(cfg['download'], nname + '-' + str(uuid.uuid4()))
     tar.extractall(uidf)
     tar.close()
     
     #先删除目标目录
-    if os.path.isdir(cfg['target'] + nname):
-        cleanDir(cfg['target'] + nname)
-        os.removedirs(cfg['target'] + nname)
+    if os.path.isdir(os.path.join(cfg['target'], nname)):
+        cleanDir(os.path.join(cfg['target'], nname))
+        os.removedirs(os.path.join(cfg['target'], nname))
     #复制文件夹到目标地址并改名
-    os.rename(uidf + '/package' , cfg['target'] + nname)
+    os.rename(uidf + '/package' , os.path.join(cfg['target'], nname))
     os.removedirs(uidf)
 
     print 'install ' + nname + ' v' + last + ' finished!'
@@ -89,7 +89,7 @@ def analysisDependencies(dpd):
             f = open(path)
             localv = json.loads(f.read())['version']
             f.close()
-        print 'require %s : local %s %s, ' % (k, localv, v)
+        print 'require %s %s : local %s, ' % (k, v, localv)
 
 
 def remove(nname):
@@ -127,17 +127,20 @@ def show(name):
         showone(name)
         
 
+import argparse
+
 if __name__ == '__main__':
-    act = {}
-    act['install'] = install
-    act['remove'] = remove
-    act['show'] = show
-    if len(sys.argv) == 3 and act.has_key(sys.argv[1]) and len(sys.argv[2]) > 0:
-        act[sys.argv[1]](sys.argv[2])
-    else:
-        print """e.g.
-python npm.py install <packagename>
-python npm.py remove <packagename>
-python npm.py show <all | packagename>
-"""
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-r', action="store_true", help='remove pkg')
+    group.add_argument('-i', action="store_true", help='install pkg')
+    group.add_argument('-s', action="store_true", help='show pkg')
+    parser.add_argument('PKG', nargs=1, help='pkg name')
+    results = parser.parse_args()
+    if results.r:
+      remove(results.PKG[0])
+    if results.i:
+      install(results.PKG[0])
+    if results.s:
+      show(results.PKG[0])
 
