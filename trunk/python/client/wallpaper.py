@@ -61,13 +61,14 @@ def main(root=u"D:/lusionx/Pictures/H和邪社"):#就用和谐社的图片
         #print path
         if os.path.isdir(path) :
             pics.extend(getWallpapers(path))
-    path = random.choice(pics)
+    path = random.choice(pics)    
     if set(path):
-        print path#.encode('utf-8')
-        #open(os.path.join(os.path.dirname(__file__),'wallpaper.txt'),'a').write(path.encode('utf-8')+'\n')
+        print path.encode('gb2312')
+        #dblite.log(os.path.split(__file__)[1], 'error:'+path)
     else:
-        print 'error:' + path
-        open(os.path.join(os.path.dirname(__file__),'wallpaper.txt'),'a').write('error:'+path.encode('utf-8')+'\n')
+        print u'error:' + path.encode('utf-8')
+        import dblite
+        dblite.log(os.path.split(__file__)[1], u'error:' + path)
 
 if __name__ == "__main__":
     #main(sys.argv)
