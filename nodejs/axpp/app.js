@@ -39,6 +39,6 @@ app.configure('production', function(){
 app.get('/', routes.home);
 app.get('/json', routes.json);
 
-app.listen(3000);
+app.listen(8100);
 console.log('http://localhost:%s',app.address().port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
