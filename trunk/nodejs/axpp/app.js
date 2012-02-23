@@ -13,6 +13,8 @@ var app = module.exports = express.createServer();
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  //app.set('view engine', 'html');
+  //app.register(".html", require("jqtpl").express);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -32,4 +34,5 @@ app.configure('production', function(){
 app.get('/', routes.index);
 
 app.listen(3000);
+console.log('http://localhost:%s',app.address().port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
