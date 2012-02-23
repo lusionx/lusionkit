@@ -12,10 +12,14 @@ var app = module.exports = express.createServer();
 
 app.configure(function(){
     app.set('views', __dirname + '/views');
-    //app.set('view engine', 'jade');
+    
+    //app.set('view engine', 'jade');//使用 jqtpl, 而不是jade
     app.set('view engine', 'html');
-    //app.set('view options', { layout: false });
     app.register(".html", require("jqtpl").express);
+    
+    //layout 通过{{layout 'xxx'}}在view中单独控制, 而不在全局
+    app.set('view options', { layout: false });
+    
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
@@ -32,7 +36,8 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.index);
+app.get('/', routes.home);
+app.get('/json', routes.json);
 
 app.listen(3000);
 console.log('http://localhost:%s',app.address().port);
