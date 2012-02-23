@@ -8,7 +8,7 @@ import datetime
 Base = declarative_base()
 engine = create_engine('sqlite:///D:\\app\\db.sqlite')
 
-def Session():
+def _Session():
     from sqlalchemy.orm import sessionmaker
     Session = sessionmaker(bind=engine)
     return Session()
@@ -20,16 +20,20 @@ class Log(Base):
     when = Column(DateTime, nullable = False)
     message = Column(String, nullable = False)
     
-    def __init__(self, msg):
+    def __init__(self, app='', msg=''):
         self.message = msg
-        self.app = 'testApp'
+        self.app = app
         self.when = datetime.datetime.now()
 
-def dbInit():
+def _dbInit():
     Base.metadata.create_all(engine) 
 
-def init():
-    pass
+def log(app='app', msg=''):
+    ss = _Session()
+    o = Log(app, msg)
+    ss.add(o)
+    ss.commit()
+
 
 def main():
     ss = Session()
