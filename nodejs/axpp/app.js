@@ -23,6 +23,7 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
+    //静态文件优先级最高, 能找到文件, 不会走router
     app.use(express.static(__dirname + '/public'));
 });
 
