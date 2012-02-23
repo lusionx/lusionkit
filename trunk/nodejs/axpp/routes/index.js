@@ -8,5 +8,5 @@ exports.home = function(req, res){
 };
 
 exports.json = function(req, res){
-  res.send({ str: 'json str', aaa:123 })
+  res.json({ str: 'json str', b:11, aaa:123 })
 };
