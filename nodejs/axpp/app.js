@@ -36,8 +36,9 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.home);
-app.get('/json', routes.json);
+routes.init(app);
+//app.get('/', routes.home);
+//app.get('/json', routes.json);
 
 app.listen(8100);
 console.log('http://localhost:%s',app.address().port);
