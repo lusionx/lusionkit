@@ -101,7 +101,7 @@ def analysisDependencies(dpd):
 
 
 def remove(nname):
-    dirpath = cfg['target'] + nname
+    dirpath = os.path.join(cfg['target'], nname)
     if os.path.isdir(dirpath):
         cleanDir(dirpath)
         os.removedirs(dirpath)
