@@ -9,7 +9,7 @@ var Log = (function(ose){
         body: String,
         date: Date
     });
-    return ose.model('logs', obj)
+    return ose.model('logs', obj);
 })(mongoose);
 
 
