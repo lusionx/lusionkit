@@ -12,7 +12,7 @@ Ext.onReady(function () {
             margins: '1 1 4 1'
         }, {
             region: 'west',
-            layout: 'accordion',
+            layout: 'accordion',//特殊说明, 表示一个可展开的东西
             collapsible: true,
             title: '导航 west',
             split: true,
@@ -23,7 +23,6 @@ Ext.onReady(function () {
             }, {
                 title: 'accordion2'
             }]
-            // could use a TreePanel or AccordionLayout for navigational items
         }, {
             region: 'south',
             title: 'South Panel',
