@@ -12,11 +12,17 @@ Ext.onReady(function () {
             margins: '1 1 4 1'
         }, {
             region: 'west',
+            layout: 'accordion',
             collapsible: true,
-            title: 'Navigation west',
+            title: '导航 west',
             split: true,
             width: 150,
-            margins: '0 0 0 1'
+            margins: '0 0 0 1',
+            items: [{
+                title: 'accordion1'
+            }, {
+                title: 'accordion2'
+            }]
             // could use a TreePanel or AccordionLayout for navigational items
         }, {
             region: 'south',
@@ -47,5 +53,4 @@ Ext.onReady(function () {
             }
         }]
     });
-
 });
