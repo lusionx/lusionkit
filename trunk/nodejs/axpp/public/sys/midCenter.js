@@ -7,10 +7,11 @@ Ext.sys.midCenter.create = function () {
         // First tab active by default
         items: [{
             title: 'Default Tab',
-            html: 'The first tab\'s content. Others may be added dynamically'
+            html: 'The first tab\'s content. Others may be added dynamically',
         }, {
             title: ' Tab 2',
-            html: 'The 2 tab\'s content. Others may be added dynamically'
+            html: 'The 2 tab\'s content. Others may be added dynamically',
+            closable: true
         }]
     });
     return bar;
