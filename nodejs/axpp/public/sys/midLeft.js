@@ -1,6 +1,6 @@
 Ext.sys.midLeft = {};
 Ext.sys.midLeft.create = function () {
-    var bar = Ext.create('Ext.Panel', {
+    var bar = Ext.create('Ext.panel.Panel', {
         region: 'west',
         layout: 'accordion',//特殊说明, 表示一个可展开的东西
         //collapsible: true,

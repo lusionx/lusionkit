@@ -1,6 +1,6 @@
 Ext.sys.topBar = {};
 Ext.sys.topBar.create = function(){
-    var bar = Ext.create('Ext.Panel',{
+    var bar = Ext.create('Ext.panel.Panel',{
         xtype: 'box',
         id: 'header',
         region: 'north',

@@ -1,6 +1,6 @@
 Ext.sys.midCenter = {};
 Ext.sys.midCenter.create = function () {
-    var bar = Ext.createWidget('tabpanel', {
+    var bar = Ext.create('Ext.tab.Panel', {
         region: 'center',
         // TabPanel itself has no title
         activeTab: 0,
