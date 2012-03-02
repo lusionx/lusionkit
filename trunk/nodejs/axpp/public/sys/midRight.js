@@ -1,6 +1,6 @@
 Ext.sys.midRight = {};
 Ext.sys.midRight.create = function () {
-    var bar = Ext.create('Ext.Panel', {
+    var bar = Ext.create('Ext.panel.Panel', {
         region: 'east',
         title: 'East Panel',
         collapsible: true,
