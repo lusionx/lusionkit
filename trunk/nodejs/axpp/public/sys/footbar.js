@@ -1,6 +1,6 @@
 Ext.sys.footBar = {};
-Ext.sys.footBar.create = function(){
-    var bar = Ext.create('Ext.Panel',{
+Ext.sys.footBar.create = function () {
+    var bar = Ext.create('Ext.Panel', {
         region: 'south',
         title: 'South Panel',
         collapsible: true,
