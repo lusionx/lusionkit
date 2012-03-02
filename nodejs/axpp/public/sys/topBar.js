@@ -1,6 +1,6 @@
-
-Ext.sys.topBar.get = function(){
-    var bar = Ext.create('Ext.Panel.',{
+Ext.sys.topBar = {};
+Ext.sys.topBar.create = function(){
+    var bar = Ext.create('Ext.Panel',{
         region: 'north',
         html: '<h1 class="x-panel-header">Page Title</h1>',
         autoHeight: true,

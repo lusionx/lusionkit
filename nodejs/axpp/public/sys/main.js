@@ -1,10 +1,10 @@
 Ext.require(['*']);
-
+Ext.sys = {};
 Ext.onReady(function () {
     Ext.tip.QuickTipManager.init();
     Ext.create('Ext.container.Viewport', {
         layout: 'border',
-        items: [ Ext.sys.get(), {
+        items: [ Ext.sys.topBar.create(), Ext.sys.footBar.create(),{
             region: 'west',
             layout: 'accordion',//特殊说明, 表示一个可展开的东西
             //collapsible: true,
@@ -19,15 +19,6 @@ Ext.onReady(function () {
                 title: 'accordion2',
                 html: '<a>2222</a>'
             }]
-        }, {
-            region: 'south',
-            title: 'South Panel',
-            collapsible: true,
-            html: 'Information goes here',
-            split: true,
-            height: 100,
-            minHeight: 100,
-            margins: '0 1 1 1'
         }, {
             region: 'east',
             title: 'East Panel',
