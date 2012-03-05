@@ -12,7 +12,19 @@ Ext.sys.midCenter.create = function () {
             title: ' Tab 2',
             html: 'The 2 tab\'s content. Others may be added dynamically',
             closable: true
-        }]
+        }],
+        id: 's-tabs'
     });
     return bar;
+};
+
+Ext.sys.midCenter.get = function () {
+    var tabs = Ext.getCmp('s-tabs');
+    //tabs
+    return tabs;
+};
+
+Ext.sys.midCenter.activeTab = function () {
+    var tabs = Ext.getCmp('s-tabs');
+    return tabs.getActiveTab();
 };

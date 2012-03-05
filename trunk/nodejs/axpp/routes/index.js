@@ -16,16 +16,17 @@ var home = exports.home = function (req, res) {
     };
 
 var json = exports.json = function (req, res) {
-        res.json({
-            str: 'json str',
-            b: 11,
-            aaa: 123
-        })
+        var q = req.params[0].split('/');
+        var d = require('./json')[q[0]];
+        //q.push(req.query);
+        q = q.slice(1);
+        //res.json(q);
+        res.json(d.apply(req.query,q));
     };
 
 
 exports.init = function (app) {
     //app.get('/extjs/*.*', extjs);
     app.get('/', home);
-    app.get('/json', json);
+    app.get('/json/*', json);
 };
