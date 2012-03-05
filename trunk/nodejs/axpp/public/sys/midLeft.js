@@ -9,17 +9,34 @@ Ext.sys.midLeft.create = function () {
             margin: '4 15 0 15',
             toggleGroup: 'btnG1',
             handler: function (btn, e) {
+                //Ext.MessageBox.alert('完成', btn.text + '点击');
+                var tabs = Ext.sys.midCenter.get();
+                var tab = tabs.add({
+                    title: btn.text,
+                    html : btn.text,
+                    closable: true
+                });
+                tabs.setActiveTab(tab);
+            }
+        }));
+    }
+    
+    var btns2 = [];
+    for (var i = 0; i < 10; i++) {
+        btns2.push(Ext.create('Ext.button.Button', {
+            text: Ext.String.format('Click2 Me {0}', i),
+            enableToggle: true,
+            //width:100,
+            margin: '4 15 0 15',
+            toggleGroup: 'btnG1',
+            handler: function (btn, e) {
                 Ext.MessageBox.alert('完成', btn.text + '点击');
             }
         }));
     }
-
     var bar = Ext.create('Ext.panel.Panel', {
         region: 'west',
-        layout: {
-            type: 'accordion',
-            aline: 'center'
-        },
+        layout: 'accordion',
         //特殊说明, 表示一个可展开的东西
         //collapsible: true,
         //title: '导航 west',
@@ -32,7 +49,7 @@ Ext.sys.midLeft.create = function () {
             items: btns
         }, {
             title: 'accordion2',
-            html: '<a>2222</a>'
+            items: btns2
         }]
     });
     return bar;
