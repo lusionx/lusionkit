@@ -5,13 +5,11 @@ Ext.sys.midCenter.create = function () {
         // TabPanel itself has no title
         activeTab: 0,
         // First tab active by default
+        plain: true,
         items: [{
             title: 'Default Tab',
-            html: 'The first tab\'s content. Others may be added dynamically',
-        }, {
-            title: ' Tab 2',
-            html: 'The 2 tab\'s content. Others may be added dynamically',
-            closable: true
+            //closable: true,
+            html: 'The first tab\'s content. Others may be added dynamically'
         }],
         id: 's-tabs'
     });
@@ -24,7 +22,7 @@ Ext.sys.midCenter.get = function () {
     return tabs;
 };
 
-Ext.sys.midCenter.activeTab = function () {
+Ext.sys.midCenter.getActiveTab = function () {
     var tabs = Ext.getCmp('s-tabs');
     return tabs.getActiveTab();
 };
