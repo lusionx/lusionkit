@@ -34,6 +34,28 @@ Ext.sys.midLeft.create = function () {
             }
         }));
     }
+    
+    var dataTree = Ext.create('Ext.data.TreeStore', {
+        root: {
+            expanded: true
+        },
+        proxy: {
+            type: 'ajax',
+            url: '/sys/dataTree.json'
+        }
+    });
+    
+    var treePanel = Ext.create('Ext.tree.Panel', {
+        //id: 'tree-panel',
+        title: 'accordion0',
+        split: true,
+        height: 360,
+        minSize: 150,
+        rootVisible: false,
+        autoScroll: true,
+        store: dataTree
+    });
+    
     var bar = Ext.create('Ext.panel.Panel', {
         region: 'west',
         layout: 'accordion',
@@ -42,9 +64,9 @@ Ext.sys.midLeft.create = function () {
         //title: '导航 west',
         //titleCollapse : true,
         split: true,
-        width: 150,
+        width: 160,
         margins: '0 0 0 1',
-        items: [{
+        items: [treePanel, {
             title: 'accordion1',
             items: btns
         }, {

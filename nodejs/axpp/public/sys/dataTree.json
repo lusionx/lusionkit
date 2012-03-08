@@ -1,0 +1,42 @@
+{ 
+text: '.',
+children: [{
+    text:'Basic',
+    expanded: true,
+    children:[{
+        text:'Absolute',
+        id:'absolute',
+        leaf:true
+    },{
+        text:'Accordion',
+        id:'accordion',
+        leaf:true
+    },{
+        text:'hBox',
+        id:'hbox',
+        leaf:true
+    }]
+},{
+    text:'Custom',
+    children:[{
+        text:'Center',
+        id:'center',
+        leaf:true
+    },{
+        text:'Center2',
+        id:'center2',
+        leaf:true
+    }]
+},{
+    text:'Combination',
+    children:[{
+        text:'Absolute Layout',
+        id:'abs-form',
+        leaf:true
+    },{
+        text:'Tabs with Nested',
+        id:'tabs-nested-layouts',
+        leaf:true
+    }]
+}]
+}
