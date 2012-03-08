@@ -3,6 +3,8 @@
  * 是 this.a 查询query
  */
 
+var fs = require('fs');
+
 exports.menu = function(p1, p2){
     return {menu:2, a:p1, b:p2, c: this.ww};
 }

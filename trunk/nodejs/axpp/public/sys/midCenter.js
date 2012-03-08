@@ -5,7 +5,7 @@ Ext.sys.midCenter.create = function () {
         // TabPanel itself has no title
         activeTab: 0,
         // First tab active by default
-        plain: true,
+        //plain: true,
         items: [{
             title: 'Default Tab',
             //closable: true,
