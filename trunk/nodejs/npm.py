@@ -95,7 +95,7 @@ def analysisDependencies(dpd):
             f = open(path)
             localv = json.loads(f.read())['version']
             f.close()
-        print 'require %s %s : local %s, ' % (k, v, localv)
+        print '    require %s %s : local %s, ' % (k, v, localv)
         if localv == 'none':
             cfg['childPkg'].append(k)
 
