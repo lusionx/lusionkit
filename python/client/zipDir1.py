@@ -1,14 +1,11 @@
 # coding: utf-8
 """
-°ÑÖ¸¶¨ÎÄ¼ş¼ĞÏÂµÄÖ±½ÓÎÄ¼şÑ¹Ëõ³ÉÒ»¸özip
-±£´æÔÚÓëÎÄ¼ş¼ĞÍ¬¼¶µÄÎ»ÖÃ
+æŠŠæ–‡ä»¶å¤¹å˜æˆzip,ä¸”ä¸å¢åŠ è·¯å¾„
 """
 import os
 import zipfile
+import argparse
 
-def main():
-    zipDir('D:\\lusionx\\Pictures\\HºÍĞ°Éç\\Ñ©Å®')
-    
 def zipDir(dirpath):
     filelist = []
     fullpath = ''
@@ -20,8 +17,25 @@ def zipDir(dirpath):
             print "except:" + fullpath
     myzip = zipfile.ZipFile(os.path.basename(dirpath) + '.zip', 'w')
     for path in filelist:
+        print 'wirte %s' % path
         myzip.write(path,os.path.basename(path))
     myzip.close()
 
+def main():#æŒ‡å®šä¸€ä¸ª æ–‡ä»¶å¤¹
+    parser = argparse.ArgumentParser()
+    parser.add_argument('DIR', nargs=1, help='dirName')
+    results = parser.parse_args()
+    u = results.DIR[0]
+    zipDir(u)
+
+def mainAll():#æ‰€æœ‰æ–‡ä»¶å¤¹
+    root = os.getcwd()#os.path.dirname(__file__)
+    print __file__
+    fullpath = ''
+    for path in os.listdir(root):
+        fullpath = os.path.join(root, path)
+        if os.path.isdir(fullpath) and not os.path.exists(fullpath + '.zip'):
+            zipDir(fullpath)
+            
 if __name__ == '__main__':
-    main()
+    mainAll()
