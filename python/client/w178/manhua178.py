@@ -14,8 +14,12 @@ def loadDir(u):
         for a in div.findAll('a'):
             links.append((a['href'],a.string))
     #links = sorted(links,key = lambda x:x[1].replace(u'第',''))
+    ss = ''
     for k,v in links:
-        print 'cmd -d %s %s' % (k,v)
+        a = 'python ../manhua178.py -d %s %s' % (k,v)
+        print a
+        ss += a + '\n'
+    open('index.txt','w').write(ss.encode('utf-8'))
     return links
 
 def loadInfo(u):
