@@ -2,7 +2,7 @@
 
 import httplib2
 from BeautifulSoup import BeautifulSoup
-import argparse, json, os
+import argparse, json, os, zipfile
 
 def loadDir(u):
     h = httplib2.Http()
@@ -42,15 +42,22 @@ def downImg(u):
     ss = json.loads(ss)
     domain = u'http://imgfast.manhua.178.com/'
     i = 0
+    svPaths = []
     for a in ss:
-        i+=1
-        f = open(title + u'_' + os.path.split(a)[1],'wb')
+        i += 1
+        f = open(title + u'_' + '%03d%s' % (i, os.path.splitext(a)[1]), 'wb')
+        svPaths.append(f.name)
         print '%s/%s %s to %s ' % (i, len(ss), a, f.name, )
         resp, byts = h.request(domain + a, "GET")
         f.write(byts)
         f.close()
+    title = title.lstrip(u'第')
+    zf = zipfile.ZipFile(title + '.zip', 'w')
+    for a in svPaths:
+        zf.write(a)
+        os.remove(a)
+    zf.close()
     
-        
 def main():
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
