@@ -23,7 +23,7 @@ def loadDir(u):
     return links
 
 def loadInfo(u):
-    h = httplib2.Http(".cache")
+    h = httplib2.Http()
     resp, content = h.request(u, "GET")
     content = content.decode('utf-8')
     soup = BeautifulSoup(content)
@@ -37,8 +37,8 @@ def downImg(u):
     resp, content = h.request(u, "GET")
     content = content.decode('utf-8')
     content = content.split('\n')
-    ss = [line for line in content if line[:12]=='var pages = '][0][13:-3]
-    title = [line for line in content if line[:21]=='var g_chapter_name = '][0][22:-3]
+    ss = [line for line in content if line[:12]=='var pages = '][0][21:-2]
+    title = [line for line in content if line[:21]=='var g_chapter_name = '][0][22:-2]
     ss = json.loads(ss)
     domain = u'http://imgfast.manhua.178.com/'
     i = 0
