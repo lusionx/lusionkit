@@ -47,8 +47,9 @@ def downImg(u):
         i += 1
         f = open(title + u'_' + '%03d%s' % (i, os.path.splitext(a)[1]), 'wb')
         svPaths.append(f.name)
-        print '%s/%s %s to %s ' % (i, len(ss), a, f.name, )
+        print '%s/%s %s to %s ' % (i, len(ss), domain + a, f.name, )
         resp, byts = h.request(domain + a, "GET")
+        print resp
         f.write(byts)
         f.close()
     title = title.lstrip(u'第')
