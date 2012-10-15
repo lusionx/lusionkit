@@ -49,7 +49,7 @@ def downImg(u):
         svPaths.append(f.name)
         print '%s/%s %s to %s ' % (i, len(ss), domain + a, f.name, )
         resp, byts = h.request(domain + a, "GET")
-        print resp
+        #print resp
         f.write(byts)
         f.close()
     title = title.lstrip(u'第')
