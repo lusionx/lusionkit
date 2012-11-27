@@ -17,7 +17,7 @@ def loadDir(u):
             links.insert(0,(domain + a['href'],a.contents[0]))
     ss = ''
     for k,v in links:
-        a = 'python ../comic.131.py -d %s %s' % (k,v)
+        a = 'python ../bin/comic.131.py -d %s %s' % (k,v)
         print a
         ss += a + '\n'
     open('index.txt','w').write(ss.encode('utf-8'))

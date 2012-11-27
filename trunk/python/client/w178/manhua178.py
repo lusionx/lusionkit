@@ -16,7 +16,7 @@ def loadDir(u):
     #links = sorted(links,key = lambda x:x[1].replace(u'第',''))
     ss = ''
     for k,v in links:
-        a = 'python ../manhua178.py -d %s %s' % (k,v)
+        a = 'python ../bin/manhua178.py -d %s %s' % (k,v)
         print a
         ss += a + '\n'
     open('index.txt','w').write(ss.encode('utf-8'))
@@ -47,12 +47,12 @@ def downImg(u):
         i += 1
         f = open(title + u'_' + '%03d%s' % (i, os.path.splitext(a)[1]), 'wb')
         svPaths.append(f.name)
-        print '%s/%s %s to %s ' % (i, len(ss), domain + a, f.name, )
-        resp, byts = h.request(domain + a, "GET")
+        print '%3d/%s %s to %s ' % (i, len(ss), domain + a, f.name, )
+        resp, byts = h.request(domain + a.replace(' ','%20'), "GET")
         #print resp
         f.write(byts)
         f.close()
-    title = title.lstrip(u'第')
+    #title = title.lstrip(u'第')
     zf = zipfile.ZipFile(title + '.zip', 'w')
     for a in svPaths:
         zf.write(a)

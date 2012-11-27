@@ -15,7 +15,7 @@ def loadDir(u):
             links.append(('http://manhua.7k7k.com' + a['href'],a.string))
     ss = ''
     for k,v in links:
-        a = 'python ../manhua7k7k.py -d %s %s' % (k, v)
+        a = 'python ../bin/manhua7k7k.py -d %s %s' % (k, v)
         print a
         ss += a + '\n'
     open('index.txt','w').write(ss.encode('utf-8'))
