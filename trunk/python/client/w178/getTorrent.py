@@ -5,7 +5,7 @@ import argparse, os
 import libClip
 
 
-root = 'D:\\lusionx\\Videos\\torrent'#os.path.dirname(__file__)
+root = os.getcwd()#os.path.dirname(__file__)
 
 def gclip():
     return libClip.get()
