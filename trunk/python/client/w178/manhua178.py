@@ -16,7 +16,7 @@ def loadDir(u):
     #links = sorted(links,key = lambda x:x[1].replace(u'第',''))
     ss = ''
     for k,v in links:
-        a = 'python ../bin/manhua178.py -d %s %s' % (k,v)
+        a = 'mh178 -d %s %s' % (k,v)
         print a
         ss += a + '\n'
     open('index.txt','w').write(ss.encode('utf-8'))
