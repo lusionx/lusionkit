@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alx.ORM.Test", "Alx.ORM.Test\Alx.ORM.Test.csproj", "{296B9B1E-3C69-4564-B3CC-F3C5CE7C318A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alx.ORM.Core", "Alx.ORM.Core\Alx.ORM.Core.csproj", "{3535E634-C7EE-468F-A982-A8031B14DE17}"
