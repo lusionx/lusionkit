@@ -45,11 +45,13 @@
     <Compile Include="AttrCache.cs" />
     <Compile Include="Attribute\Column.cs" />
     <Compile Include="Attribute\Tabel.cs" />
+    <Compile Include="Construction.cs" />
     <Compile Include="Dynamic.cs" />
     <Compile Include="Enumerable_my.cs" />
     <Compile Include="Special\ISpecial.cs" />
     <Compile Include="ObjectContext.cs" />
     <Compile Include="Special\SpOracle.cs" />
+    <Compile Include="Special\SpSQL.cs" />
     <Compile Include="Special\SpSQLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableBase.cs" />

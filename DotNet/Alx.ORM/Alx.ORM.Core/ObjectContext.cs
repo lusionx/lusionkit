@@ -11,7 +11,9 @@ using System.Linq.Dynamic;
 
 namespace Alx.ORM.Core
 {
-
+    /// <summary>
+    /// 显示类型化参数
+    /// </summary>
     public class Parameter
     {
         public DbType DbType { get; set; }
@@ -37,6 +39,20 @@ namespace Alx.ORM.Core
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionStr"></param>
+        /// <param name="factory"></param>
+        /// <param name="sp">适配器 SQL, SQLite, Oracle</param>
+        public ObjectContext(string connectionStr, DbProviderFactory factory, string sp)
+        {
+            Provider = factory;
+            Connection = Provider.CreateConnection();
+            Connection.ConnectionString = connectionStr;
+            var ass = Assembly.GetExecutingAssembly();
+            Special = ass.CreateInstance(ass.FullName.Split(',')[0] + ".Sp" + sp) as ISpecial;
+        }
 
         /// <summary>
         /// 
