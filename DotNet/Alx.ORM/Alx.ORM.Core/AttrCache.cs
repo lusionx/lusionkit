@@ -23,7 +23,7 @@ namespace Alx.ORM.Core
             }
             else
             {
-                var tableAttr = tableType.GetCustomAttributes(false)
+                var tableAttr = tableType.GetCustomAttributes(true)
                             .Single(a => a is TabelAttribute) as TabelAttribute;
                 var columnsAttr = new List<ColumnAttribute>();
                 tableAttr.Columns = columnsAttr;
@@ -41,7 +41,7 @@ namespace Alx.ORM.Core
                     col.GetFun = GetDelegate(property.GetGetMethod());
                     if (col.DefaultValue != null)
                     {
-                        col.DefaultVal = (System.Activator.CreateInstance(col.DefaultValue) as IDefultVal).GetVal();
+                        col.DefVal = (System.Activator.CreateInstance(col.DefaultValue) as IDefultVal).GetVal();
                     }
 
                     columnsAttr.Add(col);

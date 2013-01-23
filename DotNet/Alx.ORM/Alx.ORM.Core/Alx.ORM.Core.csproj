@@ -48,6 +48,7 @@
     <Compile Include="Construction.cs" />
     <Compile Include="Dynamic.cs" />
     <Compile Include="Enumerable_my.cs" />
+    <Compile Include="IDefVal.cs" />
     <Compile Include="Special\ISpecial.cs" />
     <Compile Include="ObjectContext.cs" />
     <Compile Include="Special\SpOracle.cs" />
