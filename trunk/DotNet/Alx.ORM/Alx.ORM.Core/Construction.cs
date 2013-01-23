@@ -33,38 +33,9 @@ namespace Alx.ORM.Core
         public string DataType { get; set; }
         public DbType DbType { get; set; }
         public string Des { get; set; }
+        public int Length { get; set; }
         public bool IsPk { get; set; }
         public bool Nullable { get; set; }
         public IDefVal DefVal { get; set; }
     }
-
-    public interface IDefVal
-    {
-        object Val { get; }
-    }
-
-    public class Int0 : IDefVal
-    {
-        public object Val
-        {
-            get { return 0; }
-        }
-    }
-
-    public class StringNull : IDefVal
-    {
-        public object Val
-        {
-            get { return null; }
-        }
-    }
-
-    public class StringEmpty : IDefVal
-    {
-        public object Val
-        {
-            get { return string.Empty; }
-        }
-    }
-
 }

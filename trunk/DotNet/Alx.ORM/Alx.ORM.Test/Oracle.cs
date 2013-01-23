@@ -12,7 +12,8 @@ namespace Alx.ORM.Test
     {
         public void Test()
         {
-            TestInsert();
+            //TestInsert();
+            TestInsert继承();
             //TestDelete();
             //TestSelect();
             //TestUpdate();
@@ -38,6 +39,7 @@ namespace Alx.ORM.Test
 
         }
 
+
         public void TestInsert()
         {
             string cnstr = @"Data Source=testbj;User Id=HR_PPORTAL;Password=1qaz2wsx;";
@@ -51,10 +53,28 @@ namespace Alx.ORM.Test
             });
         }
 
+        public void TestInsert继承()
+        {
+            string cnstr = @"Data Source=testbj;User Id=HR_PPORTAL;Password=1qaz2wsx;";
+            var db = new ObjectContext(cnstr);
+            db.Insert(new TMP_TEST_EXT
+            {
+                CREATEDATE = DateTime.Now,
+                NAME = "lxx",
+                PERSON_KEY = Guid.NewGuid(),
+                VISIBLE = "4"
+            });
+        }
+
         public void Test1()
         {
 
         }
+    }
+
+    public class TMP_TEST_EXT : TMP_TEST
+    {
+        public string Ext { get; set; }
     }
 
     [Tabel(Name = "TMP_TEST")]
