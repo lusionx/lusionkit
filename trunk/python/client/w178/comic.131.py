@@ -14,7 +14,10 @@ def loadDir(u):
     links = [] 
     for div in soup.findAll('ul', attrs={'class':'mh_fj'}):
         for a in div.findAll('a'):
-            links.insert(0,(domain + a['href'],a.contents[0]))
+            if a['href'][:len(domain)] == domain:                
+                links.insert(0,(a['href'],a.contents[0]))
+            else :
+                links.insert(0,(domain + a['href'],a.contents[0]))
     ss = ''
     for k,v in links:
         a = 'mh131 -d %s %s' % (k,v)
@@ -35,7 +38,7 @@ def downImg(u):
     content = content.decode('utf-8')
     soup = BeautifulSoup(content)
     title = soup.find('div', attrs={'class':'mh_szwz2'})
-    title = title.findAll('a')[-1].nextSibling.split(' ')[-1]
+    title = title.findAll('a')[-1].string
     #print title
     pages = []
     #生成所有的page地址 http://comic.131.com/content/15159/156936/[xx].html
