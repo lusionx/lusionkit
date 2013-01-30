@@ -37,9 +37,16 @@ def downImg(u):
     resp, content = h.request(u, "GET")
     content = content.decode('utf-8')
     content = content.split('\n')
-    ss = [line for line in content if line[:12]=='var pages = '][0][21:-2]
-    title = [line for line in content if line[:21]=='var g_chapter_name = '][0][22:-2]
+    ss = [line for line in content if line[:26]=='eval(function(p,a,c,k,e,d)'][0]
+    f = open('tmp.js','w')
+    f.write(ss+';console.log(pages);')
+    f.close()
+    ss = os.popen('node tmp.js').readlines()[0]
     ss = json.loads(ss)
+    #print ss
+    #return;
+    title = [line for line in content if line[:21]=='var g_chapter_name = '][0][22:-2]
+    
     domain = u'http://imgfast.manhua.178.com/'
     i = 0
     svPaths = []
