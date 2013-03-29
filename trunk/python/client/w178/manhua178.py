@@ -16,6 +16,8 @@ def loadDir(u):
     #links = sorted(links,key = lambda x:x[1].replace(u'第',''))
     ss = ''
     for k,v in links:
+        if k[:4] != 'http':
+            k = 'http://manhua.178.com' + k
         a = 'mh178 -d %s %s' % (k,v)
         print a
         ss += a + '\n'
