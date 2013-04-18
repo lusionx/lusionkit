@@ -24,7 +24,7 @@ def cleanDir(Dir):
             os.rmdir(filePath)
         else:
             print '%s is not file ,dir ' % filePath
-    #os.removedirs(Dir)
+    #os.rmdir(Dir)
 
 def cmpVersion(v1, v2):
     """
@@ -101,7 +101,7 @@ def downLoad(url, nname, ver):
     #先删除目标目录
     if os.path.isdir(os.path.join(cfg['target'], nname)):
         cleanDir(os.path.join(cfg['target'], nname))
-        os.removedirs(os.path.join(cfg['target'], nname))
+        os.rmdir(os.path.join(cfg['target'], nname))# removedirs
     #复制文件夹到目标地址并改名
     os.rename(uidf + '/package' , os.path.join(cfg['target'], nname))
     os.removedirs(uidf)
