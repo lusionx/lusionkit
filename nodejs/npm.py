@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-#!/usr/bin/python
+#coding: utf-8
 
 """
 使用python 下载 npmjs.org的模块
 """
 
-import httplib2, json, os, tarfile, uuid, sys
+import httplib2, json, os, tarfile, uuid, sys, os
 
 cfg = {}
-cfg['base'] = 'D:\\app\\nodejs'
-cfg['download'] = os.path.join(cfg['base'], 'tmp')
-cfg['target'] = os.path.join(cfg['base'], 'node_modules')
+cfg['target'] = os.environ['NODE_PATH']
+cfg['download'] = os.path.abspath(os.path.join(cfg['target'], '..\\', 'tmp'))
 cfg['childPkg'] = []
 
 def cleanDir(Dir):
@@ -28,39 +26,67 @@ def cleanDir(Dir):
             print '%s is not file ,dir ' % filePath
     #os.removedirs(Dir)
 
+def cmpVersion(v1, v2):
+    """
+    比较 *(0.0.1), none(0.0.0), x.x.x 作为版本号时的大小 as cmp
+    """
+    def fix(v):
+        v = v.lstrip('~').replace('x','1')
+        if v == '*':
+            return [0,0,1]
+        if v == 'none':
+            return [0,0,0]
+        v = [int(a) for a in v.split('.')]
+        return v
+    v1 = fix(v1)
+    v2 = fix(v2)
+    for i in xrange(0,3):
+        if v1[i] == v2[i]:
+            continue
+        else:
+            return cmp(v1[i], v2[i])
+    return 0
+    
 
-def install(nname):
-    url = 'http://registry.npmjs.org/' + nname;
-    #h = httplib2.Http(".cache")
+def install(nname, ver='latest'):
+    url = 'http://registry.npmjs.org/' + nname
     
     #分析json 得到最新版的地址,版本号
     print 'Get package info from %s' % url
     h = httplib2.Http()
     resp, content = h.request(url, "GET")
-    #content = urllib2.urlopen(url).read()
     info = json.loads(content)
     
     #可能有找不到的情况
     if info.has_key('error'):
         print "Can't find %s" % nname
         return
-    last = info['dist-tags']['latest']
     
-    print 'The last verson is %s' % last
-    
-    lastverson = info['versions'][last]
-    url = lastverson['dist']['tarball']
-    dependencies = {}
-    if lastverson.has_key('dependencies'):
-        dependencies = lastverson['dependencies']
-    #处理依赖
-    analysisDependencies(dependencies)
+    if ver =='latest':
+        ver = info['dist-tags']['latest']
+        
+    if not info['versions'].has_key(ver):
+        print "Can't find %s version %s" % (nname, ver)
+        return
 
+    print 'Get verson %s' % ver
+    
+    lastverson = info['versions'][ver]
+    url = lastverson['dist']['tarball']
+
+    #处理依赖 队列
+    if lastverson.has_key('dependencies'):
+        analysisDependencies(lastverson['dependencies'])
+
+    downLoad(url, nname, ver)
+    print 'install ' + nname + ' v' + ver + ' finished!'
+
+def downLoad(url, nname, ver):
     #下载 tgz文件
     print 'Download from %s' % url
+    h = httplib2.Http()
     resp, content = h.request(url,'GET')
-    #content = urllib2.urlopen(url).read()
-    filename = nname + '-' + last + '.tgz'
+    filename = nname + '-' + ver + '.tgz'
     f = open(os.path.join(cfg['download'], filename),'wb')
     f.write(content)
     f.close()
@@ -80,13 +106,6 @@ def install(nname):
     os.rename(uidf + '/package' , os.path.join(cfg['target'], nname))
     os.removedirs(uidf)
 
-    print 'install ' + nname + ' v' + last + ' finished!'
-    if len(cfg['childPkg']) > 0:
-        a = cfg['childPkg'][0]
-        del cfg['childPkg'][0]
-        install(a)
-        
-
 def analysisDependencies(dpd):
     for k,v in dpd.items():
         localv = 'none'
@@ -95,8 +114,10 @@ def analysisDependencies(dpd):
             f = open(path)
             localv = json.loads(f.read())['version']
             f.close()
-        print '    require %s %s : local %s, ' % (k, v, localv)
-        if localv == 'none':
+        need = cmpVersion(v, localv)
+        print '    require %s %s : local %s ' % (k, v, localv)
+        if need == 1:
+            print '        %s append' % k
             cfg['childPkg'].append(k)
 
 
@@ -149,11 +170,17 @@ if __name__ == '__main__':
     group.add_argument('-i', action="store_true", help='install pkg')
     group.add_argument('-s', action="store_true", help='show pkg')
     parser.add_argument('PKG', nargs=1, help='pkg name')
+    parser.add_argument('-v', default='latest', metavar='x.x.x', help = 'version for install')
     results = parser.parse_args()
     if results.r:
         remove(results.PKG[0])
     if results.i:
-        install(results.PKG[0])
+        install(results.PKG[0], results.v)#处理第一个包
+        for i in xrange(0,1000):#处理
+            if len(cfg['childPkg']) > 0:
+                a = cfg['childPkg'][0]
+                del cfg['childPkg'][0]
+                install(a)
     if results.s:
         show(results.PKG[0])
 
