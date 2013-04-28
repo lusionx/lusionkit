@@ -85,26 +85,33 @@ def downLoad(url, nname, ver):
     #下载 tgz文件
     print 'Download from %s' % url
     h = httplib2.Http()
-    resp, content = h.request(url,'GET')
-    filename = nname + '-' + ver + '.tgz'
-    f = open(os.path.join(cfg['download'], filename),'wb')
-    f.write(content)
-    f.close()
-    
-    #解压 tgz文件
-    print 'Extracting'
-    tar = tarfile.open(os.path.join(cfg['download'], filename))
-    uidf = os.path.join(cfg['download'], nname + '-' + str(uuid.uuid4()))
-    tar.extractall(uidf)
-    tar.close()
+    filename = os.path.basename(url)
+    if not os.path.isfile(filename):
+        resp, content = h.request(url,'GET')
+        f = open(os.path.join(cfg['download'], filename),'wb')
+        f.write(content)
+        f.close()
     
     #先删除目标目录
     if os.path.isdir(os.path.join(cfg['target'], nname)):
         cleanDir(os.path.join(cfg['target'], nname))
-        os.rmdir(os.path.join(cfg['target'], nname))# removedirs
-    #复制文件夹到目标地址并改名
-    os.rename(uidf + '/package' , os.path.join(cfg['target'], nname))
-    os.removedirs(uidf)
+        os.rmdir(os.path.join(cfg['target'], nname))
+        
+    #解压 tgz文件
+    print 'Extracting'
+    tar = tarfile.open(os.path.join(cfg['download'], filename))
+    for mem in tar.getmembers():
+        name = mem.name
+        ff = tar.extractfile(mem)
+        tf = os.path.join(cfg['target'], nname, name[8:])
+        if not os.path.isdir(os.path.dirname(tf)):
+            os.mkdir(os.path.dirname(tf))
+        tf = open(os.path.join(cfg['target'], nname, name[8:]), 'wb')
+        tf.write(ff.read())
+        ff.close()
+        tf.close()
+    tar.close()
+    
 
 def analysisDependencies(dpd):
     for k,v in dpd.items():
@@ -125,7 +132,7 @@ def remove(nname):
     dirpath = os.path.join(cfg['target'], nname)
     if os.path.isdir(dirpath):
         cleanDir(dirpath)
-        os.removedirs(dirpath)
+        os.rmdir(dirpath)
         print 'Remove %s from lib(%s)' % (nname, cfg['target'])
         return True
     else:
@@ -133,6 +140,13 @@ def remove(nname):
         return False
 
 def show(name):
+    def getVersion(name):
+        path = os.path.join(cfg['target'], nname, 'package.json')
+        localv = ''
+        if os.path.isfile(path):
+            localv = json.loads(open(path).read())['version']
+        return localv
+
     def showone(nname):
         path = os.path.join(cfg['target'], nname, 'package.json')
         if os.path.isfile(path):
@@ -176,11 +190,10 @@ if __name__ == '__main__':
         remove(results.PKG[0])
     if results.i:
         install(results.PKG[0], results.v)#处理第一个包
-        for i in xrange(0,1000):#处理
-            if len(cfg['childPkg']) > 0:
-                a = cfg['childPkg'][0]
-                del cfg['childPkg'][0]
-                install(a)
+        while len(cfg['childPkg']) > 0:
+            a = cfg['childPkg'][0]
+            del cfg['childPkg'][0]
+            install(a)
     if results.s:
         show(results.PKG[0])
 
