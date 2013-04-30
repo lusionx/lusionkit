@@ -31,7 +31,7 @@ def cmpVersion(v1, v2):
     比较 *(0.0.1), none(0.0.0), latest(9.9.9), x.x.x 作为版本号时的大小 as cmp
     """
     def fix(v):
-        v = v.lstrip('~').replace('x','1')
+        v = v.lstrip('~').lstrip('>').replace('x','1')
         if v == '*':
             return [0,0,1]
         if v == 'none':
@@ -104,6 +104,8 @@ def downLoad(url, nname, ver):
     print 'Extracting'
     tar = tarfile.open(os.path.join(cfg['download'], filename))
     for mem in tar.getmembers():
+        if not mem.isfile():
+            continue
         name = mem.name
         ff = tar.extractfile(mem)
         tf = os.path.join(cfg['target'], nname, name[8:])
