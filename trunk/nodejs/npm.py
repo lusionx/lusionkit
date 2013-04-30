@@ -28,7 +28,7 @@ def cleanDir(Dir):
 
 def cmpVersion(v1, v2):
     """
-    比较 *(0.0.1), none(0.0.0), x.x.x 作为版本号时的大小 as cmp
+    比较 *(0.0.1), none(0.0.0), latest(9.9.9), x.x.x 作为版本号时的大小 as cmp
     """
     def fix(v):
         v = v.lstrip('~').replace('x','1')
@@ -36,7 +36,10 @@ def cmpVersion(v1, v2):
             return [0,0,1]
         if v == 'none':
             return [0,0,0]
+        if v == 'latest':
+            return [9,9,9]
         v = [int(a) for a in v.split('.')]
+
         return v
     v1 = fix(v1)
     v2 = fix(v2)
@@ -105,7 +108,7 @@ def downLoad(url, nname, ver):
         ff = tar.extractfile(mem)
         tf = os.path.join(cfg['target'], nname, name[8:])
         if not os.path.isdir(os.path.dirname(tf)):
-            os.mkdir(os.path.dirname(tf))
+            os.makedirs(os.path.dirname(tf))
         tf = open(os.path.join(cfg['target'], nname, name[8:]), 'wb')
         tf.write(ff.read())
         ff.close()
