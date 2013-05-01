@@ -31,7 +31,10 @@ def cmpVersion(v1, v2):
     比较 *(0.0.1), none(0.0.0), latest(9.9.9), x.x.x 作为版本号时的大小 as cmp
     """
     def fix(v):
-        v = v.lstrip('~').lstrip('>').replace('x','1')
+        sp = '~>='
+        for s in sp:
+            v = v.replace(s,'')
+        v = v.replace('x','0')
         if v == '*':
             return [0,0,1]
         if v == 'none':
@@ -126,8 +129,8 @@ def analysisDependencies(dpd):
             f = open(path)
             localv = json.loads(f.read())['version']
             f.close()
-        need = cmpVersion(v, localv)
         print '    require %s %s : local %s ' % (k, v, localv)
+        need = cmpVersion(v, localv)
         if need == 1:
             print '        %s append' % k
             cfg['childPkg'].append(k)
