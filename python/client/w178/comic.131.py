@@ -51,8 +51,8 @@ def downImg(u):
         resp, content = h.request(url, "GET")
         content = content.decode('utf-8')
         soup = BeautifulSoup(content)
-        imgjs = soup.find('script', attrs={'id':'imgjs'})['src']
-        img = imgjs.split('?img=')[1]
+        img = soup.find('img', attrs={'id':'comicBigPic'})['src']
+        #img = imgjs.split('?img=')[1]
         resp, bytes = h.request(img, "GET")
         fileName = '%s_%03d%s' % (title, i, os.path.splitext(img)[1])
         print '%3d/%s from %s to %s' % (i, len(pages), img, fileName)
