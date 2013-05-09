@@ -5,4 +5,4 @@
 
 module.exports = (app)->
     app.get '/user', (req,res)->
-        res.render 'index', { title: '用户' }
+        res.render 'user', { title: '用户' }
