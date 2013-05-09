@@ -4,30 +4,38 @@
  ###
 
 express = require 'express'
-routes = require './routes'
-http = require 'http'
 path = require 'path'
+settings = require './settings'
+mongodb = require 'mongodb'
 
+ 
 app = express()
 
 # all environments
-app.set('port', process.env.PORT || 3000)
-app.set('views', __dirname + '/views')
-app.set('view engine', 'jade')
-app.use(express.favicon())
-app.use(express.logger('dev'))
-app.use(express.bodyParser())
-app.use(express.methodOverride())
-app.use(app.router)
-app.use(express.static(path.join(__dirname, 'static')))
+app.set 'port', settings.port
+app.set 'views', __dirname + "/views"
+app.set 'view engine', 'jade'
+
+app.set 'mongodb', (callback)->
+    mongodb.MongoClient.connect "mongodb://localhost:27017/integration_test", callback
+    
+#app.use(express.favicon())
+
+app.locals settings.locals
+
+app.use express.logger('dev')
+app.use express.bodyParser()
+app.use express.methodOverride()
+app.use app.router
+app.use express.static(path.join(__dirname, 'static'))
 
 #development only
 if 'development' is app.get 'env'
-	app.use(express.errorHandler())
+    app.use express.errorHandler()
 
 
-routes app
+(require './routes') app
 
-http.createServer(app).listen app.get('port'), ()->
-	console.log 'Express server listening on port ' + app.get('port')
+(require 'http').createServer(app).listen app.get('port'), ()->
+    console.log 'Express server listening on port ' + app.get('port')
 
