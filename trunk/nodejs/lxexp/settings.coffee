@@ -8,7 +8,7 @@ options =
     host:'127.0.0.1'
     port:'27017'
     name:'test'
-    user:'lxing' # works when mongod auth=Y
+    user:'' # works when mongod auth=Y
     pwd:'pwd2'
     build:()->
       auth = if @user then @user + ':' + @pwd + '@' else ''

@@ -7,11 +7,19 @@ html
         link(rel='shortcut icon', href='/img/favicon.png')
         //if lt IE 9
             script(src='/js/html5shiv.js')
-
         meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
-
     body
-        block content
+        include include/nav
+        header
+            div.container
+                h1 这个系统不呀不寻常
+
+        div.container
+            block content
+
+            hr
+            include include/footer
+
         script(src='/js/jquery-1.9.1.min.js')
         script(src='/js/bootstrap.min.js')
         block foot

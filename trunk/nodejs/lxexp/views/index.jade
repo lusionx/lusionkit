@@ -2,8 +2,8 @@ extends layout
 
 block content
     h1= title
-        p Welcome to #{title}
+    p Welcome to #{title}
 
     ul
         each v, k in items
-            li #{k} #{v}
+            li #{k} #{v.name}
