@@ -147,31 +147,42 @@ def remove(nname):
         print "Can't find %s from lib(%s)" % (nname, cfg['target'])
         return False
 
-def show(name):
-    def getVersion(name):
-        path = os.path.join(cfg['target'], nname, 'package.json')
-        localv = ''
-        if os.path.isfile(path):
-            localv = json.loads(open(path).read())['version']
-        return localv
+def localPkgInf(nname):
+    path = os.path.join(cfg['target'], nname, 'package.json')
+    if os.path.isfile(path):
+        f = open(path)
+        info = json.loads(f.read())
+        f.close()
+        if not info.has_key('description'):
+            info['description'] = 'None'
+        if not info.has_key('dependencies'):
+            info['dependencies'] = {}
+        return info
 
-    def showone(nname):
-        path = os.path.join(cfg['target'], nname, 'package.json')
-        if os.path.isfile(path):
-            f = open(path)
-            info = json.loads(f.read())
-            f.close()
-            keys = ['name','version']
-            for k in keys:
-                print '%s : %s' % (k,info[k])
-            if info.has_key('description'):
-                k = 'description'
-                print '%s : %s' % (k,info[k])
-            if info.has_key('dependencies') and len(info['dependencies']):
-                print 'dependencies:'
-                for k,v in info['dependencies'].items():
-                    print '    %s : %s' % (k, v)
-            print ''
+def show(name):
+    def lblank(i):
+        bk=''
+        for e in range(i):
+            bk += '    '
+        return bk
+
+    def showone(nname,deep = 0):
+        info = localPkgInf(nname)
+        keys = ['name','version','description']
+        for k in keys:
+            print lblank(deep),
+            print '%s : %s' % (k, info[k])
+        print lblank(deep),
+        print 'dependencies:'
+        for k,v in info['dependencies'].items():
+            if localPkgInf(k):
+                print lblank(deep + 1),
+                print '%s : %s (%s)' % (k, v, localPkgInf(k)['version'])
+                showone(k, deep + 2)
+            else:
+                print lblank(deep + 2),
+                print '%s : %s (%s)' % (k, v, 'None')
+        print ''
     if name == 'all':
         i = 0
         for path in os.listdir(cfg['target']):
@@ -197,7 +208,7 @@ if __name__ == '__main__':
     if results.r:
         remove(results.PKG[0])
     if results.i:
-        install(results.PKG[0], results.v)#处理第一个包
+        install(results.PKG[0], results.v)
         while len(cfg['childPkg']) > 0:
             a = cfg['childPkg'][0]
             del cfg['childPkg'][0]
