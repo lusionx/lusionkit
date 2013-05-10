@@ -16,8 +16,8 @@ app.set 'port', settings.port
 app.set 'views', __dirname + "/views"
 app.set 'view engine', 'jade'
 
-app.set 'mongodb', (callback)->
-    mongodb.MongoClient.connect "mongodb://localhost:27017/integration_test", callback
+app.set 'mongodb', (callback) ->
+    mongodb.MongoClient.connect settings.db.build(), callback
     
 #app.use(express.favicon())
 
