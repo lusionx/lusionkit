@@ -1,5 +1,34 @@
 extends layout
 
 block content
-    input(type='text')
-    p reg
+    div.row
+        div.span10.offset2
+            form#op-reg.form-horizontal.fix(method='post', action='/reg')
+                div.control-group
+                    label.control-label
+                    div.controls
+                        span.help-block 棒助信息
+                div.control-group
+                    label.control-label Email
+                    div.controls
+                        input(type='text', name='EMAIL')
+                div.control-group
+                    label.control-label 密码
+                    div.controls
+                        input(type='text', name='PWD')
+                div.control-group
+                    label.control-label 确认密码
+                    div.controls
+                        input(type='text', name='PWD2')
+                div.control-group
+                    label.control-label
+                    div.controls
+                        input.btn.btn-large.btn-primary(type='submit', value='注册')
+
+block foot
+    script
+        $(function(){
+            alert('a');
+        })
+
+
