@@ -20,7 +20,8 @@ app.set 'view engine', 'jade'
 app.locals settings.locals
 
 app.use express.logger('dev')
-app.use require('./connect-db')()
+app.use require('./connect/connect-mongodb')()
+app.use require('./connect/connect-mongoose')()
 app.use express.bodyParser()
 app.use express.methodOverride()
 app.use express.cookieParser settings.secret
