@@ -26,3 +26,13 @@ header h1 {
    font-size:41px;
    text-shadow:4px 4px 8px #E82720;
 }
+
+/*for jquery  jQuery Validate*/
+label.error {
+    display: inline-block;
+    margin-bottom: 0px;
+    color: #b94a48;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+/*for jquery  jQuery Validate end*/

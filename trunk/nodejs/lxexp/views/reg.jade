@@ -7,7 +7,7 @@ block content
                 div.control-group
                     label.control-label
                     div.controls
-                        span.help-block 棒助信息
+                        span.help-block 标题
                 div.control-group
                     label.control-label Email
                     div.controls
@@ -15,7 +15,7 @@ block content
                 div.control-group
                     label.control-label 密码
                     div.controls
-                        input(type='text', name='PWD')
+                        input#PWD(type='text', name='PWD')
                 div.control-group
                     label.control-label 确认密码
                     div.controls
@@ -26,9 +26,17 @@ block content
                         input.btn.btn-large.btn-primary(type='submit', value='注册')
 
 block foot
+    script(src='/js/jquery.validate.min.js')
+    script(src='/js/jquery.validate.messages_zh.js')
     script
         $(function(){
-            alert('a');
+            $('#op-reg').validate({
+                rules: {
+                    EMAIL: { required: true, email: true },
+                    PWD: { required: true, rangelength: [6, 16] },
+                    PWD2: { equalTo: "#PWD" }
+                }
+            })
         })
 
 
