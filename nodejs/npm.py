@@ -4,7 +4,7 @@
 使用python 下载 npmjs.org的模块
 """
 
-import httplib2, json, os, tarfile, uuid, sys, os
+import httplib2, json, os, tarfile, sys, os
 
 cfg = {}
 cfg['target'] = os.environ['NODE_PATH']
@@ -168,6 +168,9 @@ def show(name):
 
     def showone(nname,deep = 0):
         info = localPkgInf(nname)
+        if info is None:
+            print 'Cant find ' + nname
+            return 
         keys = ['name','version','description']
         for k in keys:
             print lblank(deep),
