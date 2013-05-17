@@ -22,15 +22,13 @@ class myose
         @isOpen = false
         @cnstr = ''
 
-    open: (conn=null) ->
+    open: () ->
         if not @isOpen
-            if conn is null and @cnstr is '' then @cnstr = require('../settings').db.build()
-            ose.connect @cnstr
+            @cnstr = require('../settings').db.build()
             @isOpen = true
+            ose.connect @cnstr
 
-    app_user: () ->
-        @open()
-        require('../model/app_user')(ose)
+    app_user: require('../model/app_user')(ose)
 
     close: ->
         ose.disconnect()
